@@ -234,7 +234,7 @@
 
 <script>
 const DATA = {
-  "generatedAt": "2026-08-28T01:17:03.216Z",
+  "generatedAt": "2026-08-28T01:27:00.219Z",
   "periods": [
     {
       "channel": "官網",
@@ -5530,6 +5530,16 @@ const DATA = {
       "achievementRate": 72.2
     },
     {
+      "channel": "Amazon(中東站/UAE)",
+      "year": 2026,
+      "month": 4,
+      "totalRevenueUSD": 2211.03,
+      "totalRevenueAED": 8120.01,
+      "byProduct": {},
+      "byCategory": {},
+      "source": "推算(加總當月週期資料換算，僅供參考，已包含在Amazon總額內)"
+    },
+    {
       "channel": "官網",
       "year": 2026,
       "month": 5,
@@ -5650,6 +5660,16 @@ const DATA = {
       "source": "月報表(財務結算)",
       "targetUSD": 42380.95,
       "achievementRate": 78.7
+    },
+    {
+      "channel": "Amazon(中東站/UAE)",
+      "year": 2026,
+      "month": 5,
+      "totalRevenueUSD": 2677.11,
+      "totalRevenueAED": 9831.67,
+      "byProduct": {},
+      "byCategory": {},
+      "source": "推算(加總當月週期資料換算，僅供參考，已包含在Amazon總額內)"
     },
     {
       "channel": "官網",
@@ -5782,6 +5802,16 @@ const DATA = {
       "achievementRate": 105.8
     },
     {
+      "channel": "Amazon(中東站/UAE)",
+      "year": 2026,
+      "month": 6,
+      "totalRevenueUSD": 2291.73,
+      "totalRevenueAED": 8416.38,
+      "byProduct": {},
+      "byCategory": {},
+      "source": "推算(加總當月週期資料換算，僅供參考，已包含在Amazon總額內)"
+    },
+    {
       "channel": "官網",
       "year": 2026,
       "month": 7,
@@ -5902,6 +5932,16 @@ const DATA = {
       "source": "月報表(財務結算)",
       "targetUSD": 50857.15,
       "achievementRate": 62.4
+    },
+    {
+      "channel": "Amazon(中東站/UAE)",
+      "year": 2026,
+      "month": 7,
+      "totalRevenueUSD": 5178.81,
+      "totalRevenueAED": 19019.18,
+      "byProduct": {},
+      "byCategory": {},
+      "source": "推算(加總當月週期資料換算，僅供參考，已包含在Amazon總額內)"
     },
     {
       "channel": "官網",
@@ -6040,6 +6080,16 @@ const DATA = {
       ],
       "targetUSD": 50857.15,
       "achievementRate": 40.6
+    },
+    {
+      "channel": "Amazon(中東站/UAE)",
+      "year": 2026,
+      "month": 8,
+      "totalRevenueUSD": 940.79,
+      "totalRevenueAED": 3455.05,
+      "byProduct": {},
+      "byCategory": {},
+      "source": "推算(加總當月週期資料換算，僅供參考，已包含在Amazon總額內)"
     }
   ],
   "company": [
@@ -7386,9 +7436,12 @@ const DATA = {
             ${(() => {
               const official = (DATA.monthly || []).find((m) => m.channel === "官網" && m.year === latest.year && m.month === latest.month);
               const amazon = (DATA.monthly || []).find((m) => m.channel === "Amazon" && m.year === latest.year && m.month === latest.month);
+              const uae = (DATA.monthly || []).find((m) => m.channel === "Amazon(中東站/UAE)" && m.year === latest.year && m.month === latest.month);
+              const usaOnly = amazon ? amazon.totalRevenueUSD - (uae ? uae.totalRevenueUSD : 0) : null;
               const parts = [];
               if (official) parts.push(`<span class="dot official" style="width:8px;height:8px;vertical-align:middle;"></span> 官網 ${fmtUSD(official.totalRevenueUSD)}`);
-              if (amazon) parts.push(`<span class="dot amazon" style="width:8px;height:8px;vertical-align:middle;"></span> Amazon(美國站) ${fmtUSD(amazon.totalRevenueUSD)}`);
+              if (usaOnly != null) parts.push(`<span class="dot amazon" style="width:8px;height:8px;vertical-align:middle;"></span> Amazon(美國站) ${fmtUSD(usaOnly)}`);
+              if (uae) parts.push(`<span class="dot" style="width:8px;height:8px;vertical-align:middle;background:var(--text-muted);"></span> Amazon(中東站/UAE) ${fmtUSD(uae.totalRevenueUSD)}`);
               return parts.join("　");
             })()}
           </div>
