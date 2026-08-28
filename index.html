@@ -205,11 +205,7 @@
     <h1>Sherriva 銷售儀表板</h1>
     <div class="updated" id="updatedAt"></div>
   </header>
-  <div class="subnote">
-    官網＋Amazon 銷售量彙整，供業務查詢每期(週報)與每月銷售狀況。
-    <b>Amazon 金額只計美國站(USD)</b>，阿聯酋/加拿大/沙特等站數量另計但金額未併入，避免匯率誤算；月報總額則採財務結算後的
-    <b>表2 官網 / 表3 Amazon 彙總</b>數字為準。
-  </div>
+  <div class="subnote" id="subnote"></div>
 
   <div class="hero card" id="hero"></div>
 
@@ -238,7 +234,7 @@
 
 <script>
 const DATA = {
-  "generatedAt": "2026-08-28T01:07:57.579Z",
+  "generatedAt": "2026-08-28T01:17:03.216Z",
   "periods": [
     {
       "channel": "官網",
@@ -748,12 +744,12 @@ const DATA = {
       "endDate": "2026-04-19",
       "label": "4/13-4/19",
       "month": 4,
-      "totalRevenueUSD": 6168.32,
+      "totalRevenueUSD": 7113.75,
       "totalUnits": 127,
       "byProduct": {
         "WHD-1000": {
-          "qty": 7,
-          "revenue": 677.8000000000001
+          "qty": 10,
+          "revenue": 1051.433764465623
         },
         "UHD-1440": {
           "qty": 16,
@@ -786,12 +782,16 @@ const DATA = {
         "0C-T97M-VPP4": {
           "qty": 1,
           "revenue": 132.04
+        },
+        "AE-WHD5100": {
+          "qty": 3,
+          "revenue": 571.7930565010212
         }
       },
       "byCategory": {
         "無線傳輸(WTR/WHD)": {
-          "qty": 11,
-          "revenue": 1392.7
+          "qty": 14,
+          "revenue": 1766.333764465623
         },
         "HDMI分配/切換": {
           "qty": 106,
@@ -802,25 +802,28 @@ const DATA = {
           "revenue": 46.97
         },
         "未分類": {
-          "qty": 1,
-          "revenue": 132.04
+          "qty": 4,
+          "revenue": 703.8330565010211
         }
       },
       "byRegion": {
         "USA": {
           "qty": 119,
           "revenue": 6168.32,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         },
         "UAE": {
           "qty": 6,
           "revenue": 3472.08,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         },
         "SA": {
           "qty": 2,
           "revenue": 1486.14,
-          "currency": "本地幣別(未換算)"
+          "currency": "本地幣別",
+          "includedInUSDTotal": false
         }
       },
       "byRegionDetail": {
@@ -923,10 +926,18 @@ const DATA = {
           "byCategory": {}
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "USA",
+        "UAE"
+      ],
+      "regionsExcluded": [
+        "SA",
+        "CA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Apr13-2026Apr19CustomUnifiedTransaction_0413~0419.xlsx",
       "targetUSD": 9888.89,
-      "achievementRate": 62.4
+      "achievementRate": 71.9
     },
     {
       "channel": "Amazon",
@@ -935,24 +946,32 @@ const DATA = {
       "endDate": "2026-04-26",
       "label": "4/20-4/26",
       "month": 4,
-      "totalRevenueUSD": 9601.06,
+      "totalRevenueUSD": 10432,
       "totalUnits": 210,
       "byProduct": {
+        "AE-WHD5100": {
+          "qty": 2,
+          "revenue": 381.1953710006808
+        },
+        "UHD-1280": {
+          "qty": 20,
+          "revenue": 1071.23070115725
+        },
+        "UHD-2180": {
+          "qty": 85,
+          "revenue": 2370.8194145677326
+        },
+        "WHD-5000": {
+          "qty": 1,
+          "revenue": 156.13070115724983
+        },
+        "WHD-1000": {
+          "qty": 24,
+          "revenue": 2182.694588155208
+        },
         "UHD-1480": {
           "qty": 19,
           "revenue": 1413.5600000000002
-        },
-        "UHD-2180": {
-          "qty": 84,
-          "revenue": 2337.8799999999997
-        },
-        "WHD-1000": {
-          "qty": 23,
-          "revenue": 2058.1500000000005
-        },
-        "UHD-1280": {
-          "qty": 18,
-          "revenue": 935.1000000000003
         },
         "UHD-1240X": {
           "qty": 12,
@@ -980,33 +999,35 @@ const DATA = {
         }
       },
       "byCategory": {
+        "未分類": {
+          "qty": 3,
+          "revenue": 521.1653710006808
+        },
         "HDMI分配/切換": {
-          "qty": 147,
-          "revenue": 5820.96
+          "qty": 150,
+          "revenue": 5990.030115724985
         },
         "無線傳輸(WTR/WHD)": {
-          "qty": 26,
-          "revenue": 2589.0000000000005
+          "qty": 28,
+          "revenue": 2869.6752893124576
         },
         "電視天線": {
           "qty": 29,
           "revenue": 1051.1300000000006
-        },
-        "未分類": {
-          "qty": 1,
-          "revenue": 139.97
         }
       },
       "byRegion": {
         "UAE": {
           "qty": 7,
           "revenue": 3051.63,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         },
         "USA": {
           "qty": 203,
           "revenue": 9601.06,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         }
       },
       "byRegionDetail": {
@@ -1119,10 +1140,18 @@ const DATA = {
           }
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "UAE",
+        "USA"
+      ],
+      "regionsExcluded": [
+        "CA",
+        "SA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Apr20-2026Apr26CustomTransaction.xlsx",
       "targetUSD": 9888.89,
-      "achievementRate": 97.1
+      "achievementRate": 105.5
     },
     {
       "channel": "Amazon",
@@ -1131,12 +1160,12 @@ const DATA = {
       "endDate": "2026-04-30",
       "label": "4/27-4/30",
       "month": 4,
-      "totalRevenueUSD": 3165.73,
+      "totalRevenueUSD": 3600.39,
       "totalUnits": 81,
       "byProduct": {
         "UHD-2180": {
-          "qty": 45,
-          "revenue": 1248.1300000000006
+          "qty": 46,
+          "revenue": 1281.0694145677337
         },
         "SAF-6500": {
           "qty": 2,
@@ -1151,8 +1180,8 @@ const DATA = {
           "revenue": 39.97
         },
         "UHD-1440": {
-          "qty": 4,
-          "revenue": 193.43
+          "qty": 5,
+          "revenue": 248.42523485364194
         },
         "UHD-1280": {
           "qty": 10,
@@ -1165,37 +1194,52 @@ const DATA = {
         "WHD-5100": {
           "qty": 2,
           "revenue": 359.9
+        },
+        "AE-WHD5100": {
+          "qty": 1,
+          "revenue": 190.5976855003404
+        },
+        "WHD-5000": {
+          "qty": 1,
+          "revenue": 156.13070115724983
         }
       },
       "byCategory": {
         "HDMI分配/切換": {
-          "qty": 71,
-          "revenue": 2693.9199999999987
+          "qty": 73,
+          "revenue": 2781.8546494213742
         },
         "電視天線": {
           "qty": 3,
           "revenue": 111.91
         },
         "無線傳輸(WTR/WHD)": {
-          "qty": 2,
-          "revenue": 359.9
+          "qty": 3,
+          "revenue": 516.0307011572498
+        },
+        "未分類": {
+          "qty": 1,
+          "revenue": 190.5976855003404
         }
       },
       "byRegion": {
         "USA": {
           "qty": 76,
           "revenue": 3165.73,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         },
         "UAE": {
           "qty": 4,
           "revenue": 1596.3,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         },
         "SA": {
           "qty": 1,
           "revenue": 743.07,
-          "currency": "本地幣別(未換算)"
+          "currency": "本地幣別",
+          "includedInUSDTotal": false
         }
       },
       "byRegionDetail": {
@@ -1302,10 +1346,18 @@ const DATA = {
           "byCategory": {}
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "USA",
+        "UAE"
+      ],
+      "regionsExcluded": [
+        "SA",
+        "CA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Apr27-2026Apr30CustomUnifiedTransaction.xlsx",
       "targetUSD": 5650.79,
-      "achievementRate": 56
+      "achievementRate": 63.7
     },
     {
       "channel": "Amazon",
@@ -1314,16 +1366,16 @@ const DATA = {
       "endDate": "2026-05-10",
       "label": "5/1-5/10",
       "month": 5,
-      "totalRevenueUSD": 9023.68,
+      "totalRevenueUSD": 9315.28,
       "totalUnits": 197,
       "byProduct": {
         "UHD-1280": {
-          "qty": 8,
-          "revenue": 463.7600000000001
+          "qty": 9,
+          "revenue": 531.825350578625
         },
         "UHD-2180": {
-          "qty": 89,
-          "revenue": 2484.069999999999
+          "qty": 90,
+          "revenue": 2517.009414567732
         },
         "UHD-1480": {
           "qty": 21,
@@ -1360,12 +1412,16 @@ const DATA = {
         "0C-T97M-VPP4": {
           "qty": 1,
           "revenue": 139.97
+        },
+        "AE-WHD5100": {
+          "qty": 1,
+          "revenue": 190.5976855003404
         }
       },
       "byCategory": {
         "HDMI分配/切換": {
-          "qty": 153,
-          "revenue": 6062.730000000006
+          "qty": 155,
+          "revenue": 6163.734765146364
         },
         "無線傳輸(WTR/WHD)": {
           "qty": 16,
@@ -1376,25 +1432,28 @@ const DATA = {
           "revenue": 946.3400000000004
         },
         "未分類": {
-          "qty": 1,
-          "revenue": 139.97
+          "qty": 2,
+          "revenue": 330.5676855003404
         }
       },
       "byRegion": {
         "USA": {
           "qty": 192,
           "revenue": 9023.68,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         },
         "UAE": {
           "qty": 3,
           "revenue": 1070.91,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         },
         "SA": {
           "qty": 2,
           "revenue": 1254.91,
-          "currency": "本地幣別(未換算)"
+          "currency": "本地幣別",
+          "includedInUSDTotal": false
         }
       },
       "byRegionDetail": {
@@ -1517,10 +1576,18 @@ const DATA = {
           }
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "USA",
+        "UAE"
+      ],
+      "regionsExcluded": [
+        "CA",
+        "SA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026May1-2026May10CustomUnifiedTransaction.xlsx + SA---2026May1-2026May10CustomTransaction .csv",
       "targetUSD": 13671.28,
-      "achievementRate": 66
+      "achievementRate": 68.1
     },
     {
       "channel": "Amazon",
@@ -1529,7 +1596,7 @@ const DATA = {
       "endDate": "2026-05-17",
       "label": "5/11-5/17",
       "month": 5,
-      "totalRevenueUSD": 7894.73,
+      "totalRevenueUSD": 8540.41,
       "totalUnits": 163,
       "byProduct": {
         "UHD-1240X": {
@@ -1561,8 +1628,8 @@ const DATA = {
           "revenue": 521.7300000000001
         },
         "WHD-1000": {
-          "qty": 10,
-          "revenue": 974.6500000000002
+          "qty": 11,
+          "revenue": 1083.0039823008851
         },
         "SAE-5500": {
           "qty": 2,
@@ -1571,6 +1638,14 @@ const DATA = {
         "WHD-5100": {
           "qty": 2,
           "revenue": 359.9
+        },
+        "AE-WHD5100": {
+          "qty": 2,
+          "revenue": 381.1953710006808
+        },
+        "0C-T97M-VPP4": {
+          "qty": 1,
+          "revenue": 156.13070115724983
         }
       },
       "byCategory": {
@@ -1583,25 +1658,32 @@ const DATA = {
           "revenue": 1412.0400000000006
         },
         "無線傳輸(WTR/WHD)": {
-          "qty": 12,
-          "revenue": 1334.5500000000002
+          "qty": 13,
+          "revenue": 1442.9039823008852
+        },
+        "未分類": {
+          "qty": 3,
+          "revenue": 537.3260721579306
         }
       },
       "byRegion": {
         "USA": {
           "qty": 156,
           "revenue": 7894.73,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         },
         "UAE": {
           "qty": 4,
           "revenue": 2371.26,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         },
         "SA": {
           "qty": 3,
           "revenue": 2154.9,
-          "currency": "本地幣別(未換算)"
+          "currency": "本地幣別",
+          "includedInUSDTotal": false
         }
       },
       "byRegionDetail": {
@@ -1708,10 +1790,18 @@ const DATA = {
           "byCategory": {}
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "USA",
+        "UAE"
+      ],
+      "regionsExcluded": [
+        "SA",
+        "CA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "20260511-0517.xlsx",
       "targetUSD": 9569.89,
-      "achievementRate": 82.5
+      "achievementRate": 89.2
     },
     {
       "channel": "Amazon",
@@ -1720,12 +1810,28 @@ const DATA = {
       "endDate": "2026-05-24",
       "label": "5/18-5/24",
       "month": 5,
-      "totalRevenueUSD": 8622.9,
+      "totalRevenueUSD": 9981,
       "totalUnits": 179,
       "byProduct": {
+        "WHD-1000": {
+          "qty": 14,
+          "revenue": 1389.7539823008851
+        },
+        "AE-WHD5100": {
+          "qty": 5,
+          "revenue": 895.8066712049014
+        },
         "UHD-2180": {
-          "qty": 85,
-          "revenue": 2369.729999999999
+          "qty": 88,
+          "revenue": 2468.548243703198
+        },
+        "WHD-5000": {
+          "qty": 1,
+          "revenue": 156.13070115724983
+        },
+        "UHD-1440": {
+          "qty": 13,
+          "revenue": 630.89978897209
         },
         "SAF-6500": {
           "qty": 9,
@@ -1734,10 +1840,6 @@ const DATA = {
         "WHD-5100": {
           "qty": 8,
           "revenue": 1430.6000000000001
-        },
-        "WHD-1000": {
-          "qty": 13,
-          "revenue": 1281.4
         },
         "UHD-1280": {
           "qty": 9,
@@ -1755,10 +1857,6 @@ const DATA = {
           "qty": 9,
           "revenue": 339.83000000000004
         },
-        "UHD-1440": {
-          "qty": 11,
-          "revenue": 531.9100000000001
-        },
         "0C-T97M-VPP4": {
           "qty": 4,
           "revenue": 538.74
@@ -1769,33 +1867,35 @@ const DATA = {
         }
       },
       "byCategory": {
+        "無線傳輸(WTR/WHD)": {
+          "qty": 23,
+          "revenue": 2976.484683458134
+        },
+        "未分類": {
+          "qty": 9,
+          "revenue": 1434.5466712049013
+        },
         "HDMI分配/切換": {
-          "qty": 127,
-          "revenue": 4782.959999999996
+          "qty": 132,
+          "revenue": 4980.768032675288
         },
         "電視天線": {
           "qty": 15,
           "revenue": 589.2000000000002
-        },
-        "無線傳輸(WTR/WHD)": {
-          "qty": 21,
-          "revenue": 2711.9999999999995
-        },
-        "未分類": {
-          "qty": 4,
-          "revenue": 538.74
         }
       },
       "byRegion": {
         "UAE": {
           "qty": 12,
           "revenue": 4987.62,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         },
         "USA": {
           "qty": 167,
           "revenue": 8622.9,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         }
       },
       "byRegionDetail": {
@@ -1912,10 +2012,18 @@ const DATA = {
           "byCategory": {}
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "UAE",
+        "USA"
+      ],
+      "regionsExcluded": [
+        "SA",
+        "CA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026May18-2026May24CustomUnifiedTransaction.xlsx",
       "targetUSD": 9569.89,
-      "achievementRate": 90.1
+      "achievementRate": 104.3
     },
     {
       "channel": "Amazon",
@@ -1924,7 +2032,7 @@ const DATA = {
       "endDate": "2026-05-31",
       "label": "5/25-5/31",
       "month": 5,
-      "totalRevenueUSD": 6248.32,
+      "totalRevenueUSD": 6630.04,
       "totalUnits": 137,
       "byProduct": {
         "UHD-2180": {
@@ -1956,12 +2064,12 @@ const DATA = {
           "revenue": 539.8499999999999
         },
         "UHD-1440": {
-          "qty": 7,
-          "revenue": 340.34
+          "qty": 8,
+          "revenue": 395.3352348536419
         },
         "UHD-1280": {
-          "qty": 1,
-          "revenue": 57.97
+          "qty": 3,
+          "revenue": 194.10070115724983
         },
         "SAE-5500": {
           "qty": 2,
@@ -1974,12 +2082,16 @@ const DATA = {
         "UHD-1440X": {
           "qty": 5,
           "revenue": 249.85
+        },
+        "AE-WHD5100": {
+          "qty": 1,
+          "revenue": 190.5976855003404
         }
       },
       "byCategory": {
         "HDMI分配/切換": {
-          "qty": 111,
-          "revenue": 4491.1599999999935
+          "qty": 114,
+          "revenue": 4682.285936010885
         },
         "電視天線": {
           "qty": 12,
@@ -1990,20 +2102,22 @@ const DATA = {
           "revenue": 1133.5500000000002
         },
         "未分類": {
-          "qty": 1,
-          "revenue": 139.97
+          "qty": 2,
+          "revenue": 330.5676855003404
         }
       },
       "byRegion": {
         "USA": {
           "qty": 133,
           "revenue": 6248.32,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         },
         "UAE": {
           "qty": 4,
           "revenue": 1401.88,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         }
       },
       "byRegionDetail": {
@@ -2112,10 +2226,18 @@ const DATA = {
           "byCategory": {}
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "USA",
+        "UAE"
+      ],
+      "regionsExcluded": [
+        "SA",
+        "CA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026May25-2026May31CustomUnifiedTransaction.xlsx",
       "targetUSD": 9569.89,
-      "achievementRate": 65.3
+      "achievementRate": 69.3
     },
     {
       "channel": "Amazon",
@@ -2124,16 +2246,24 @@ const DATA = {
       "endDate": "2026-06-07",
       "label": "6/1-6/7",
       "month": 6,
-      "totalRevenueUSD": 8366.07,
+      "totalRevenueUSD": 9017.17,
       "totalUnits": 185,
       "byProduct": {
-        "WHD-1000": {
-          "qty": 11,
-          "revenue": 1088.4500000000003
-        },
         "UHD-2180": {
-          "qty": 70,
-          "revenue": 1955.1000000000013
+          "qty": 74,
+          "revenue": 2086.857658270934
+        },
+        "WHD-1000": {
+          "qty": 12,
+          "revenue": 1212.9945881552078
+        },
+        "UHD-1280": {
+          "qty": 7,
+          "revenue": 433.1760517358747
+        },
+        "AE-WHD5100": {
+          "qty": 1,
+          "revenue": 190.5976855003404
         },
         "UHD-1480": {
           "qty": 20,
@@ -2155,10 +2285,6 @@ const DATA = {
           "qty": 20,
           "revenue": 979.4000000000003
         },
-        "UHD-1280": {
-          "qty": 4,
-          "revenue": 228.98
-        },
         "WHD-5100": {
           "qty": 3,
           "revenue": 539.8499999999999
@@ -2177,43 +2303,47 @@ const DATA = {
         }
       },
       "byCategory": {
-        "無線傳輸(WTR/WHD)": {
-          "qty": 14,
-          "revenue": 1628.3000000000004
-        },
         "HDMI分配/切換": {
-          "qty": 135,
-          "revenue": 5686.45
+          "qty": 142,
+          "revenue": 6022.403710006808
+        },
+        "無線傳輸(WTR/WHD)": {
+          "qty": 15,
+          "revenue": 1752.844588155208
+        },
+        "未分類": {
+          "qty": 2,
+          "revenue": 322.63768550034035
         },
         "電視天線": {
           "qty": 24,
           "revenue": 919.2800000000004
-        },
-        "未分類": {
-          "qty": 1,
-          "revenue": 132.04
         }
       },
       "byRegion": {
         "UAE": {
           "qty": 9,
           "revenue": 2391.15,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         },
         "SA": {
           "qty": 1,
           "revenue": 743.07,
-          "currency": "本地幣別(未換算)"
+          "currency": "本地幣別",
+          "includedInUSDTotal": false
         },
         "USA": {
           "qty": 174,
           "revenue": 8366.07,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         },
         "CA": {
           "qty": 1,
           "revenue": 22.94,
-          "currency": "本地幣別(未換算)"
+          "currency": "本地幣別",
+          "includedInUSDTotal": false
         }
       },
       "byRegionDetail": {
@@ -2350,10 +2480,18 @@ const DATA = {
           }
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "UAE",
+        "USA"
+      ],
+      "regionsExcluded": [
+        "SA",
+        "CA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jun1-2026Jun7CustomTransaction.xlsx",
       "targetUSD": 9888.89,
-      "achievementRate": 84.6
+      "achievementRate": 91.2
     },
     {
       "channel": "Amazon",
@@ -2362,12 +2500,12 @@ const DATA = {
       "endDate": "2026-06-14",
       "label": "6/8-6/14",
       "month": 6,
-      "totalRevenueUSD": 10075.32,
+      "totalRevenueUSD": 10790.66,
       "totalUnits": 234,
       "byProduct": {
         "UHD-2180": {
-          "qty": 115,
-          "revenue": 3156.4099999999944
+          "qty": 116,
+          "revenue": 3189.3494145677278
         },
         "UHD-1240X": {
           "qty": 17,
@@ -2378,12 +2516,12 @@ const DATA = {
           "revenue": 827.3100000000003
         },
         "UHD-1440": {
-          "qty": 22,
-          "revenue": 1072.4400000000003
+          "qty": 23,
+          "revenue": 1127.4352348536422
         },
         "WHD-1000": {
-          "qty": 10,
-          "revenue": 961.7800000000002
+          "qty": 11,
+          "revenue": 1086.324588155208
         },
         "UHD-1480": {
           "qty": 26,
@@ -2412,45 +2550,56 @@ const DATA = {
         "0C-T97M-VPP4": {
           "qty": 2,
           "revenue": 264.08
+        },
+        "WHD-5000": {
+          "qty": 2,
+          "revenue": 312.26140231449966
+        },
+        "AE-WHD5100": {
+          "qty": 1,
+          "revenue": 190.5976855003404
         }
       },
       "byCategory": {
         "HDMI分配/切換": {
-          "qty": 184,
-          "revenue": 7155.490000000007
+          "qty": 186,
+          "revenue": 7243.424649421382
         },
         "電視天線": {
           "qty": 25,
           "revenue": 921.2500000000003
         },
         "無線傳輸(WTR/WHD)": {
-          "qty": 15,
-          "revenue": 1722.5300000000002
+          "qty": 18,
+          "revenue": 2159.3359904697077
         },
         "HDMI線材": {
           "qty": 1,
           "revenue": 11.97
         },
         "未分類": {
-          "qty": 2,
-          "revenue": 264.08
+          "qty": 3,
+          "revenue": 454.6776855003404
         }
       },
       "byRegion": {
         "USA": {
           "qty": 227,
           "revenue": 10075.32,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         },
         "UAE": {
           "qty": 6,
           "revenue": 2627.08,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         },
         "SA": {
           "qty": 1,
           "revenue": 743.07,
-          "currency": "本地幣別(未換算)"
+          "currency": "本地幣別",
+          "includedInUSDTotal": false
         }
       },
       "byRegionDetail": {
@@ -2585,10 +2734,18 @@ const DATA = {
           }
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "USA",
+        "UAE"
+      ],
+      "regionsExcluded": [
+        "CA",
+        "SA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jun8-2026Jun14CustomUnifiedTransaction.xlsx",
       "targetUSD": 9888.89,
-      "achievementRate": 101.9
+      "achievementRate": 109.1
     },
     {
       "channel": "Amazon",
@@ -2597,16 +2754,28 @@ const DATA = {
       "endDate": "2026-06-21",
       "label": "6/15-6/21",
       "month": 6,
-      "totalRevenueUSD": 8615.67,
+      "totalRevenueUSD": 9361.07,
       "totalUnits": 189,
       "byProduct": {
+        "0C-T97M-VPP4": {
+          "qty": 5,
+          "revenue": 740.4021034717495
+        },
+        "WHD-5000": {
+          "qty": 1,
+          "revenue": 156.13070115724983
+        },
+        "UHD-2180": {
+          "qty": 76,
+          "revenue": 2131.7988291354673
+        },
+        "UHD-1440": {
+          "qty": 11,
+          "revenue": 544.6952348536421
+        },
         "WHD-1000": {
           "qty": 11,
           "revenue": 1073.6000000000001
-        },
-        "UHD-2180": {
-          "qty": 74,
-          "revenue": 2065.9200000000014
         },
         "UHD-1480": {
           "qty": 26,
@@ -2620,10 +2789,6 @@ const DATA = {
           "qty": 2,
           "revenue": 79.94
         },
-        "UHD-1440": {
-          "qty": 10,
-          "revenue": 489.70000000000005
-        },
         "SAF-7500": {
           "qty": 5,
           "revenue": 234.85
@@ -2631,10 +2796,6 @@ const DATA = {
         "UHD-1240X": {
           "qty": 6,
           "revenue": 227.82
-        },
-        "0C-T97M-VPP4": {
-          "qty": 2,
-          "revenue": 272.01
         },
         "UHD-1440X": {
           "qty": 12,
@@ -2650,38 +2811,41 @@ const DATA = {
         }
       },
       "byCategory": {
+        "未分類": {
+          "qty": 5,
+          "revenue": 740.4021034717495
+        },
         "無線傳輸(WTR/WHD)": {
-          "qty": 13,
-          "revenue": 1433.5000000000002
+          "qty": 14,
+          "revenue": 1589.63070115725
         },
         "HDMI分配/切換": {
-          "qty": 130,
-          "revenue": 5552.239999999998
+          "qty": 133,
+          "revenue": 5673.114063989106
         },
         "電視天線": {
           "qty": 36,
           "revenue": 1357.9200000000005
-        },
-        "未分類": {
-          "qty": 2,
-          "revenue": 272.01
         }
       },
       "byRegion": {
         "UAE": {
           "qty": 7,
           "revenue": 2737.47,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         },
         "USA": {
           "qty": 181,
           "revenue": 8615.67,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         },
         "CA": {
           "qty": 1,
           "revenue": 53.4,
-          "currency": "本地幣別(未換算)"
+          "currency": "本地幣別",
+          "includedInUSDTotal": false
         }
       },
       "byRegionDetail": {
@@ -2808,10 +2972,18 @@ const DATA = {
           }
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "UAE",
+        "USA"
+      ],
+      "regionsExcluded": [
+        "SA",
+        "CA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jun15-2026Jun21CustomTransaction.xlsx",
       "targetUSD": 9888.89,
-      "achievementRate": 87.1
+      "achievementRate": 94.7
     },
     {
       "channel": "Amazon",
@@ -2886,12 +3058,14 @@ const DATA = {
         "USA": {
           "qty": 320,
           "revenue": 12884.99,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         },
         "AE": {
           "qty": 8,
           "revenue": 3425.26,
-          "currency": "本地幣別(未換算)"
+          "currency": "本地幣別",
+          "includedInUSDTotal": false
         }
       },
       "byRegionDetail": {
@@ -3000,7 +3174,15 @@ const DATA = {
           "byCategory": {}
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "USA"
+      ],
+      "regionsExcluded": [
+        "CA",
+        "AE",
+        "SA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jun22-2026Jun28CustomUnifiedTransaction.xlsx",
       "targetUSD": 9888.89,
       "achievementRate": 130.3
@@ -3012,9 +3194,17 @@ const DATA = {
       "endDate": "2026-06-30",
       "label": "6/29-6/30",
       "month": 6,
-      "totalRevenueUSD": 2808.63,
+      "totalRevenueUSD": 2988.53,
       "totalUnits": 71,
       "byProduct": {
+        "UHD-1440": {
+          "qty": 6,
+          "revenue": 297.3952348536419
+        },
+        "WHD-5000": {
+          "qty": 1,
+          "revenue": 124.90401633764466
+        },
         "UHD-1480": {
           "qty": 5,
           "revenue": 379.05000000000007
@@ -3026,10 +3216,6 @@ const DATA = {
         "UHD-2180": {
           "qty": 29,
           "revenue": 798.5300000000005
-        },
-        "UHD-1440": {
-          "qty": 5,
-          "revenue": 242.4
         },
         "SAF-6500": {
           "qty": 11,
@@ -3054,28 +3240,30 @@ const DATA = {
       },
       "byCategory": {
         "HDMI分配/切換": {
-          "qty": 51,
-          "revenue": 1930.820000000001
+          "qty": 52,
+          "revenue": 1985.8152348536428
+        },
+        "無線傳輸(WTR/WHD)": {
+          "qty": 6,
+          "revenue": 534.7040163376447
         },
         "電視天線": {
           "qty": 13,
           "revenue": 468.0100000000001
-        },
-        "無線傳輸(WTR/WHD)": {
-          "qty": 5,
-          "revenue": 409.8
         }
       },
       "byRegion": {
         "UAE": {
           "qty": 2,
           "revenue": 660.68,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         },
         "USA": {
           "qty": 69,
           "revenue": 2808.63,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         }
       },
       "byRegionDetail": {
@@ -3164,10 +3352,18 @@ const DATA = {
           }
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "UAE",
+        "USA"
+      ],
+      "regionsExcluded": [
+        "SA",
+        "CA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jun29-2026Jun30CustomTransaction.xlsx",
       "targetUSD": 2825.4,
-      "achievementRate": 99.4
+      "achievementRate": 105.8
     },
     {
       "channel": "Amazon",
@@ -3176,9 +3372,21 @@ const DATA = {
       "endDate": "2026-07-05",
       "label": "7/1-7/5",
       "month": 7,
-      "totalRevenueUSD": 5453.04,
+      "totalRevenueUSD": 6082.51,
       "totalUnits": 137,
       "byProduct": {
+        "UHD-1440": {
+          "qty": 11,
+          "revenue": 537.2697889720899
+        },
+        "WHD-5000": {
+          "qty": 3,
+          "revenue": 405.9387338325391
+        },
+        "WHD-1000": {
+          "qty": 3,
+          "revenue": 317.4945881552076
+        },
         "UHD-2180": {
           "qty": 62,
           "revenue": 1727.140000000001
@@ -3199,17 +3407,9 @@ const DATA = {
           "qty": 9,
           "revenue": 339.83000000000004
         },
-        "WHD-1000": {
-          "qty": 2,
-          "revenue": 192.95
-        },
         "UHD-1440X": {
           "qty": 1,
           "revenue": 49.97
-        },
-        "UHD-1440": {
-          "qty": 9,
-          "revenue": 438.2800000000001
         },
         "UHD-1280": {
           "qty": 4,
@@ -3226,28 +3426,30 @@ const DATA = {
       },
       "byCategory": {
         "HDMI分配/切換": {
-          "qty": 103,
-          "revenue": 4169.059999999992
+          "qty": 105,
+          "revenue": 4268.049788972083
+        },
+        "無線傳輸(WTR/WHD)": {
+          "qty": 7,
+          "revenue": 903.3833219877467
         },
         "電視天線": {
           "qty": 25,
           "revenue": 911.0800000000005
-        },
-        "無線傳輸(WTR/WHD)": {
-          "qty": 3,
-          "revenue": 372.9
         }
       },
       "byRegion": {
         "UAE": {
           "qty": 6,
           "revenue": 2311.74,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         },
         "USA": {
           "qty": 131,
           "revenue": 5453.04,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         }
       },
       "byRegionDetail": {
@@ -3348,10 +3550,18 @@ const DATA = {
           "byCategory": {}
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "UAE",
+        "USA"
+      ],
+      "regionsExcluded": [
+        "SA",
+        "CA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jul1-2026Jul5CustomTransaction.xlsx",
       "targetUSD": 8202.77,
-      "achievementRate": 66.5
+      "achievementRate": 74.2
     },
     {
       "channel": "Amazon",
@@ -3360,12 +3570,12 @@ const DATA = {
       "endDate": "2026-07-12",
       "label": "7/6-7/12",
       "month": 7,
-      "totalRevenueUSD": 6990.04,
+      "totalRevenueUSD": 7746.32,
       "totalUnits": 159,
       "byProduct": {
         "UHD-2180": {
-          "qty": 65,
-          "revenue": 1813.850000000001
+          "qty": 69,
+          "revenue": 1945.6076582709336
         },
         "UHD-1480": {
           "qty": 26,
@@ -3408,38 +3618,44 @@ const DATA = {
           "revenue": 35.97
         },
         "0C-T97M-VPP4": {
-          "qty": 1,
-          "revenue": 132.04
+          "qty": 2,
+          "revenue": 288.1707011572498
+        },
+        "WHD-5000": {
+          "qty": 3,
+          "revenue": 468.39210347174946
         }
       },
       "byCategory": {
         "HDMI分配/切換": {
-          "qty": 109,
-          "revenue": 4665.279999999994
+          "qty": 113,
+          "revenue": 4797.037658270928
         },
         "電視天線": {
           "qty": 32,
           "revenue": 1159.0700000000006
         },
         "無線傳輸(WTR/WHD)": {
-          "qty": 9,
-          "revenue": 1033.65
+          "qty": 12,
+          "revenue": 1502.0421034717497
         },
         "未分類": {
-          "qty": 1,
-          "revenue": 132.04
+          "qty": 2,
+          "revenue": 288.1707011572498
         }
       },
       "byRegion": {
         "USA": {
           "qty": 151,
           "revenue": 6990.04,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         },
         "UAE": {
           "qty": 8,
           "revenue": 2777.44,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         }
       },
       "byRegionDetail": {
@@ -3552,10 +3768,18 @@ const DATA = {
           "byCategory": {}
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "USA",
+        "UAE"
+      ],
+      "regionsExcluded": [
+        "SA",
+        "CA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jul6-2026Jul12CustomUnifiedTransaction.xlsx",
       "targetUSD": 11483.87,
-      "achievementRate": 60.9
+      "achievementRate": 67.5
     },
     {
       "channel": "Amazon",
@@ -3564,9 +3788,29 @@ const DATA = {
       "endDate": "2026-07-31",
       "label": "7/7-7/31",
       "month": 7,
-      "totalRevenueUSD": 4776.59,
+      "totalRevenueUSD": 5649.59,
       "totalUnits": 110,
       "byProduct": {
+        "0C-T97M-VPP4": {
+          "qty": 2,
+          "revenue": 288.1707011572498
+        },
+        "WHD-1000": {
+          "qty": 11,
+          "revenue": 1100.3845881552077
+        },
+        "UHD-1440": {
+          "qty": 2,
+          "revenue": 103.96523485364193
+        },
+        "WHD-5000": {
+          "qty": 1,
+          "revenue": 156.13070115724983
+        },
+        "AE-WHD5100": {
+          "qty": 2,
+          "revenue": 381.1953710006808
+        },
         "SAF-6500": {
           "qty": 27,
           "revenue": 971.1900000000005
@@ -3579,10 +3823,6 @@ const DATA = {
           "qty": 4,
           "revenue": 228.98
         },
-        "WHD-1000": {
-          "qty": 10,
-          "revenue": 975.8400000000001
-        },
         "UHD-1480": {
           "qty": 11,
           "revenue": 860.7700000000001
@@ -3591,17 +3831,9 @@ const DATA = {
           "qty": 3,
           "revenue": 140.91
         },
-        "UHD-1440": {
-          "qty": 1,
-          "revenue": 48.97
-        },
         "UHD-1240X": {
           "qty": 6,
           "revenue": 227.82
-        },
-        "0C-T97M-VPP4": {
-          "qty": 1,
-          "revenue": 132.04
         },
         "UHD-1440X": {
           "qty": 2,
@@ -3613,33 +3845,35 @@ const DATA = {
         }
       },
       "byCategory": {
+        "未分類": {
+          "qty": 4,
+          "revenue": 669.3660721579306
+        },
+        "無線傳輸(WTR/WHD)": {
+          "qty": 12,
+          "revenue": 1256.5152893124578
+        },
+        "HDMI分配/切換": {
+          "qty": 63,
+          "revenue": 2575.6352348536407
+        },
         "電視天線": {
           "qty": 31,
           "revenue": 1148.0700000000006
-        },
-        "HDMI分配/切換": {
-          "qty": 62,
-          "revenue": 2520.6399999999985
-        },
-        "無線傳輸(WTR/WHD)": {
-          "qty": 10,
-          "revenue": 975.8400000000001
-        },
-        "未分類": {
-          "qty": 1,
-          "revenue": 132.04
         }
       },
       "byRegion": {
         "UAE": {
           "qty": 6,
           "revenue": 3206.08,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         },
         "USA": {
           "qty": 104,
           "revenue": 4776.59,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         }
       },
       "byRegionDetail": {
@@ -3756,10 +3990,18 @@ const DATA = {
           "byCategory": {}
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "UAE",
+        "USA"
+      ],
+      "regionsExcluded": [
+        "SA",
+        "CA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jul27-2026Jul31CustomTransaction.xlsx + July_payment_transactions_7.21-7.31.csv",
       "targetUSD": 41013.83,
-      "achievementRate": 11.6
+      "achievementRate": 13.8
     },
     {
       "channel": "Amazon",
@@ -3768,20 +4010,20 @@ const DATA = {
       "endDate": "2026-07-19",
       "label": "7/13-7/19",
       "month": 7,
-      "totalRevenueUSD": 7735.96,
+      "totalRevenueUSD": 9324.95,
       "totalUnits": 178,
       "byProduct": {
         "UHD-1240X": {
-          "qty": 10,
-          "revenue": 379.70000000000005
+          "qty": 11,
+          "revenue": 425.87290673927845
         },
         "UHD-2180": {
-          "qty": 72,
-          "revenue": 2009.6400000000012
+          "qty": 77,
+          "revenue": 2174.3370728386676
         },
         "UHD-1440": {
-          "qty": 10,
-          "revenue": 480.39
+          "qty": 12,
+          "revenue": 590.3804697072839
         },
         "SAF-6500": {
           "qty": 25,
@@ -3808,8 +4050,8 @@ const DATA = {
           "revenue": 47.47
         },
         "WHD-1000": {
-          "qty": 6,
-          "revenue": 588.75
+          "qty": 7,
+          "revenue": 713.2945881552076
         },
         "SAE-5500": {
           "qty": 1,
@@ -3818,36 +4060,42 @@ const DATA = {
         "SAF-7500": {
           "qty": 1,
           "revenue": 46.97
+        },
+        "AE-WHD5100": {
+          "qty": 6,
+          "revenue": 1143.5861130020423
         }
       },
       "byCategory": {
         "HDMI分配/切換": {
-          "qty": 122,
-          "revenue": 4890.539999999996
+          "qty": 130,
+          "revenue": 5211.400449285225
         },
         "電視天線": {
           "qty": 27,
           "revenue": 974.9900000000002
         },
         "無線傳輸(WTR/WHD)": {
-          "qty": 12,
-          "revenue": 1606.3500000000001
+          "qty": 13,
+          "revenue": 1730.8945881552077
         },
         "未分類": {
-          "qty": 2,
-          "revenue": 264.08
+          "qty": 8,
+          "revenue": 1407.6661130020423
         }
       },
       "byRegion": {
         "USA": {
           "qty": 163,
           "revenue": 7735.96,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         },
         "UAE": {
           "qty": 15,
           "revenue": 5835.57,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         }
       },
       "byRegionDetail": {
@@ -3968,10 +4216,18 @@ const DATA = {
           "byCategory": {}
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "USA",
+        "UAE"
+      ],
+      "regionsExcluded": [
+        "SA",
+        "CA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jul13-2026Jul19CustomUnifiedTransaction.xlsx",
       "targetUSD": 11483.87,
-      "achievementRate": 67.4
+      "achievementRate": 81.2
     },
     {
       "channel": "Amazon",
@@ -3980,20 +4236,20 @@ const DATA = {
       "endDate": "2026-07-26",
       "label": "7/20-7/26",
       "month": 7,
-      "totalRevenueUSD": 6058.72,
+      "totalRevenueUSD": 6516.79,
       "totalUnits": 139,
       "byProduct": {
         "UHD-2180": {
-          "qty": 65,
-          "revenue": 1808.5900000000013
+          "qty": 66,
+          "revenue": 1841.5294145677344
         },
         "UHD-1480": {
           "qty": 22,
           "revenue": 1729.4400000000003
         },
         "WHD-1000": {
-          "qty": 10,
-          "revenue": 969.7
+          "qty": 11,
+          "revenue": 1094.2445881552076
         },
         "UHD-1280": {
           "qty": 3,
@@ -4016,8 +4272,8 @@ const DATA = {
           "revenue": 71.94
         },
         "UHD-1440": {
-          "qty": 1,
-          "revenue": 48.97
+          "qty": 3,
+          "revenue": 158.96046970728386
         },
         "WHD-5100": {
           "qty": 1,
@@ -4026,32 +4282,42 @@ const DATA = {
         "WHD-5000C": {
           "qty": 2,
           "revenue": 117.9
+        },
+        "AE-WHD5100": {
+          "qty": 1,
+          "revenue": 190.5976855003404
         }
       },
       "byCategory": {
         "HDMI分配/切換": {
-          "qty": 99,
-          "revenue": 4024.7999999999925
+          "qty": 102,
+          "revenue": 4167.72988427501
         },
         "無線傳輸(WTR/WHD)": {
-          "qty": 13,
-          "revenue": 1267.55
+          "qty": 14,
+          "revenue": 1392.0945881552075
         },
         "電視天線": {
           "qty": 22,
           "revenue": 766.3700000000003
+        },
+        "未分類": {
+          "qty": 1,
+          "revenue": 190.5976855003404
         }
       },
       "byRegion": {
         "USA": {
           "qty": 134,
           "revenue": 6058.72,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         },
         "UAE": {
           "qty": 5,
           "revenue": 1682.27,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         }
       },
       "byRegionDetail": {
@@ -4160,10 +4426,18 @@ const DATA = {
           "byCategory": {}
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "USA",
+        "UAE"
+      ],
+      "regionsExcluded": [
+        "SA",
+        "CA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jul20-2026Jul26CustomUnifiedTransaction.xlsx",
       "targetUSD": 11483.87,
-      "achievementRate": 52.8
+      "achievementRate": 56.7
     },
     {
       "channel": "Amazon",
@@ -4172,9 +4446,29 @@ const DATA = {
       "endDate": "2026-07-31",
       "label": "7/27-7/31",
       "month": 7,
-      "totalRevenueUSD": 4776.59,
+      "totalRevenueUSD": 5649.59,
       "totalUnits": 110,
       "byProduct": {
+        "0C-T97M-VPP4": {
+          "qty": 2,
+          "revenue": 288.1707011572498
+        },
+        "WHD-1000": {
+          "qty": 11,
+          "revenue": 1100.3845881552077
+        },
+        "UHD-1440": {
+          "qty": 2,
+          "revenue": 103.96523485364193
+        },
+        "WHD-5000": {
+          "qty": 1,
+          "revenue": 156.13070115724983
+        },
+        "AE-WHD5100": {
+          "qty": 2,
+          "revenue": 381.1953710006808
+        },
         "SAF-6500": {
           "qty": 27,
           "revenue": 971.1900000000005
@@ -4187,10 +4481,6 @@ const DATA = {
           "qty": 4,
           "revenue": 228.98
         },
-        "WHD-1000": {
-          "qty": 10,
-          "revenue": 975.8400000000001
-        },
         "UHD-1480": {
           "qty": 11,
           "revenue": 860.7700000000001
@@ -4199,17 +4489,9 @@ const DATA = {
           "qty": 3,
           "revenue": 140.91
         },
-        "UHD-1440": {
-          "qty": 1,
-          "revenue": 48.97
-        },
         "UHD-1240X": {
           "qty": 6,
           "revenue": 227.82
-        },
-        "0C-T97M-VPP4": {
-          "qty": 1,
-          "revenue": 132.04
         },
         "UHD-1440X": {
           "qty": 2,
@@ -4221,33 +4503,35 @@ const DATA = {
         }
       },
       "byCategory": {
+        "未分類": {
+          "qty": 4,
+          "revenue": 669.3660721579306
+        },
+        "無線傳輸(WTR/WHD)": {
+          "qty": 12,
+          "revenue": 1256.5152893124578
+        },
+        "HDMI分配/切換": {
+          "qty": 63,
+          "revenue": 2575.6352348536407
+        },
         "電視天線": {
           "qty": 31,
           "revenue": 1148.0700000000006
-        },
-        "HDMI分配/切換": {
-          "qty": 62,
-          "revenue": 2520.6399999999985
-        },
-        "無線傳輸(WTR/WHD)": {
-          "qty": 10,
-          "revenue": 975.8400000000001
-        },
-        "未分類": {
-          "qty": 1,
-          "revenue": 132.04
         }
       },
       "byRegion": {
         "UAE": {
           "qty": 6,
           "revenue": 3206.08,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         },
         "USA": {
           "qty": 104,
           "revenue": 4776.59,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         }
       },
       "byRegionDetail": {
@@ -4364,10 +4648,18 @@ const DATA = {
           "byCategory": {}
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "UAE",
+        "USA"
+      ],
+      "regionsExcluded": [
+        "SA",
+        "CA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jul27-2026Jul31CustomTransaction.xlsx",
       "targetUSD": 8202.77,
-      "achievementRate": 58.2
+      "achievementRate": 68.9
     },
     {
       "channel": "Amazon",
@@ -4376,12 +4668,12 @@ const DATA = {
       "endDate": "2026-08-09",
       "label": "8/1-8/9",
       "month": 8,
-      "totalRevenueUSD": 11278.96,
+      "totalRevenueUSD": 11953.76,
       "totalUnits": 234,
       "byProduct": {
         "UHD-2180": {
-          "qty": 73,
-          "revenue": 2040.4100000000012
+          "qty": 75,
+          "revenue": 2106.2888291354675
         },
         "SAF-6500": {
           "qty": 63,
@@ -4392,20 +4684,24 @@ const DATA = {
           "revenue": 1957.9000000000003
         },
         "WHD-1000": {
-          "qty": 28,
-          "revenue": 2690.6100000000006
+          "qty": 30,
+          "revenue": 2939.699176310416
         },
         "UHD-1440": {
-          "qty": 8,
-          "revenue": 391.76
+          "qty": 9,
+          "revenue": 446.7552348536419
         },
         "SAF-7500": {
           "qty": 9,
           "revenue": 422.72999999999996
         },
+        "UHD-1280": {
+          "qty": 5,
+          "revenue": 299.9453505786249
+        },
         "UHD-1240X": {
-          "qty": 10,
-          "revenue": 379.70000000000005
+          "qty": 11,
+          "revenue": 425.87290673927845
         },
         "WHD-5100": {
           "qty": 5,
@@ -4415,35 +4711,41 @@ const DATA = {
           "qty": 1,
           "revenue": 47.97
         },
-        "UHD-1280": {
-          "qty": 4,
-          "revenue": 231.88
+        "AE-WHD5100": {
+          "qty": 1,
+          "revenue": 190.5976855003404
         }
       },
       "byCategory": {
         "HDMI分配/切換": {
-          "qty": 121,
-          "revenue": 5049.619999999993
+          "qty": 126,
+          "revenue": 5284.732321307004
         },
         "電視天線": {
           "qty": 72,
           "revenue": 2685.2400000000016
         },
         "無線傳輸(WTR/WHD)": {
-          "qty": 33,
-          "revenue": 3544.1000000000004
+          "qty": 35,
+          "revenue": 3793.189176310416
+        },
+        "未分類": {
+          "qty": 1,
+          "revenue": 190.5976855003404
         }
       },
       "byRegion": {
         "USA": {
           "qty": 226,
           "revenue": 11278.96,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         },
         "UAE": {
           "qty": 8,
           "revenue": 2478.2,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         }
       },
       "byRegionDetail": {
@@ -4552,10 +4854,17 @@ const DATA = {
           "byCategory": {}
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "USA",
+        "UAE"
+      ],
+      "regionsExcluded": [
+        "CA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Aug1-2026Aug2CustomUnifiedTransaction.xlsx + 2026Aug3-2026Aug9CustomUnifiedTransaction.xlsx",
       "targetUSD": 14764.98,
-      "achievementRate": 76.4
+      "achievementRate": 81
     },
     {
       "channel": "Amazon",
@@ -4564,7 +4873,7 @@ const DATA = {
       "endDate": "2026-08-16",
       "label": "8/10-8/16",
       "month": 8,
-      "totalRevenueUSD": 8404.41,
+      "totalRevenueUSD": 8670.4,
       "totalUnits": 179,
       "byProduct": {
         "UHD-1240X": {
@@ -4572,8 +4881,8 @@ const DATA = {
           "revenue": 263.89
         },
         "UHD-2180": {
-          "qty": 54,
-          "revenue": 1506.180000000001
+          "qty": 55,
+          "revenue": 1539.119414567734
         },
         "SAF-6500": {
           "qty": 62,
@@ -4592,8 +4901,8 @@ const DATA = {
           "revenue": 1326.14
         },
         "UHD-1440": {
-          "qty": 1,
-          "revenue": 48.97
+          "qty": 4,
+          "revenue": 213.9557045609258
         },
         "SAE-5500": {
           "qty": 1,
@@ -4604,8 +4913,8 @@ const DATA = {
           "revenue": 46.97
         },
         "UHD-1280": {
-          "qty": 5,
-          "revenue": 284.05
+          "qty": 6,
+          "revenue": 352.11535057862494
         },
         "UHD-1440X": {
           "qty": 4,
@@ -4618,8 +4927,8 @@ const DATA = {
       },
       "byCategory": {
         "HDMI分配/切換": {
-          "qty": 88,
-          "revenue": 3621.109999999995
+          "qty": 93,
+          "revenue": 3887.10046970728
         },
         "電視天線": {
           "qty": 64,
@@ -4638,12 +4947,14 @@ const DATA = {
         "USA": {
           "qty": 174,
           "revenue": 8404.41,
-          "currency": "USD"
+          "currency": "USD",
+          "includedInUSDTotal": true
         },
         "UAE": {
           "qty": 5,
           "revenue": 976.85,
-          "currency": "本地幣別(未換算)"
+          "currency": "AED",
+          "includedInUSDTotal": true
         }
       },
       "byRegionDetail": {
@@ -4744,10 +5055,17 @@ const DATA = {
           "byCategory": {}
         }
       },
-      "currency": "USD(僅美國站，其餘站點金額未列入加總)",
+      "regionsIncludedInUSD": [
+        "USA",
+        "UAE"
+      ],
+      "regionsExcluded": [
+        "CA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Aug10-2026Aug16CustomUnifiedTransaction.xlsx",
       "targetUSD": 11483.87,
-      "achievementRate": 73.2
+      "achievementRate": 75.5
     }
   ],
   "monthly": [
@@ -5642,11 +5960,11 @@ const DATA = {
       "channel": "Amazon",
       "year": 2026,
       "month": 8,
-      "totalRevenueUSD": 19683.37,
+      "totalRevenueUSD": 20624.16,
       "byProduct": {
         "UHD-2180": {
-          "qty": 127,
-          "revenue": 3546.590000000002
+          "qty": 130,
+          "revenue": 3645.4082437032016
         },
         "SAF-6500": {
           "qty": 125,
@@ -5657,20 +5975,24 @@ const DATA = {
           "revenue": 3284.0400000000004
         },
         "WHD-1000": {
-          "qty": 44,
-          "revenue": 4245.300000000001
+          "qty": 46,
+          "revenue": 4494.389176310417
         },
         "UHD-1440": {
-          "qty": 9,
-          "revenue": 440.73
+          "qty": 13,
+          "revenue": 660.7109394145677
         },
         "SAF-7500": {
           "qty": 10,
           "revenue": 469.69999999999993
         },
+        "UHD-1280": {
+          "qty": 11,
+          "revenue": 652.0607011572499
+        },
         "UHD-1240X": {
-          "qty": 17,
-          "revenue": 643.59
+          "qty": 18,
+          "revenue": 689.7629067392784
         },
         "WHD-5100": {
           "qty": 9,
@@ -5680,9 +6002,9 @@ const DATA = {
           "qty": 5,
           "revenue": 239.85
         },
-        "UHD-1280": {
-          "qty": 9,
-          "revenue": 515.9300000000001
+        "AE-WHD5100": {
+          "qty": 1,
+          "revenue": 190.5976855003404
         },
         "0C-T97M-VPP4": {
           "qty": 2,
@@ -5695,20 +6017,20 @@ const DATA = {
       },
       "byCategory": {
         "HDMI分配/切換": {
-          "qty": 209,
-          "revenue": 8670.729999999989
+          "qty": 219,
+          "revenue": 9171.832791014283
         },
         "電視天線": {
           "qty": 136,
           "revenue": 4971.720000000002
         },
         "無線傳輸(WTR/WHD)": {
-          "qty": 53,
-          "revenue": 5768.91
+          "qty": 55,
+          "revenue": 6017.999176310415
         },
         "未分類": {
-          "qty": 2,
-          "revenue": 272.01
+          "qty": 3,
+          "revenue": 462.6076855003404
         }
       },
       "source": "暫估(加總2份期報,尚未經財務結算)",
@@ -5717,7 +6039,7 @@ const DATA = {
         "8/10-8/16"
       ],
       "targetUSD": 50857.15,
-      "achievementRate": 38.7
+      "achievementRate": 40.6
     }
   ],
   "company": [
@@ -6276,19 +6598,19 @@ const DATA = {
     {
       "year": 2026,
       "month": 8,
-      "totalRevenueUSD": 21895.84,
+      "totalRevenueUSD": 22836.63,
       "byCategory": {
         "HDMI分配/切換": {
-          "qty": 210,
-          "revenue": 8670.729999999989
+          "qty": 220,
+          "revenue": 9171.832791014283
         },
         "無線傳輸(WTR/WHD)": {
-          "qty": 68,
-          "revenue": 7263.4
+          "qty": 70,
+          "revenue": 7512.489176310415
         },
         "未分類": {
-          "qty": 12,
-          "revenue": 272.01
+          "qty": 13,
+          "revenue": 462.6076855003404
         },
         "電視天線": {
           "qty": 136,
@@ -6297,8 +6619,8 @@ const DATA = {
       },
       "byProduct": {
         "UHD-2180": {
-          "qty": 128,
-          "revenue": 3546.590000000002
+          "qty": 131,
+          "revenue": 3645.4082437032016
         },
         "WHD-5100": {
           "qty": 16,
@@ -6329,28 +6651,32 @@ const DATA = {
           "revenue": 3284.0400000000004
         },
         "WHD-1000": {
-          "qty": 44,
-          "revenue": 4245.300000000001
+          "qty": 46,
+          "revenue": 4494.389176310417
         },
         "UHD-1440": {
-          "qty": 9,
-          "revenue": 440.73
+          "qty": 13,
+          "revenue": 660.7109394145677
         },
         "SAF-7500": {
           "qty": 10,
           "revenue": 469.69999999999993
         },
+        "UHD-1280": {
+          "qty": 11,
+          "revenue": 652.0607011572499
+        },
         "UHD-1240X": {
-          "qty": 17,
-          "revenue": 643.59
+          "qty": 18,
+          "revenue": 689.7629067392784
         },
         "UHD-1440X": {
           "qty": 5,
           "revenue": 239.85
         },
-        "UHD-1280": {
-          "qty": 9,
-          "revenue": 515.9300000000001
+        "AE-WHD5100": {
+          "qty": 1,
+          "revenue": 190.5976855003404
         },
         "0C-T97M-VPP4": {
           "qty": 2,
@@ -6363,7 +6689,7 @@ const DATA = {
       },
       "source": "暫估(官網+Amazon加總,尚未經財務結算)",
       "targetUSD": 57142.86,
-      "achievementRate": 38.3
+      "achievementRate": 40
     }
   ],
   "inventory": [
@@ -6662,7 +6988,8 @@ const DATA = {
     "targetChannelSplit": {
       "官網": 0.11,
       "Amazon": 0.89
-    }
+    },
+    "fxRateAEDperUSD": 3.6725
   }
 };
 </script>
@@ -6858,15 +7185,21 @@ const DATA = {
       const idx = +select.value;
       const p = periods[idx];
       const prev = periods[idx - 1];
-      const moneyFmt = chDef.key === "Amazon" ? (v) => fmtUSD(v) + " (US)" : fmtUSD;
+      const moneyFmt = fmtUSD;
 
       let extraRegion = "";
       if (chDef.key === "Amazon" && p.byRegion) {
-        const others = Object.entries(p.byRegion).filter(([r]) => r !== "USA");
-        if (others.length) {
-          extraRegion = `<div style="font-size:12px;color:var(--text-muted);margin-top:-6px;margin-bottom:14px;">
-            其他站點數量：${others.map(([r, v]) => `${r} ${fmtNum(v.qty)}件`).join("　")}（金額未併入，幣別非USD）
-          </div>`;
+        const included = Object.entries(p.byRegion).filter(([, v]) => v.includedInUSDTotal && v.currency !== "USD");
+        const excluded = Object.entries(p.byRegion).filter(([, v]) => !v.includedInUSDTotal);
+        const lines = [];
+        if (included.length) {
+          lines.push(`已換算併入：${included.map(([r, v]) => `${r} ${fmtNum(v.revenue)} ${v.currency}`).join("　")}`);
+        }
+        if (excluded.length) {
+          lines.push(`未併入(無可靠匯率，僅列數量)：${excluded.map(([r, v]) => `${r} ${fmtNum(v.qty)}件`).join("　")}`);
+        }
+        if (lines.length) {
+          extraRegion = `<div style="font-size:12px;color:var(--text-muted);margin-top:-6px;margin-bottom:14px;">${lines.join("　｜　")}</div>`;
         }
       }
 
@@ -6955,7 +7288,7 @@ const DATA = {
       const idx = +select.value;
       const m = months[idx];
       const prev = months[idx - 1];
-      const moneyFmt = chDef.key === "Amazon" ? (v) => fmtUSD(v) + " (US)" : fmtUSD;
+      const moneyFmt = fmtUSD;
       const provisional = /暫估/.test(m.source);
 
       body.innerHTML = `
@@ -7173,13 +7506,18 @@ const DATA = {
       const idx = +select.value;
       const p = periods[idx];
       const detail = p.byRegionDetail[region];
-      const regionTotal = p.byRegion[region] || { qty: 0, revenue: 0 };
+      const regionTotal = p.byRegion[region] || { qty: 0, revenue: 0, includedInUSDTotal: false };
+      const rate = DATA.meta.fxRateAEDperUSD;
+      const convertedNote = regionTotal.includedInUSDTotal
+        ? `已用固定匯率(1USD=${rate} ${currencyLabel})換算，併入上方 Amazon 實際業績`
+        : `金額為當地幣別，目前沒有可靠匯率來源，未併入 Amazon 實際業績`;
       body.innerHTML = `
-        <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px;">${p.startDate} ~ ${p.endDate}　金額為當地幣別，未換算USD</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px;">${p.startDate} ~ ${p.endDate}　${convertedNote}</div>
         <div class="stat-row">
           <div class="stat-tile">
             <div class="stat-label">銷售額</div>
             <div class="stat-value">${moneyFmt(regionTotal.revenue)}</div>
+            ${regionTotal.includedInUSDTotal ? `<div class="stat-delta flat">≈ ${fmtUSD(regionTotal.revenue / rate)}</div>` : ""}
           </div>
           <div class="stat-tile">
             <div class="stat-label">銷售數量</div>
@@ -7219,6 +7557,13 @@ const DATA = {
 
   const updated = new Date(DATA.generatedAt);
   document.getElementById("updatedAt").textContent = "資料更新時間：" + updated.toLocaleString("zh-TW", { hour12: false });
+
+  document.getElementById("subnote").innerHTML = `
+    官網＋Amazon 銷售量彙整，供業務查詢每期(週報)與每月銷售狀況。
+    <b>Amazon 金額已換算為USD：美國站(USD，匯率1:1)＋阿聯酋站(AED，固定匯率 1USD=${DATA.meta.fxRateAEDperUSD} AED)</b>，
+    加拿大/沙特等其他站點目前沒有可靠匯率來源，只列數量、金額未併入；月報總額則採財務結算後的
+    <b>表2 官網 / 表3 Amazon 彙總</b>數字為準。
+  `;
 
   document.getElementById("footNote").innerHTML = `
     產品分類(HDMI分配/切換、無線傳輸、電視天線、HDMI線材)對應 sherriva.com 官網選單分類；SKU 明細比對不到分類的歸入「未分類」。
