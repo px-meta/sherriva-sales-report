@@ -6,83 +6,58 @@
 <title>Sherriva 銷售儀表板</title>
 <style>
   :root {
-    color-scheme: light;
-    --surface-1:      #fcfcfb;
-    --page:           #f9f9f7;
-    --text-primary:   #0b0b0b;
-    --text-secondary: #52514e;
-    --text-muted:     #898781;
-    --grid:           #e1e0d9;
-    --axis:           #c3c2b7;
-    --border:         rgba(11,11,11,0.10);
-    --good:           #006300;
-    --warning:        #8a6100;
-    --critical:       #d03b3b;
-    --series-official: #2a78d6; /* 官網 */
-    --series-amazon:   #eb6834; /* Amazon */
-    --series-official-fill: #cde2fb;
-    --series-amazon-fill:   #fbd9c8;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:where(:not([data-theme="light"])) {
-      color-scheme: dark;
-      --surface-1:      #1a1a19;
-      --page:           #0d0d0d;
-      --text-primary:   #ffffff;
-      --text-secondary: #c3c2b7;
-      --text-muted:     #898781;
-      --grid:           #2c2c2a;
-      --axis:           #383835;
-      --border:         rgba(255,255,255,0.10);
-      --good:           #0ca30c;
-      --warning:        #fab219;
-      --critical:       #e66767;
-      --series-official: #3987e5;
-      --series-amazon:   #d95926;
-      --series-official-fill: #1c3a5c;
-      --series-amazon-fill:   #4a2c1c;
-    }
-  }
-  :root[data-theme="dark"] {
     color-scheme: dark;
-    --surface-1:      #1a1a19;
-    --page:           #0d0d0d;
+    --page:           #10132a;
+    --surface-1:      #1a1e42;
+    --surface-2:      #232a5c;
     --text-primary:   #ffffff;
-    --text-secondary: #c3c2b7;
-    --text-muted:     #898781;
-    --grid:           #2c2c2a;
-    --axis:           #383835;
-    --border:         rgba(255,255,255,0.10);
-    --good:           #0ca30c;
-    --warning:        #fab219;
-    --critical:       #e66767;
-    --series-official: #3987e5;
-    --series-amazon:   #d95926;
-    --series-official-fill: #1c3a5c;
-    --series-amazon-fill:   #4a2c1c;
+    --text-secondary: #b7bce2;
+    --text-muted:     #7d82ac;
+    --grid:           #2b2f5e;
+    --axis:           #383e74;
+    --border:         rgba(255,255,255,0.09);
+    --good:           #2fd480;
+    --warning:        #ffb130;
+    --critical:       #ff5c72;
+    --good-fill:      rgba(47,212,128,0.16);
+    --warning-fill:   rgba(255,177,48,0.16);
+    --critical-fill:  rgba(255,92,114,0.16);
+    --series-official: #3ea6ff; /* 官網 */
+    --series-amazon:   #ff9f43; /* Amazon */
+    --series-official-fill: rgba(62,166,255,0.20);
+    --series-amazon-fill:   rgba(255,159,67,0.20);
+    --cat-hdmi:      #3ea6ff;
+    --cat-wireless:  #a56bff;
+    --cat-antenna:   #2fd480;
+    --cat-cable:     #ffb130;
+    --cat-other:     #7d82ac;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    background: var(--page);
+    background:
+      radial-gradient(1200px 500px at 15% -10%, rgba(62,166,255,0.10), transparent 60%),
+      radial-gradient(1000px 500px at 100% 0%, rgba(165,107,255,0.08), transparent 55%),
+      var(--page);
     color: var(--text-primary);
     font-family: system-ui, -apple-system, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
     -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 20px 80px; }
+  .wrap { max-width: 1220px; margin: 0 auto; padding: 28px 20px 80px; }
   header.top { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
-  h1 { font-size: 22px; font-weight: 700; margin: 0; }
+  h1 { font-size: 24px; font-weight: 800; margin: 0; letter-spacing: 0.2px; }
   .updated { color: var(--text-muted); font-size: 13px; }
   .subnote { color: var(--text-secondary); font-size: 13px; margin: 4px 0 20px; line-height: 1.6; }
   .subnote b { color: var(--text-primary); }
 
-  nav.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+  nav.tabs { display: flex; gap: 6px; margin-bottom: 22px; flex-wrap: wrap; }
   nav.tabs button {
-    appearance: none; border: none; background: none; cursor: pointer;
-    padding: 10px 16px; font-size: 14px; font-weight: 600; color: var(--text-muted);
-    border-bottom: 2px solid transparent; margin-bottom: -1px;
+    appearance: none; border: 1px solid var(--border); background: var(--surface-1); cursor: pointer;
+    padding: 10px 18px; font-size: 14px; font-weight: 700; color: var(--text-secondary);
+    border-radius: 999px; transition: all 0.12s;
   }
-  nav.tabs button.active { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  nav.tabs button:hover { color: var(--text-primary); border-color: var(--axis); }
+  nav.tabs button.active { color: #0b0d1f; background: var(--series-official); border-color: var(--series-official); }
 
   .view { display: none; }
   .view.active { display: block; }
@@ -91,26 +66,31 @@
   @media (max-width: 820px) { .channels-grid { grid-template-columns: 1fr; } }
 
   .card {
-    background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
-    padding: 18px 20px;
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 16px;
+    padding: 20px 22px; box-shadow: 0 10px 30px -18px rgba(0,0,0,0.6);
+    border-top: 3px solid var(--card-accent, var(--axis));
   }
   .card + .card { margin-top: 18px; }
   .card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
-  .channel-name { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; }
+  .channel-name { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 800; }
+  .channel-icon { font-size: 18px; line-height: 1; }
   .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
   .dot.official { background: var(--series-official); }
   .dot.amazon { background: var(--series-amazon); }
 
   select.period-select {
-    font: inherit; font-size: 13px; padding: 5px 8px; border-radius: 6px;
-    border: 1px solid var(--border); background: var(--surface-1); color: var(--text-primary);
+    font: inherit; font-size: 13px; padding: 6px 10px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface-2); color: var(--text-primary);
   }
 
-  .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-bottom: 14px; }
-  .stat-tile { padding: 10px 0; }
-  .stat-label { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
-  .stat-value { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .stat-delta { font-size: 12px; margin-top: 3px; font-variant-numeric: tabular-nums; }
+  .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .stat-tile {
+    padding: 12px 14px; border-radius: 12px; background: var(--surface-2);
+    border-left: 3px solid var(--tile-accent, var(--axis));
+  }
+  .stat-label { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; font-weight: 600; }
+  .stat-value { font-size: 30px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -0.3px; }
+  .stat-delta { font-size: 12px; margin-top: 5px; font-variant-numeric: tabular-nums; font-weight: 700; }
   .stat-delta.up { color: var(--good); }
   .stat-delta.down { color: var(--critical); }
   .stat-delta.flat { color: var(--text-muted); }
@@ -150,22 +130,23 @@
   .foot-note { color: var(--text-muted); font-size: 12px; margin-top: 28px; line-height: 1.7; }
 
   /* ---- 頂部KPI：目標/實際/達成率 ---- */
-  .hero { margin-bottom: 22px; }
+  .hero { margin-bottom: 22px; border-top-color: var(--series-official); }
   .hero-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
   @media (max-width: 720px) { .hero-grid { grid-template-columns: 1fr; } }
-  .hero-tile-label { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
-  .hero-tile-value { font-size: 30px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.15; }
-  .hero-tile-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
-  .hero-tile-value.muted { font-size: 18px; color: var(--text-muted); font-weight: 600; }
+  .hero-tile { border-radius: 14px; padding: 16px 18px; background: var(--surface-2); border-left: 4px solid var(--tile-accent, var(--axis)); }
+  .hero-tile-label { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+  .hero-tile-value { font-size: 42px; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1.1; letter-spacing: -0.5px; }
+  .hero-tile-sub { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+  .hero-tile-value.muted { font-size: 20px; color: var(--text-muted); font-weight: 600; }
   .hero-tile-value.good { color: var(--good); }
   .hero-tile-value.warning { color: var(--warning); }
   .hero-tile-value.critical { color: var(--critical); }
-  .progress-track { height: 8px; border-radius: 999px; background: var(--grid); margin-top: 10px; overflow: hidden; }
+  .progress-track { height: 10px; border-radius: 999px; background: var(--grid); margin-top: 12px; overflow: hidden; }
   .progress-fill { height: 100%; border-radius: 999px; }
   .progress-fill.good { background: var(--good); }
   .progress-fill.warning { background: var(--warning); }
   .progress-fill.critical { background: var(--critical); }
-  .hero-period { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
+  .hero-period { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; font-weight: 600; }
 
   /* ---- 分類/品項兩層明細表 ---- */
   table.cat-table { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -182,21 +163,27 @@
   tr.sku-row { display: none; font-weight: 400; color: var(--text-secondary); }
   tr.sku-row.open { display: table-row; }
   tr.sku-row td:first-child { padding-left: 26px; }
+  .cat-icon { display: inline-block; width: 20px; text-align: center; margin-right: 4px; }
+  .cat-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 8px; }
 
   /* ---- 庫存戰情表 ---- */
   table.inv-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  table.inv-table th, table.inv-table td { padding: 7px 8px; text-align: right; border-bottom: 1px solid var(--grid); }
+  table.inv-table th, table.inv-table td { padding: 9px 8px; text-align: right; border-bottom: 1px solid var(--grid); }
   table.inv-table th:first-child, table.inv-table td:first-child { text-align: left; }
   table.inv-table thead th { color: var(--text-muted); font-weight: 600; font-size: 12px; }
   table.inv-table td.num, table.inv-table th.num { font-variant-numeric: tabular-nums; }
   table.inv-table tbody tr:last-child td { border-bottom: none; }
-  .inv-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; }
-  .inv-badge.critical { color: var(--critical); background: color-mix(in srgb, var(--critical) 14%, transparent); }
-  .inv-badge.warning { color: var(--warning); background: color-mix(in srgb, var(--warning) 16%, transparent); }
-  .inv-badge.good { color: var(--good); background: color-mix(in srgb, var(--good) 12%, transparent); }
-  .inv-badge.na { color: var(--text-muted); background: var(--page); }
-  .inv-alert-banner { display: flex; align-items: flex-start; gap: 8px; background: color-mix(in srgb, var(--critical) 10%, transparent); border: 1px solid color-mix(in srgb, var(--critical) 35%, transparent); border-radius: 10px; padding: 10px 14px; font-size: 13px; margin-bottom: 16px; }
+  .inv-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; padding: 4px 11px; border-radius: 999px; }
+  .inv-badge.critical { color: var(--critical); background: var(--critical-fill); }
+  .inv-badge.warning { color: var(--warning); background: var(--warning-fill); }
+  .inv-badge.good { color: var(--good); background: var(--good-fill); }
+  .inv-badge.na { color: var(--text-muted); background: var(--surface-2); }
+  .inv-alert-banner { display: flex; align-items: flex-start; gap: 10px; background: var(--critical-fill); border: 1px solid color-mix(in srgb, var(--critical) 45%, transparent); border-radius: 12px; padding: 12px 16px; font-size: 13px; margin-bottom: 16px; }
   .inv-alert-banner b { color: var(--critical); }
+
+  /* ---- 每週日銷售 ---- */
+  .week-day-table td.today { color: var(--series-official); font-weight: 800; }
+  .week-pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 999px; background: var(--series-official-fill); color: var(--series-official); margin-left: 8px; }
 </style>
 </head>
 <body>
@@ -210,12 +197,17 @@
   <div class="hero card" id="hero"></div>
 
   <nav class="tabs">
-    <button data-view="weekly" class="active">週報</button>
-    <button data-view="monthly">月報</button>
-    <button data-view="inventory">庫存戰情</button>
+    <button data-view="daily" class="active">📅 每日</button>
+    <button data-view="weekly">📊 週報</button>
+    <button data-view="monthly">🗓️ 月報</button>
+    <button data-view="inventory">📦 庫存戰情</button>
   </nav>
 
-  <section id="view-weekly" class="view active">
+  <section id="view-daily" class="view active">
+    <div class="channels-grid" id="dailyGrid"></div>
+  </section>
+
+  <section id="view-weekly" class="view">
     <div class="channels-grid" id="weeklyGrid"></div>
   </section>
 
@@ -224,7 +216,7 @@
   </section>
 
   <section id="view-inventory" class="view">
-    <div class="card" id="inventoryCard"></div>
+    <div class="card" id="inventoryCard" style="--card-accent: var(--warning)"></div>
   </section>
 
   <div class="foot-note" id="footNote"></div>
@@ -234,7 +226,7 @@
 
 <script>
 const DATA = {
-  "generatedAt": "2026-08-28T06:22:14.312Z",
+  "generatedAt": "2026-08-28T23:00:05.640Z",
   "periods": [
     {
       "channel": "官網",
@@ -270,8 +262,8 @@ const DATA = {
       "excludedRefunded": 0,
       "currency": "USD",
       "source": "orders_export_4.11-4.26.xlsx",
-      "targetUSD": 2793.65,
-      "achievementRate": 71.9
+      "targetUSD": 2782.34,
+      "achievementRate": 72.1
     },
     {
       "channel": "官網",
@@ -303,8 +295,8 @@ const DATA = {
       "excludedRefunded": 0,
       "currency": "USD",
       "source": "orders_export_4.27-4.30.csv",
-      "targetUSD": 698.41,
-      "achievementRate": 96.5
+      "targetUSD": 695.59,
+      "achievementRate": 96.9
     },
     {
       "channel": "官網",
@@ -356,8 +348,8 @@ const DATA = {
       "excludedRefunded": 0,
       "currency": "USD",
       "source": "shopify_orders_May_original-5.1-5.10.xlsx",
-      "targetUSD": 1689.71,
-      "achievementRate": 38.8
+      "targetUSD": 1682.87,
+      "achievementRate": 39
     },
     {
       "channel": "官網",
@@ -389,7 +381,7 @@ const DATA = {
       "excludedRefunded": 1,
       "currency": "USD",
       "source": "shopify_orders_May_original-5.11-5.20.csv",
-      "targetUSD": 1689.71,
+      "targetUSD": 1682.87,
       "achievementRate": 16.3
     },
     {
@@ -418,7 +410,7 @@ const DATA = {
       "excludedRefunded": 0,
       "currency": "USD",
       "source": "shopify_orders_May_original-5.21-5.28.csv",
-      "targetUSD": 1351.77,
+      "targetUSD": 1346.3,
       "achievementRate": 0
     },
     {
@@ -455,8 +447,8 @@ const DATA = {
       "excludedRefunded": 0,
       "currency": "USD",
       "source": "shopify_orders_June_original-6.1-6.10..xlsx",
-      "targetUSD": 1746.03,
-      "achievementRate": 85.5
+      "targetUSD": 1738.97,
+      "achievementRate": 85.9
     },
     {
       "channel": "官網",
@@ -492,8 +484,8 @@ const DATA = {
       "excludedRefunded": 0,
       "currency": "USD",
       "source": "shopify_orders_June_original-6.11-6.20.csv.xlsx",
-      "targetUSD": 1746.03,
-      "achievementRate": 57.6
+      "targetUSD": 1738.97,
+      "achievementRate": 57.8
     },
     {
       "channel": "官網",
@@ -529,8 +521,8 @@ const DATA = {
       "excludedRefunded": 0,
       "currency": "USD",
       "source": "shopify_orders_June_original-6.21-6.30.csv",
-      "targetUSD": 1746.03,
-      "achievementRate": 29.8
+      "targetUSD": 1738.97,
+      "achievementRate": 29.9
     },
     {
       "channel": "官網",
@@ -566,8 +558,8 @@ const DATA = {
       "excludedRefunded": 0,
       "currency": "USD",
       "source": "shopify_orders_July-7.1-7.10.xlsx",
-      "targetUSD": 2027.65,
-      "achievementRate": 48.7
+      "targetUSD": 2019.44,
+      "achievementRate": 48.9
     },
     {
       "channel": "官網",
@@ -603,8 +595,8 @@ const DATA = {
       "excludedRefunded": 0,
       "currency": "USD",
       "source": "shopify_orders_July-7.11-7.20.csv",
-      "targetUSD": 2027.65,
-      "achievementRate": 23.6
+      "targetUSD": 2019.44,
+      "achievementRate": 23.7
     },
     {
       "channel": "官網",
@@ -644,8 +636,8 @@ const DATA = {
       "excludedRefunded": 0,
       "currency": "USD",
       "source": "0721-0731.xlsx + shopify_orders_July-7.21-7.31.csv",
-      "targetUSD": 2230.41,
-      "achievementRate": 33.5
+      "targetUSD": 2221.39,
+      "achievementRate": 33.6
     },
     {
       "channel": "官網",
@@ -693,8 +685,8 @@ const DATA = {
       "excludedRefunded": 0,
       "currency": "USD",
       "source": "shopify_orders_August-8.1-8.10.csv",
-      "targetUSD": 2027.65,
-      "achievementRate": 36.1
+      "targetUSD": 2019.44,
+      "achievementRate": 36.3
     },
     {
       "channel": "官網",
@@ -734,8 +726,8 @@ const DATA = {
       "excludedRefunded": 0,
       "currency": "USD",
       "source": "shopify_orders_August-8.11-8.20.xlsx",
-      "targetUSD": 2027.65,
-      "achievementRate": 73
+      "targetUSD": 2019.44,
+      "achievementRate": 73.3
     },
     {
       "channel": "官網",
@@ -799,8 +791,8 @@ const DATA = {
       "excludedRefunded": 0,
       "currency": "USD",
       "source": "Shopify Admin API(暫估，本旬尚未結束)",
-      "targetUSD": 1622.12,
-      "achievementRate": 107.5
+      "targetUSD": 1615.56,
+      "achievementRate": 108
     },
     {
       "channel": "Amazon",
@@ -1001,8 +993,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Apr13-2026Apr19CustomUnifiedTransaction_0413~0419.xlsx",
-      "targetUSD": 9888.89,
-      "achievementRate": 71.9
+      "targetUSD": 9848.87,
+      "achievementRate": 72.2
     },
     {
       "channel": "Amazon",
@@ -1215,8 +1207,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Apr20-2026Apr26CustomTransaction.xlsx",
-      "targetUSD": 9888.89,
-      "achievementRate": 105.5
+      "targetUSD": 9848.87,
+      "achievementRate": 105.9
     },
     {
       "channel": "Amazon",
@@ -1421,8 +1413,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Apr27-2026Apr30CustomUnifiedTransaction.xlsx",
-      "targetUSD": 5650.79,
-      "achievementRate": 63.7
+      "targetUSD": 5627.92,
+      "achievementRate": 64
     },
     {
       "channel": "Amazon",
@@ -1651,8 +1643,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026May1-2026May10CustomUnifiedTransaction.xlsx + SA---2026May1-2026May10CustomTransaction .csv",
-      "targetUSD": 13671.28,
-      "achievementRate": 68.1
+      "targetUSD": 13615.95,
+      "achievementRate": 68.4
     },
     {
       "channel": "Amazon",
@@ -1865,8 +1857,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "20260511-0517.xlsx",
-      "targetUSD": 9569.89,
-      "achievementRate": 89.2
+      "targetUSD": 9531.16,
+      "achievementRate": 89.6
     },
     {
       "channel": "Amazon",
@@ -2087,8 +2079,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026May18-2026May24CustomUnifiedTransaction.xlsx",
-      "targetUSD": 9569.89,
-      "achievementRate": 104.3
+      "targetUSD": 9531.16,
+      "achievementRate": 104.7
     },
     {
       "channel": "Amazon",
@@ -2301,8 +2293,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026May25-2026May31CustomUnifiedTransaction.xlsx",
-      "targetUSD": 9569.89,
-      "achievementRate": 69.3
+      "targetUSD": 9531.16,
+      "achievementRate": 69.6
     },
     {
       "channel": "Amazon",
@@ -2555,8 +2547,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jun1-2026Jun7CustomTransaction.xlsx",
-      "targetUSD": 9888.89,
-      "achievementRate": 91.2
+      "targetUSD": 9848.87,
+      "achievementRate": 91.6
     },
     {
       "channel": "Amazon",
@@ -2809,8 +2801,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jun8-2026Jun14CustomUnifiedTransaction.xlsx",
-      "targetUSD": 9888.89,
-      "achievementRate": 109.1
+      "targetUSD": 9848.87,
+      "achievementRate": 109.6
     },
     {
       "channel": "Amazon",
@@ -3047,8 +3039,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jun15-2026Jun21CustomTransaction.xlsx",
-      "targetUSD": 9888.89,
-      "achievementRate": 94.7
+      "targetUSD": 9848.87,
+      "achievementRate": 95
     },
     {
       "channel": "Amazon",
@@ -3249,8 +3241,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jun22-2026Jun28CustomUnifiedTransaction.xlsx",
-      "targetUSD": 9888.89,
-      "achievementRate": 130.3
+      "targetUSD": 9848.87,
+      "achievementRate": 130.8
     },
     {
       "channel": "Amazon",
@@ -3427,8 +3419,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jun29-2026Jun30CustomTransaction.xlsx",
-      "targetUSD": 2825.4,
-      "achievementRate": 105.8
+      "targetUSD": 2813.96,
+      "achievementRate": 106.2
     },
     {
       "channel": "Amazon",
@@ -3625,8 +3617,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jul1-2026Jul5CustomTransaction.xlsx",
-      "targetUSD": 8202.77,
-      "achievementRate": 74.2
+      "targetUSD": 8169.57,
+      "achievementRate": 74.5
     },
     {
       "channel": "Amazon",
@@ -3843,8 +3835,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jul6-2026Jul12CustomUnifiedTransaction.xlsx",
-      "targetUSD": 11483.87,
-      "achievementRate": 67.5
+      "targetUSD": 11437.4,
+      "achievementRate": 67.7
     },
     {
       "channel": "Amazon",
@@ -4065,7 +4057,7 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jul27-2026Jul31CustomTransaction.xlsx + July_payment_transactions_7.21-7.31.csv",
-      "targetUSD": 41013.83,
+      "targetUSD": 40847.84,
       "achievementRate": 13.8
     },
     {
@@ -4291,8 +4283,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jul13-2026Jul19CustomUnifiedTransaction.xlsx",
-      "targetUSD": 11483.87,
-      "achievementRate": 81.2
+      "targetUSD": 11437.4,
+      "achievementRate": 81.5
     },
     {
       "channel": "Amazon",
@@ -4501,8 +4493,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jul20-2026Jul26CustomUnifiedTransaction.xlsx",
-      "targetUSD": 11483.87,
-      "achievementRate": 56.7
+      "targetUSD": 11437.4,
+      "achievementRate": 57
     },
     {
       "channel": "Amazon",
@@ -4723,8 +4715,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Jul27-2026Jul31CustomTransaction.xlsx",
-      "targetUSD": 8202.77,
-      "achievementRate": 68.9
+      "targetUSD": 8169.57,
+      "achievementRate": 69.2
     },
     {
       "channel": "Amazon",
@@ -4928,8 +4920,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Aug1-2026Aug2CustomUnifiedTransaction.xlsx + 2026Aug3-2026Aug9CustomUnifiedTransaction.xlsx",
-      "targetUSD": 14764.98,
-      "achievementRate": 81
+      "targetUSD": 14705.22,
+      "achievementRate": 81.3
     },
     {
       "channel": "Amazon",
@@ -5129,8 +5121,8 @@ const DATA = {
       ],
       "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
       "source": "2026Aug10-2026Aug16CustomUnifiedTransaction.xlsx",
-      "targetUSD": 11483.87,
-      "achievementRate": 75.5
+      "targetUSD": 11437.4,
+      "achievementRate": 75.8
     }
   ],
   "monthly": [
@@ -5180,8 +5172,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算)",
-      "targetUSD": 4190.48,
-      "achievementRate": 155.4
+      "targetUSD": 4173.52,
+      "achievementRate": 156
     },
     {
       "channel": "Amazon",
@@ -5257,8 +5249,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算)",
-      "targetUSD": 33904.76,
-      "achievementRate": 101
+      "targetUSD": 33767.54,
+      "achievementRate": 101.4
     },
     {
       "channel": "官網",
@@ -5302,8 +5294,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算)",
-      "targetUSD": 4190.48,
-      "achievementRate": 221.8
+      "targetUSD": 4173.52,
+      "achievementRate": 222.7
     },
     {
       "channel": "Amazon",
@@ -5379,8 +5371,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算)",
-      "targetUSD": 33904.76,
-      "achievementRate": 104.3
+      "targetUSD": 33767.54,
+      "achievementRate": 104.7
     },
     {
       "channel": "官網",
@@ -5408,8 +5400,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算)",
-      "targetUSD": 4190.48,
-      "achievementRate": 86.1
+      "targetUSD": 4173.52,
+      "achievementRate": 86.4
     },
     {
       "channel": "Amazon",
@@ -5473,8 +5465,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算)",
-      "targetUSD": 33904.76,
-      "achievementRate": 76.1
+      "targetUSD": 33767.54,
+      "achievementRate": 76.4
     },
     {
       "channel": "官網",
@@ -5518,8 +5510,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算)",
-      "targetUSD": 5238.1,
-      "achievementRate": 66.6
+      "targetUSD": 5216.9,
+      "achievementRate": 66.9
     },
     {
       "channel": "Amazon",
@@ -5591,8 +5583,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算)",
-      "targetUSD": 42380.95,
-      "achievementRate": 72.2
+      "targetUSD": 42209.43,
+      "achievementRate": 72.5
     },
     {
       "channel": "Amazon(中東站/UAE)",
@@ -5650,8 +5642,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算)",
-      "targetUSD": 5238.1,
-      "achievementRate": 20.4
+      "targetUSD": 5216.9,
+      "achievementRate": 20.5
     },
     {
       "channel": "Amazon",
@@ -5723,8 +5715,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算)",
-      "targetUSD": 42380.95,
-      "achievementRate": 78.7
+      "targetUSD": 42209.43,
+      "achievementRate": 79.1
     },
     {
       "channel": "Amazon(中東站/UAE)",
@@ -5774,8 +5766,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算)",
-      "targetUSD": 5238.1,
-      "achievementRate": 57.6
+      "targetUSD": 5216.9,
+      "achievementRate": 57.9
     },
     {
       "channel": "Amazon",
@@ -5863,8 +5855,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算)",
-      "targetUSD": 42380.95,
-      "achievementRate": 105.8
+      "targetUSD": 42209.43,
+      "achievementRate": 106.2
     },
     {
       "channel": "Amazon(中東站/UAE)",
@@ -5918,8 +5910,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算)",
-      "targetUSD": 6285.71,
-      "achievementRate": 34.8
+      "targetUSD": 6260.28,
+      "achievementRate": 35
     },
     {
       "channel": "Amazon",
@@ -5995,8 +5987,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算)",
-      "targetUSD": 50857.15,
-      "achievementRate": 62.4
+      "targetUSD": 50651.32,
+      "achievementRate": 62.7
     },
     {
       "channel": "Amazon(中東站/UAE)",
@@ -6079,8 +6071,8 @@ const DATA = {
         "8/11-8/20",
         "8/21-8/28"
       ],
-      "targetUSD": 6285.71,
-      "achievementRate": 62.9
+      "targetUSD": 6260.28,
+      "achievementRate": 63.2
     },
     {
       "channel": "Amazon",
@@ -6164,8 +6156,8 @@ const DATA = {
         "8/1-8/9",
         "8/10-8/16"
       ],
-      "targetUSD": 50857.15,
-      "achievementRate": 40.6
+      "targetUSD": 50651.32,
+      "achievementRate": 40.7
     },
     {
       "channel": "Amazon(中東站/UAE)",
@@ -6252,8 +6244,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算,官網+Amazon合計)",
-      "targetUSD": 38095.24,
-      "achievementRate": 107
+      "targetUSD": 37941.06,
+      "achievementRate": 107.4
     },
     {
       "year": 2026,
@@ -6332,8 +6324,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算,官網+Amazon合計)",
-      "targetUSD": 38095.24,
-      "achievementRate": 117.2
+      "targetUSD": 37941.06,
+      "achievementRate": 117.7
     },
     {
       "year": 2026,
@@ -6396,8 +6388,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算,官網+Amazon合計)",
-      "targetUSD": 38095.24,
-      "achievementRate": 77.2
+      "targetUSD": 37941.06,
+      "achievementRate": 77.5
     },
     {
       "year": 2026,
@@ -6484,8 +6476,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算,官網+Amazon合計)",
-      "targetUSD": 47619.05,
-      "achievementRate": 71.6
+      "targetUSD": 47426.33,
+      "achievementRate": 71.9
     },
     {
       "year": 2026,
@@ -6564,8 +6556,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算,官網+Amazon合計)",
-      "targetUSD": 47619.05,
-      "achievementRate": 72.3
+      "targetUSD": 47426.33,
+      "achievementRate": 72.6
     },
     {
       "year": 2026,
@@ -6652,8 +6644,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算,官網+Amazon合計)",
-      "targetUSD": 47619.05,
-      "achievementRate": 100.5
+      "targetUSD": 47426.33,
+      "achievementRate": 100.9
     },
     {
       "year": 2026,
@@ -6728,8 +6720,8 @@ const DATA = {
         }
       },
       "source": "月報表(財務結算,官網+Amazon合計)",
-      "targetUSD": 57142.86,
-      "achievementRate": 59.4
+      "targetUSD": 56911.6,
+      "achievementRate": 59.6
     },
     {
       "year": 2026,
@@ -6824,8 +6816,514 @@ const DATA = {
         }
       },
       "source": "暫估(官網+Amazon加總,尚未經財務結算)",
-      "targetUSD": 57142.86,
-      "achievementRate": 43
+      "targetUSD": 56911.6,
+      "achievementRate": 43.2
+    }
+  ],
+  "dailyOfficial": [
+    {
+      "date": "2026-07-30",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "ordersCount": 0,
+      "byProduct": {},
+      "byCategory": {},
+      "provisional": false
+    },
+    {
+      "date": "2026-07-31",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "ordersCount": 0,
+      "byProduct": {},
+      "byCategory": {},
+      "provisional": false
+    },
+    {
+      "date": "2026-08-01",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "ordersCount": 0,
+      "byProduct": {},
+      "byCategory": {},
+      "provisional": false
+    },
+    {
+      "date": "2026-08-02",
+      "totalRevenueUSD": 382.83,
+      "totalUnits": 2,
+      "ordersCount": 2,
+      "byProduct": {
+        "WHD-5000": {
+          "qty": 1,
+          "revenue": 142
+        },
+        "WHD-5100": {
+          "qty": 1,
+          "revenue": 182.1
+        }
+      },
+      "byCategory": {
+        "無線傳輸(WTR/WHD)": {
+          "qty": 2,
+          "revenue": 324.1
+        }
+      },
+      "provisional": false
+    },
+    {
+      "date": "2026-08-03",
+      "totalRevenueUSD": 156.75,
+      "totalUnits": 11,
+      "ordersCount": 2,
+      "byProduct": {
+        "未分類(無SKU)": {
+          "qty": 10,
+          "revenue": 10.5
+        },
+        "WHD-5000": {
+          "qty": 1,
+          "revenue": 141.15
+        }
+      },
+      "byCategory": {
+        "未分類": {
+          "qty": 10,
+          "revenue": 10.5
+        },
+        "無線傳輸(WTR/WHD)": {
+          "qty": 1,
+          "revenue": 141.15
+        }
+      },
+      "provisional": false
+    },
+    {
+      "date": "2026-08-04",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "ordersCount": 0,
+      "byProduct": {},
+      "byCategory": {},
+      "provisional": false
+    },
+    {
+      "date": "2026-08-05",
+      "totalRevenueUSD": 2377,
+      "totalUnits": 20,
+      "ordersCount": 1,
+      "byProduct": {
+        "WHD-5100": {
+          "qty": 20,
+          "revenue": 3580
+        }
+      },
+      "byCategory": {
+        "無線傳輸(WTR/WHD)": {
+          "qty": 20,
+          "revenue": 3580
+        }
+      },
+      "provisional": false
+    },
+    {
+      "date": "2026-08-06",
+      "totalRevenueUSD": 11.97,
+      "totalUnits": 1,
+      "ordersCount": 1,
+      "byProduct": {
+        "UHD-10KB-6.6FT": {
+          "qty": 1,
+          "revenue": 11.97
+        }
+      },
+      "byCategory": {
+        "HDMI線材": {
+          "qty": 1,
+          "revenue": 11.97
+        }
+      },
+      "provisional": false
+    },
+    {
+      "date": "2026-08-07",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "ordersCount": 0,
+      "byProduct": {},
+      "byCategory": {},
+      "provisional": false
+    },
+    {
+      "date": "2026-08-08",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "ordersCount": 0,
+      "byProduct": {},
+      "byCategory": {},
+      "provisional": false
+    },
+    {
+      "date": "2026-08-09",
+      "totalRevenueUSD": 213.63,
+      "totalUnits": 1,
+      "ordersCount": 1,
+      "byProduct": {
+        "WHD-5100": {
+          "qty": 1,
+          "revenue": 182.64
+        }
+      },
+      "byCategory": {
+        "無線傳輸(WTR/WHD)": {
+          "qty": 1,
+          "revenue": 182.64
+        }
+      },
+      "provisional": false
+    },
+    {
+      "date": "2026-08-10",
+      "totalRevenueUSD": 0,
+      "totalUnits": 1,
+      "ordersCount": 1,
+      "byProduct": {
+        "UHD-2180": {
+          "qty": 1,
+          "revenue": 29.97
+        }
+      },
+      "byCategory": {
+        "HDMI分配/切換": {
+          "qty": 1,
+          "revenue": 29.97
+        }
+      },
+      "provisional": false
+    },
+    {
+      "date": "2026-08-11",
+      "totalRevenueUSD": 606.72,
+      "totalUnits": 5,
+      "ordersCount": 2,
+      "byProduct": {
+        "WHD-5000H": {
+          "qty": 1,
+          "revenue": 59
+        },
+        "WHD-5000C": {
+          "qty": 2,
+          "revenue": 118
+        },
+        "WHD-5100": {
+          "qty": 2,
+          "revenue": 360.7
+        }
+      },
+      "byCategory": {
+        "無線傳輸(WTR/WHD)": {
+          "qty": 5,
+          "revenue": 537.7
+        }
+      },
+      "provisional": false
+    },
+    {
+      "date": "2026-08-12",
+      "totalRevenueUSD": 139,
+      "totalUnits": 2,
+      "ordersCount": 2,
+      "byProduct": {
+        "WHD-5000": {
+          "qty": 1,
+          "revenue": 139
+        },
+        "WHD-5100": {
+          "qty": 1,
+          "revenue": 179
+        }
+      },
+      "byCategory": {
+        "無線傳輸(WTR/WHD)": {
+          "qty": 2,
+          "revenue": 318
+        }
+      },
+      "provisional": false
+    },
+    {
+      "date": "2026-08-13",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "ordersCount": 0,
+      "byProduct": {},
+      "byCategory": {},
+      "provisional": false
+    },
+    {
+      "date": "2026-08-14",
+      "totalRevenueUSD": 152.74,
+      "totalUnits": 1,
+      "ordersCount": 1,
+      "byProduct": {
+        "WHD-5000": {
+          "qty": 1,
+          "revenue": 141.65
+        }
+      },
+      "byCategory": {
+        "無線傳輸(WTR/WHD)": {
+          "qty": 1,
+          "revenue": 141.65
+        }
+      },
+      "provisional": false
+    },
+    {
+      "date": "2026-08-15",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "ordersCount": 0,
+      "byProduct": {},
+      "byCategory": {},
+      "provisional": false
+    },
+    {
+      "date": "2026-08-16",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "ordersCount": 0,
+      "byProduct": {},
+      "byCategory": {},
+      "provisional": false
+    },
+    {
+      "date": "2026-08-17",
+      "totalRevenueUSD": 179,
+      "totalUnits": 1,
+      "ordersCount": 1,
+      "byProduct": {
+        "WHD-5100": {
+          "qty": 1,
+          "revenue": 179
+        }
+      },
+      "byCategory": {
+        "無線傳輸(WTR/WHD)": {
+          "qty": 1,
+          "revenue": 179
+        }
+      },
+      "provisional": false
+    },
+    {
+      "date": "2026-08-18",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "ordersCount": 0,
+      "byProduct": {},
+      "byCategory": {},
+      "provisional": false
+    },
+    {
+      "date": "2026-08-19",
+      "totalRevenueUSD": 198.36,
+      "totalUnits": 1,
+      "ordersCount": 1,
+      "byProduct": {
+        "WHD-5100": {
+          "qty": 1,
+          "revenue": 182.17
+        }
+      },
+      "byCategory": {
+        "無線傳輸(WTR/WHD)": {
+          "qty": 1,
+          "revenue": 182.17
+        }
+      },
+      "provisional": false
+    },
+    {
+      "date": "2026-08-20",
+      "totalRevenueUSD": 203.97,
+      "totalUnits": 1,
+      "ordersCount": 1,
+      "byProduct": {
+        "WHD-5000": {
+          "qty": 1,
+          "revenue": 135.97
+        }
+      },
+      "byCategory": {
+        "無線傳輸(WTR/WHD)": {
+          "qty": 1,
+          "revenue": 135.97
+        }
+      },
+      "provisional": false
+    },
+    {
+      "date": "2026-08-21",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "ordersCount": 0,
+      "byProduct": {},
+      "byCategory": {},
+      "provisional": false
+    },
+    {
+      "date": "2026-08-22",
+      "totalRevenueUSD": 340.11,
+      "totalUnits": 2,
+      "ordersCount": 2,
+      "byProduct": {
+        "WHD-5000": {
+          "qty": 2,
+          "revenue": 277.5
+        }
+      },
+      "byCategory": {
+        "無線傳輸(WTR/WHD)": {
+          "qty": 2,
+          "revenue": 277.5
+        }
+      },
+      "provisional": false
+    },
+    {
+      "date": "2026-08-23",
+      "totalRevenueUSD": 155.48,
+      "totalUnits": 1,
+      "ordersCount": 1,
+      "byProduct": {
+        "WHD-5000": {
+          "qty": 1,
+          "revenue": 138.15
+        }
+      },
+      "byCategory": {
+        "無線傳輸(WTR/WHD)": {
+          "qty": 1,
+          "revenue": 138.15
+        }
+      },
+      "provisional": false
+    },
+    {
+      "date": "2026-08-24",
+      "totalRevenueUSD": 353.17,
+      "totalUnits": 2,
+      "ordersCount": 2,
+      "byProduct": {
+        "WHD-5100": {
+          "qty": 1,
+          "revenue": 178.68
+        },
+        "WHD-5000": {
+          "qty": 1,
+          "revenue": 138.04
+        }
+      },
+      "byCategory": {
+        "無線傳輸(WTR/WHD)": {
+          "qty": 2,
+          "revenue": 316.72
+        }
+      },
+      "provisional": false
+    },
+    {
+      "date": "2026-08-25",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "ordersCount": 0,
+      "byProduct": {},
+      "byCategory": {},
+      "provisional": false
+    },
+    {
+      "date": "2026-08-26",
+      "totalRevenueUSD": 778.55,
+      "totalUnits": 8,
+      "ordersCount": 2,
+      "byProduct": {
+        "UHD-2180": {
+          "qty": 1,
+          "revenue": 29.97
+        },
+        "WHD-1000": {
+          "qty": 1,
+          "revenue": 95.97
+        },
+        "WHD-5000": {
+          "qty": 1,
+          "revenue": 135.97
+        },
+        "WHD-5100": {
+          "qty": 2,
+          "revenue": 355.27
+        },
+        "SAE-5500": {
+          "qty": 1,
+          "revenue": 46.97
+        },
+        "SAF-6500": {
+          "qty": 1,
+          "revenue": 35.97
+        },
+        "SAF-7500": {
+          "qty": 1,
+          "revenue": 46.97
+        }
+      },
+      "byCategory": {
+        "HDMI分配/切換": {
+          "qty": 1,
+          "revenue": 29.97
+        },
+        "無線傳輸(WTR/WHD)": {
+          "qty": 4,
+          "revenue": 587.21
+        },
+        "電視天線": {
+          "qty": 2,
+          "revenue": 82.94
+        },
+        "未分類": {
+          "qty": 1,
+          "revenue": 46.97
+        }
+      },
+      "provisional": false
+    },
+    {
+      "date": "2026-08-27",
+      "totalRevenueUSD": 116.88,
+      "totalUnits": 1,
+      "ordersCount": 1,
+      "byProduct": {
+        "WHD-1000": {
+          "qty": 1,
+          "revenue": 98.12
+        }
+      },
+      "byCategory": {
+        "無線傳輸(WTR/WHD)": {
+          "qty": 1,
+          "revenue": 98.12
+        }
+      },
+      "provisional": false
+    },
+    {
+      "date": "2026-08-28",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "ordersCount": 0,
+      "byProduct": {},
+      "byCategory": {},
+      "provisional": true
     }
   ],
   "inventory": [
@@ -7050,10 +7548,11 @@ const DATA = {
       "daysOfSupply": 368.9
     }
   ],
-  "inventorySnapshotAt": "2026-08-27T15:44:54.000Z",
+  "inventorySnapshotAt": "2026-08-28T10:10:02.000Z",
   "meta": {
     "officialCategories": [
       "UHD-10KB-3.3FT",
+      "UHD-10KB-6.6FT",
       "UHD-10KB-10FT",
       "HDMI CABLE",
       "WHD-5000C",
@@ -7120,7 +7619,9 @@ const DATA = {
       "UHD-10KB-10FT": "HDMI線材",
       "未分類": "未分類"
     },
-    "targetFxRateTWDperUSD": 31.5,
+    "targetFxRateTWDperUSD": 31.628,
+    "targetFxRateSource": "台灣期貨交易所(TAIFEX)每日參考匯率(自動抓取)",
+    "targetFxRateDate": "2026-08-28",
     "targetChannelSplit": {
       "官網": 0.11,
       "Amazon": 0.89
@@ -7132,9 +7633,20 @@ const DATA = {
 <script>
 (function () {
   const CH = [
-    { key: "官網", label: "官網", color: "var(--series-official)", fill: "var(--series-official-fill)", dotClass: "official" },
-    { key: "Amazon", label: "Amazon(美國站)", color: "var(--series-amazon)", fill: "var(--series-amazon-fill)", dotClass: "amazon" },
+    { key: "官網", label: "官網", icon: "🌐", color: "var(--series-official)", fill: "var(--series-official-fill)", dotClass: "official" },
+    { key: "Amazon", label: "Amazon(美國站)", icon: "🛒", color: "var(--series-amazon)", fill: "var(--series-amazon-fill)", dotClass: "amazon" },
   ];
+
+  // 4大分類的顏色/圖示，跟儀表板整體配色系統(HDMI=藍/無線=紫/天線=綠/線材=橘)一致，
+  // 讓業務光看色塊、圖示就能認出是哪一類，不用逐字讀分類名稱。
+  const CATEGORY_STYLE = {
+    "HDMI分配/切換":     { icon: "🔀", color: "var(--cat-hdmi)" },
+    "無線傳輸(WTR/WHD)": { icon: "📡", color: "var(--cat-wireless)" },
+    "電視天線":          { icon: "📺", color: "var(--cat-antenna)" },
+    "HDMI線材":          { icon: "🔌", color: "var(--cat-cable)" },
+    "未分類":            { icon: "📦", color: "var(--cat-other)" },
+  };
+  function catStyle(cat) { return CATEGORY_STYLE[cat] || CATEGORY_STYLE["未分類"]; }
 
   const fmtUSD = (n) => "US$" + Math.round(n).toLocaleString("en-US");
   const fmtNum = (n) => Math.round(n).toLocaleString("en-US");
@@ -7232,9 +7744,10 @@ const DATA = {
     if (p.targetUSD == null) return "";
     const rate = p.achievementRate;
     const cls = rate >= 100 ? "good" : rate >= 80 ? "warning" : "critical";
-    return `<div class="stat-tile">
-      <div class="stat-label">本期目標達成率(推算)</div>
-      <div class="stat-value ${cls}" style="font-size:22px;">${rate.toFixed(1)}%</div>
+    const icon = rate >= 100 ? "🟢" : rate >= 80 ? "🟡" : "🔴";
+    return `<div class="stat-tile" style="--tile-accent:var(--${cls})">
+      <div class="stat-label">${icon} 本期目標達成率(推算)</div>
+      <div class="stat-value ${cls}">${rate.toFixed(1)}%</div>
       <div class="progress-track"><div class="progress-fill ${cls}" style="width:${Math.min(100, rate)}%"></div></div>
     </div>`;
   }
@@ -7269,7 +7782,8 @@ const DATA = {
       <tbody>`;
     catRows.forEach(([cat, v], i) => {
       const skus = (skuByCategory[cat] || []).sort((a, b) => b[1].revenue - a[1].revenue);
-      html += `<tr class="cat-row" data-cat-idx="${i}"><td><span class="caret">▸</span>${cat}</td><td class="num">${fmtNum(v.qty)}</td><td class="num">${opts.moneyFmt(v.revenue)}</td></tr>`;
+      const st = catStyle(cat);
+      html += `<tr class="cat-row" data-cat-idx="${i}"><td><span class="caret">▸</span><span class="cat-icon">${st.icon}</span>${cat}</td><td class="num">${fmtNum(v.qty)}</td><td class="num" style="color:${st.color}">${opts.moneyFmt(v.revenue)}</td></tr>`;
       skus.forEach(([sku, sv]) => {
         html += `<tr class="sku-row" data-cat-idx="${i}"><td>${sku}</td><td class="num">${fmtNum(sv.qty)}</td><td class="num">${opts.moneyFmt(sv.revenue)}</td></tr>`;
       });
@@ -7295,13 +7809,14 @@ const DATA = {
     const periods = DATA.periods.filter((p) => p.channel === chDef.key).sort((a, b) => a.startDate.localeCompare(b.startDate));
     const card = document.createElement("div");
     card.className = "card";
+    card.style.setProperty("--card-accent", chDef.color);
     if (periods.length === 0) {
-      card.innerHTML = `<div class="channel-name"><span class="dot ${chDef.dotClass}"></span>${chDef.label}</div><div style="color:var(--text-muted)">尚無資料</div>`;
+      card.innerHTML = `<div class="channel-name"><span class="channel-icon">${chDef.icon}</span>${chDef.label}</div><div style="color:var(--text-muted)">尚無資料</div>`;
       return card;
     }
     const head = document.createElement("div");
     head.className = "card-head";
-    head.innerHTML = `<div class="channel-name"><span class="dot ${chDef.dotClass}"></span>${chDef.label}</div>
+    head.innerHTML = `<div class="channel-name"><span class="channel-icon">${chDef.icon}</span>${chDef.label}</div>
       <select class="period-select"></select>`;
     card.appendChild(head);
 
@@ -7342,19 +7857,19 @@ const DATA = {
       body.innerHTML = `
         <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px;">${p.startDate} ~ ${p.endDate}　來源：${p.source}</div>
         <div class="stat-row">
-          <div class="stat-tile">
-            <div class="stat-label">銷售額</div>
+          <div class="stat-tile" style="--tile-accent:${chDef.color}">
+            <div class="stat-label">💰 銷售額</div>
             <div class="stat-value">${moneyFmt(p.totalRevenueUSD)}</div>
             ${deltaEl(p.totalRevenueUSD, prev && prev.totalRevenueUSD)}
           </div>
           <div class="stat-tile">
-            <div class="stat-label">銷售數量</div>
+            <div class="stat-label">📦 銷售數量</div>
             <div class="stat-value">${fmtNum(p.totalUnits)}</div>
             ${deltaEl(p.totalUnits, prev && prev.totalUnits)}
           </div>
           <div class="stat-tile">
-            <div class="stat-label">${chDef.key === "官網" ? "訂單數" : "區間"}</div>
-            <div class="stat-value">${chDef.key === "官網" ? fmtNum(p.ordersCount) : p.label}</div>
+            <div class="stat-label">${chDef.key === "官網" ? "🧾 訂單數" : "🗓️ 區間"}</div>
+            <div class="stat-value" style="${chDef.key !== "官網" ? "font-size:20px" : ""}">${chDef.key === "官網" ? fmtNum(p.ordersCount) : p.label}</div>
           </div>
           ${targetTile(p)}
         </div>
@@ -7397,13 +7912,14 @@ const DATA = {
     const months = DATA.monthly.filter((m) => m.channel === chDef.key).sort((a, b) => a.year - b.year || a.month - b.month);
     const card = document.createElement("div");
     card.className = "card";
+    card.style.setProperty("--card-accent", chDef.color);
     if (months.length === 0) {
-      card.innerHTML = `<div class="channel-name"><span class="dot ${chDef.dotClass}"></span>${chDef.label}</div><div style="color:var(--text-muted)">尚無資料</div>`;
+      card.innerHTML = `<div class="channel-name"><span class="channel-icon">${chDef.icon}</span>${chDef.label}</div><div style="color:var(--text-muted)">尚無資料</div>`;
       return card;
     }
     const head = document.createElement("div");
     head.className = "card-head";
-    head.innerHTML = `<div class="channel-name"><span class="dot ${chDef.dotClass}"></span>${chDef.label}</div>
+    head.innerHTML = `<div class="channel-name"><span class="channel-icon">${chDef.icon}</span>${chDef.label}</div>
       <select class="period-select"></select>`;
     card.appendChild(head);
 
@@ -7433,8 +7949,8 @@ const DATA = {
           ${provisional ? `<span class="badge provisional">尚未結算</span>` : `<span class="badge">財務已結算</span>`}
         </div>
         <div class="stat-row">
-          <div class="stat-tile">
-            <div class="stat-label">月銷售額</div>
+          <div class="stat-tile" style="--tile-accent:${chDef.color}">
+            <div class="stat-label">💰 月銷售額</div>
             <div class="stat-value">${moneyFmt(m.totalRevenueUSD)}</div>
             ${deltaEl(m.totalRevenueUSD, prev && prev.totalRevenueUSD)}
           </div>
@@ -7510,13 +8026,13 @@ const DATA = {
     hero.innerHTML = `
       <div class="hero-period">${latest.year}年${latest.month}月　官網＋Amazon合計　來源：${latest.source}${provisional ? ' <span class="badge provisional">尚未結算</span>' : ' <span class="badge">財務已結算</span>'}</div>
       <div class="hero-grid">
-        <div>
-          <div class="hero-tile-label">業績目標</div>
+        <div class="hero-tile" style="--tile-accent:var(--series-official)">
+          <div class="hero-tile-label">🎯 業績目標</div>
           <div class="hero-tile-value ${hasTarget ? "" : "muted"}">${hasTarget ? fmtUSD(latest.targetUSD) : "尚未設定目標"}</div>
           ${hasTarget ? "" : `<div class="hero-tile-sub">在 targets.json 填入 monthlyTargetUSD 就會顯示</div>`}
         </div>
-        <div>
-          <div class="hero-tile-label">實際業績（合計）</div>
+        <div class="hero-tile" style="--tile-accent:var(--good)">
+          <div class="hero-tile-label">💰 實際業績（合計）</div>
           <div class="hero-tile-value">${fmtUSD(latest.totalRevenueUSD)}</div>
           <div class="hero-tile-sub" style="margin-top:6px;">
             ${(() => {
@@ -7525,15 +8041,15 @@ const DATA = {
               const uae = (DATA.monthly || []).find((m) => m.channel === "Amazon(中東站/UAE)" && m.year === latest.year && m.month === latest.month);
               const usaOnly = amazon ? amazon.totalRevenueUSD - (uae ? uae.totalRevenueUSD : 0) : null;
               const parts = [];
-              if (official) parts.push(`<span class="dot official" style="width:8px;height:8px;vertical-align:middle;"></span> 官網 ${fmtUSD(official.totalRevenueUSD)}`);
-              if (usaOnly != null) parts.push(`<span class="dot amazon" style="width:8px;height:8px;vertical-align:middle;"></span> Amazon(美國站) ${fmtUSD(usaOnly)}`);
+              if (official) parts.push(`<span class="dot official" style="width:8px;height:8px;vertical-align:middle;"></span> 🌐官網 ${fmtUSD(official.totalRevenueUSD)}`);
+              if (usaOnly != null) parts.push(`<span class="dot amazon" style="width:8px;height:8px;vertical-align:middle;"></span> 🛒Amazon(美國站) ${fmtUSD(usaOnly)}`);
               if (uae) parts.push(`<span class="dot" style="width:8px;height:8px;vertical-align:middle;background:var(--text-muted);"></span> Amazon(中東站/UAE) ${fmtUSD(uae.totalRevenueUSD)}`);
               return parts.join("　");
             })()}
           </div>
         </div>
-        <div>
-          <div class="hero-tile-label">達成率</div>
+        <div class="hero-tile" style="--tile-accent:var(--${hasTarget ? rateClass : "axis"})">
+          <div class="hero-tile-label">${hasTarget ? (rate >= 100 ? "🟢" : rate >= 80 ? "🟡" : "🔴") : "📈"} 達成率</div>
           <div class="hero-tile-value ${hasTarget ? rateClass : "muted"}">${hasTarget ? rate.toFixed(1) + "%" : "—"}</div>
           ${hasTarget ? `<div class="progress-track"><div class="progress-fill ${rateClass}" style="width:${Math.min(100, rate)}%"></div></div>` : ""}
         </div>
@@ -7546,12 +8062,12 @@ const DATA = {
   // ---------- 庫存戰情 ----------
   // 庫存快照是手動/定期下載的，不是每次網頁更新都同步，時間點要清楚標出來避免業務誤會是即時庫存。
   function inventoryStatus(item) {
-    if (!item.monthlyAvgSales) return { cls: "na", label: "近3月無銷量" };
+    if (!item.monthlyAvgSales) return { cls: "na", label: "⚪ 近3月無銷量" };
     if (item.stockoutDaysThisMonth > 0 || (item.daysOfSupply != null && item.daysOfSupply < 14)) {
-      return { cls: "critical", label: "缺貨風險" };
+      return { cls: "critical", label: "🔴 缺貨風險" };
     }
-    if (item.daysOfSupply != null && item.daysOfSupply < 30) return { cls: "warning", label: "庫存偏低" };
-    return { cls: "good", label: "庫存充足" };
+    if (item.daysOfSupply != null && item.daysOfSupply < 30) return { cls: "warning", label: "🟡 庫存偏低" };
+    return { cls: "good", label: "🟢 庫存充足" };
   }
 
   function inventoryAlertBannerHtml() {
@@ -7597,7 +8113,7 @@ const DATA = {
           ${items.map((i) => {
             const st = inventoryStatus(i);
             return `<tr>
-              <td>${i.category}</td>
+              <td><span class="cat-icon">${catStyle(i.category).icon}</span>${i.category}</td>
               <td>${i.sku}</td>
               <td class="num">${fmtNum(i.currentStock)}</td>
               <td class="num">${i.stockoutDaysThisMonth > 0 ? `<b style="color:var(--critical)">${i.stockoutDaysThisMonth}</b>` : "0"}</td>
@@ -7675,9 +8191,160 @@ const DATA = {
     return card;
   }
 
+  // ---------- 每週的日銷售報表(目前只有官網，因為只有 Shopify API 有辦法抓到日粒度；
+  // Amazon 還是靠 Holly 每7天寄信，沒有逐日資料來源) ----------
+  // 這裡是「自然週(週一~週日) + 逐日」的報表，跟「週報」分頁(官網10天一旬)是不同的兩件事。
+  const WEEKDAY_LABEL = ["日", "一", "二", "三", "四", "五", "六"];
+  function isoMonday(dateStr) {
+    const d = new Date(dateStr + "T00:00:00");
+    const day = d.getDay();
+    d.setDate(d.getDate() + (day === 0 ? -6 : 1 - day));
+    return d.toISOString().slice(0, 10);
+  }
+  function addDays(dateStr, n) {
+    const d = new Date(dateStr + "T00:00:00");
+    d.setDate(d.getDate() + n);
+    return d.toISOString().slice(0, 10);
+  }
+  function mdLabel(dateStr) {
+    const [, m, d] = dateStr.split("-");
+    return `${+m}/${+d}`;
+  }
+
+  function buildDailyCard() {
+    const days = DATA.dailyOfficial || [];
+    const card = document.createElement("div");
+    card.className = "card";
+    card.style.gridColumn = "1 / -1";
+    card.style.setProperty("--card-accent", "var(--series-official)");
+    if (days.length === 0) {
+      card.innerHTML = `<div class="channel-name"><span class="channel-icon">🌐</span>官網 每週日銷售報表</div><div style="color:var(--text-muted)">尚無資料(需設定 shopify_config.json)</div>`;
+      return card;
+    }
+
+    const byWeek = {};
+    for (const d of days) {
+      const wk = isoMonday(d.date);
+      (byWeek[wk] || (byWeek[wk] = [])).push(d);
+    }
+    const weeks = Object.keys(byWeek).sort().map((wk) => {
+      const weekDays = byWeek[wk];
+      const byCategory = {};
+      const byProduct = {};
+      for (const d of weekDays) {
+        for (const [k, v] of Object.entries(d.byCategory || {})) addToBucketLocal(byCategory, k, v.qty, v.revenue);
+        for (const [k, v] of Object.entries(d.byProduct || {})) addToBucketLocal(byProduct, k, v.qty, v.revenue);
+      }
+      return {
+        weekStart: wk, weekEnd: addDays(wk, 6), days: weekDays,
+        totalRevenueUSD: weekDays.reduce((s, d) => s + d.totalRevenueUSD, 0),
+        totalUnits: weekDays.reduce((s, d) => s + d.totalUnits, 0),
+        ordersCount: weekDays.reduce((s, d) => s + d.ordersCount, 0),
+        byCategory, byProduct,
+        isCurrent: weekDays.some((d) => d.provisional),
+      };
+    });
+    function addToBucketLocal(bucket, key, qty, revenue) {
+      if (!bucket[key]) bucket[key] = { qty: 0, revenue: 0 };
+      bucket[key].qty += qty; bucket[key].revenue += revenue;
+    }
+
+    const head = document.createElement("div");
+    head.className = "card-head";
+    head.innerHTML = `<div class="channel-name"><span class="channel-icon">🌐</span>官網 每週日銷售報表</div>
+      <select class="period-select"></select>`;
+    card.appendChild(head);
+
+    const select = head.querySelector("select");
+    weeks.forEach((w, i) => {
+      const opt = document.createElement("option");
+      opt.value = i;
+      opt.textContent = `${mdLabel(w.weekStart)} - ${mdLabel(w.weekEnd)}` + (w.isCurrent ? "（本週，進行中）" : "");
+      select.appendChild(opt);
+    });
+    select.value = weeks.length - 1;
+
+    const body = document.createElement("div");
+    card.appendChild(body);
+    const moneyFmt = fmtUSD;
+
+    function render() {
+      const idx = +select.value;
+      const w = weeks[idx];
+      const prev = weeks[idx - 1];
+      const todayStr = new Date().toISOString().slice(0, 10);
+
+      body.innerHTML = `
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px;">
+          ${w.weekStart} ~ ${w.weekEnd}${w.isCurrent ? '<span class="week-pill">本週進行中</span>' : ""}
+        </div>
+        <div class="stat-row">
+          <div class="stat-tile" style="--tile-accent:var(--series-official)">
+            <div class="stat-label">💰 本週銷售額</div>
+            <div class="stat-value">${moneyFmt(w.totalRevenueUSD)}</div>
+            ${deltaEl(w.totalRevenueUSD, prev && prev.totalRevenueUSD)}
+          </div>
+          <div class="stat-tile">
+            <div class="stat-label">📦 本週銷售數量</div>
+            <div class="stat-value">${fmtNum(w.totalUnits)}</div>
+            ${deltaEl(w.totalUnits, prev && prev.totalUnits)}
+          </div>
+          <div class="stat-tile">
+            <div class="stat-label">🧾 本週訂單數</div>
+            <div class="stat-value">${fmtNum(w.ordersCount)}</div>
+            ${deltaEl(w.ordersCount, prev && prev.ordersCount)}
+          </div>
+        </div>
+      `;
+
+      const chartData = w.days.map((d) => ({
+        label: d.date,
+        shortLabel: `週${WEEKDAY_LABEL[new Date(d.date + "T00:00:00").getDay()]}`,
+        value: d.totalRevenueUSD,
+        provisional: d.provisional,
+      }));
+      const chartWrap = renderBarChart(chartData, {
+        color: "var(--series-official)", fill: "var(--series-official-fill)", metric: "銷售額", fmt: moneyFmt, title: "本週每日銷售額",
+      });
+      body.appendChild(chartWrap);
+
+      const dayRows = w.days.map((d) => {
+        const wd = WEEKDAY_LABEL[new Date(d.date + "T00:00:00").getDay()];
+        const isToday = d.date === todayStr;
+        return `<tr>
+          <td class="${isToday ? "today" : ""}">${d.date}${d.provisional ? ' <span class="badge provisional">今日</span>' : ""}</td>
+          <td>週${wd}</td>
+          <td class="num ${isToday ? "today" : ""}">${moneyFmt(d.totalRevenueUSD)}</td>
+          <td class="num">${fmtNum(d.totalUnits)}</td>
+          <td class="num">${fmtNum(d.ordersCount)}</td>
+        </tr>`;
+      }).join("");
+      const tableWrap = document.createElement("div");
+      tableWrap.style.marginTop = "16px";
+      tableWrap.innerHTML = `<table class="prod-table week-day-table">
+        <caption>本週每日明細</caption>
+        <thead><tr><th>日期</th><th>星期</th><th class="num">銷售額</th><th class="num">數量</th><th class="num">訂單數</th></tr></thead>
+        <tbody>${dayRows}</tbody>
+      </table>`;
+      body.appendChild(tableWrap);
+
+      const catWrap = document.createElement("div");
+      catWrap.style.marginTop = "16px";
+      catWrap.innerHTML = categoryTable(w.byCategory, w.byProduct, { caption: "本週產品明細", moneyFmt, productGroups: DATA.meta.productGroups });
+      body.appendChild(catWrap);
+      wireCategoryTable(catWrap);
+    }
+    select.addEventListener("change", render);
+    render();
+    return card;
+  }
+
   // ---------- 組裝頁面 ----------
   buildHero();
   buildInventoryTab();
+  const dailyGrid = document.getElementById("dailyGrid");
+  dailyGrid.appendChild(buildDailyCard());
+
   const weeklyGrid = document.getElementById("weeklyGrid");
   CH.forEach((c) => weeklyGrid.appendChild(buildWeeklyCard(c)));
   weeklyGrid.appendChild(buildRegionCard("UAE", "AED", "Amazon(中東站/UAE)"));
@@ -7698,7 +8365,7 @@ const DATA = {
   document.getElementById("updatedAt").textContent = "資料更新時間：" + updated.toLocaleString("zh-TW", { hour12: false });
 
   document.getElementById("subnote").innerHTML = `
-    官網＋Amazon 銷售量彙整，供業務查詢每期(週報)與每月銷售狀況。
+    官網＋Amazon 銷售量彙整，供業務查詢每週逐日(僅官網)、每期(週報)與每月銷售狀況。
     <b>Amazon 金額已換算為USD：美國站(USD，匯率1:1)＋阿聯酋站(AED，固定匯率 1USD=${DATA.meta.fxRateAEDperUSD} AED)</b>，
     加拿大/沙特等其他站點目前沒有可靠匯率來源，只列數量、金額未併入；月報總額則採財務結算後的
     <b>表2 官網 / 表3 Amazon 彙總</b>數字為準。
@@ -7708,7 +8375,8 @@ const DATA = {
     產品分類(HDMI分配/切換、無線傳輸、電視天線、HDMI線材)對應 sherriva.com 官網選單分類；SKU 明細比對不到分類的歸入「未分類」。
     官網訂單金額以訂單編號去重計算；已取消/全額退款訂單不列入。
     週期資料涵蓋範圍請見各期「來源」檔名；4月初(官網4/11前、Amazon 4/13前)無存檔故未列入。
-    頂部「整體業績」取財務結算後的「表1 全公司業績」(官網+Amazon已合計)；業績目標來自公司「2026年目標」表(Sherriva列，萬元台幣換算)。
+    頂部「整體業績」取財務結算後的「表1 全公司業績」(官網+Amazon已合計)；業績目標來自公司「2026年目標」表(Sherriva列，萬元台幣換算，
+    換算匯率來源：${DATA.meta.targetFxRateSource || "targets.json"}${DATA.meta.targetFxRateDate ? `，${DATA.meta.targetFxRateDate}` : ""}，1美元=${DATA.meta.targetFxRateTWDperUSD}台幣)。
     週報卡片的「本期目標達成率」是把月目標按天數、以及官網/Amazon歷史營收佔比拆算出來的推算值，不是管理層另外訂的官網/Amazon個別目標，僅供參考抓感覺，正式檢討仍以月報為準。
   `;
 })();
