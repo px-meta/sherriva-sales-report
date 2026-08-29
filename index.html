@@ -6,39 +6,42 @@
 <title>Sherriva 銷售儀表板</title>
 <style>
   :root {
-    color-scheme: dark;
-    --page:           #10132a;
-    --surface-1:      #1a1e42;
-    --surface-2:      #232a5c;
-    --text-primary:   #ffffff;
-    --text-secondary: #b7bce2;
-    --text-muted:     #7d82ac;
-    --grid:           #2b2f5e;
-    --axis:           #383e74;
-    --border:         rgba(255,255,255,0.09);
-    --good:           #2fd480;
-    --warning:        #ffb130;
-    --critical:       #ff5c72;
-    --good-fill:      rgba(47,212,128,0.16);
-    --warning-fill:   rgba(255,177,48,0.16);
-    --critical-fill:  rgba(255,92,114,0.16);
-    --series-official: #3ea6ff; /* 官網 */
-    --series-amazon:   #ff9f43; /* Amazon */
-    --series-official-fill: rgba(62,166,255,0.20);
-    --series-amazon-fill:   rgba(255,159,67,0.20);
-    --cat-hdmi:      #3ea6ff;
-    --cat-wireless:  #a56bff;
-    --cat-antenna:   #2fd480;
-    --cat-cable:     #ffb130;
-    --cat-other:     #7d82ac;
+    color-scheme: light;
+    /* 品牌色：直接取自 sherriva.com（黑 #121212、招牌金黃 #FACA00）。sherriva.com本身
+       沒有大色塊，黑/黃只用在小按鈕跟徽章上，所以這裡也只拿來當重點數字的細框/底線/小標籤，
+       數字本體用大而粗的黑字，不整塊上色。 */
+    --brand-yellow:      #FACA00;
+    --brand-yellow-deep: #C99A00;
+    --brand-black:       #121212;
+    --page:           #f8f7f3;
+    --surface-1:      #ffffff;
+    --surface-2:      #f2f1ea;
+    --text-primary:   #121212;
+    --text-secondary: #55534c;
+    --text-muted:     #918f85;
+    --grid:           #e7e5db;
+    --axis:           #d2d0c3;
+    --border:         rgba(18,18,18,0.10);
+    --good:           #1f8f4e;
+    --warning:        #b9790a;
+    --critical:       #cf3131;
+    --good-fill:      rgba(31,143,78,0.10);
+    --warning-fill:   rgba(185,121,10,0.12);
+    --critical-fill:  rgba(207,49,49,0.10);
+    --series-official: #C99A00; /* 官網：品牌金黃(深階，白底才夠對比)，避免整塊黑色長條 */
+    --series-amazon:   #6b6862; /* Amazon：中性深灰褐，跟金黃區分開 */
+    --series-official-fill: rgba(201,154,0,0.35);
+    --series-amazon-fill:   rgba(107,104,98,0.30);
+    --cat-hdmi:      #1f6fb2;
+    --cat-wireless:  #6b3fa0;
+    --cat-antenna:   #1f8f4e;
+    --cat-cable:     #b9790a;
+    --cat-other:     #918f85;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    background:
-      radial-gradient(1200px 500px at 15% -10%, rgba(62,166,255,0.10), transparent 60%),
-      radial-gradient(1000px 500px at 100% 0%, rgba(165,107,255,0.08), transparent 55%),
-      var(--page);
+    background: var(--page);
     color: var(--text-primary);
     font-family: system-ui, -apple-system, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -56,8 +59,8 @@
     padding: 10px 18px; font-size: 14px; font-weight: 700; color: var(--text-secondary);
     border-radius: 999px; transition: all 0.12s;
   }
-  nav.tabs button:hover { color: var(--text-primary); border-color: var(--axis); }
-  nav.tabs button.active { color: #0b0d1f; background: var(--series-official); border-color: var(--series-official); }
+  nav.tabs button:hover { color: var(--text-primary); border-color: var(--brand-black); }
+  nav.tabs button.active { color: #ffffff; background: var(--brand-black); border-color: var(--brand-black); }
 
   .view { display: none; }
   .view.active { display: block; }
@@ -83,13 +86,17 @@
     border: 1px solid var(--border); background: var(--surface-2); color: var(--text-primary);
   }
 
+  /* 重點數字放大凸顯，但不用色塊底——sherriva.com 本身沒有大色塊，金黃/黑只用在
+     小按鈕跟徽章上；這裡改成白底 + 細線上邊框(色條) + 加大加粗數字。 */
   .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-bottom: 16px; }
   .stat-tile {
-    padding: 12px 14px; border-radius: 12px; background: var(--surface-2);
-    border-left: 3px solid var(--tile-accent, var(--axis));
+    padding: 12px 14px; border-radius: 10px;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--tile-accent, var(--axis));
   }
-  .stat-label { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; font-weight: 600; }
-  .stat-value { font-size: 30px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -0.3px; }
+  .stat-label { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; font-weight: 700; }
+  .stat-value { font-size: 28px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -0.3px; color: var(--tile-value-color, var(--text-primary)); }
   .stat-delta { font-size: 12px; margin-top: 5px; font-variant-numeric: tabular-nums; font-weight: 700; }
   .stat-delta.up { color: var(--good); }
   .stat-delta.down { color: var(--critical); }
@@ -133,15 +140,15 @@
   .hero { margin-bottom: 22px; border-top-color: var(--series-official); }
   .hero-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
   @media (max-width: 720px) { .hero-grid { grid-template-columns: 1fr; } }
-  .hero-tile { border-radius: 14px; padding: 16px 18px; background: var(--surface-2); border-left: 4px solid var(--tile-accent, var(--axis)); }
-  .hero-tile-label { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
-  .hero-tile-value { font-size: 42px; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1.1; letter-spacing: -0.5px; }
-  .hero-tile-sub { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+  .hero-tile { border-radius: 14px; padding: 18px 20px; background: var(--surface-1); border: 1px solid var(--border); border-top: 4px solid var(--tile-accent, var(--axis)); }
+  .hero-tile-label { font-size: 13px; color: var(--text-muted); margin-bottom: 10px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+  .hero-tile-value { font-size: 42px; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1.1; letter-spacing: -0.5px; color: var(--text-primary); }
+  .hero-tile-sub { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
   .hero-tile-value.muted { font-size: 20px; color: var(--text-muted); font-weight: 600; }
   .hero-tile-value.good { color: var(--good); }
   .hero-tile-value.warning { color: var(--warning); }
   .hero-tile-value.critical { color: var(--critical); }
-  .progress-track { height: 10px; border-radius: 999px; background: var(--grid); margin-top: 12px; overflow: hidden; }
+  .progress-track { height: 8px; border-radius: 999px; background: var(--grid); margin-top: 12px; overflow: hidden; }
   .progress-fill { height: 100%; border-radius: 999px; }
   .progress-fill.good { background: var(--good); }
   .progress-fill.warning { background: var(--warning); }
@@ -7683,7 +7690,7 @@ const DATA = {
       if (p.target != null) {
         const ty = padT + innerH - (p.target / max) * innerH;
         // 目標線畫成一條跨過該柱子的深色刻度，柱頂超過刻度=達標，方便一眼比對，不用切換數字
-        targetTicks += `<line x1="${x.toFixed(1)}" y1="${ty.toFixed(1)}" x2="${(x + barW).toFixed(1)}" y2="${ty.toFixed(1)}" stroke="var(--text-primary)" stroke-width="2"></line>`;
+        targetTicks += `<line x1="${x.toFixed(1)}" y1="${ty.toFixed(1)}" x2="${(x + barW).toFixed(1)}" y2="${ty.toFixed(1)}" stroke="var(--brand-black)" stroke-width="3"></line>`;
       }
       if (n <= 14 || i % Math.ceil(n / 14) === 0) {
         labels += `<text class="axis-label" x="${(x + barW / 2).toFixed(1)}" y="${h - 5}" text-anchor="middle">${p.shortLabel || p.label}</text>`;
@@ -7703,7 +7710,7 @@ const DATA = {
     if (hasAnyTarget) {
       const legend = document.createElement("div");
       legend.style.cssText = "font-size:11px;color:var(--text-muted);margin-top:2px;";
-      legend.innerHTML = `<span style="display:inline-block;width:14px;height:2px;background:var(--text-primary);vertical-align:middle;margin-right:4px;"></span>目標線(推算)`;
+      legend.innerHTML = `<span style="display:inline-block;width:14px;height:3px;background:var(--brand-black);vertical-align:middle;margin-right:4px;"></span>目標線(推算)`;
       div.appendChild(legend);
     }
     const svgEl = div.querySelector("svg");
