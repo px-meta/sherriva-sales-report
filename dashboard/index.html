@@ -192,6 +192,13 @@
   .cockpit-anomaly-title { font-size: 13.5px; font-weight: 700; }
   .cockpit-anomaly-detail { font-size: 12.5px; color: var(--text-secondary); margin-top: 2px; }
   .cockpit-anomaly-action { font-size: 12.5px; color: var(--text-muted); margin-top: 4px; }
+  .cockpit-radar-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 8px 0; border-bottom: 1px dashed var(--grid); font-size: 13px; }
+  .cockpit-radar-row:last-child { border-bottom: none; }
+  .cockpit-radar-row .rname { font-weight: 700; }
+  .cockpit-radar-row .rsub { font-size: 11.5px; color: var(--text-muted); display: block; margin-top: 1px; }
+  .cockpit-radar-row .rmetric { text-align: right; white-space: nowrap; }
+  .cockpit-radar-row .rmetric.good { color: var(--good); font-weight: 700; }
+  .cockpit-radar-row .rmetric.warning { color: var(--warning); font-weight: 700; }
 
   /* ---- 分類/品項兩層明細表 ---- */
   table.cat-table { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -271,7 +278,7 @@
 
 <script>
 const DATA = {
-  "generatedAt": "2026-08-29T16:54:49.546Z",
+  "generatedAt": "2026-08-29T17:02:12.925Z",
   "periods": [
     {
       "channel": "官網",
@@ -7479,6 +7486,49 @@ const DATA = {
         "action": "了解是否為季節性、競品或缺貨因素",
         "impactUSD": 9488.2
       }
+    ],
+    "opportunities": [],
+    "capitalTiedUp": [
+      {
+        "sku": "WHD-5000H",
+        "category": "無線傳輸(WTR/WHD)",
+        "currentStock": 62,
+        "daysOfSupply": null,
+        "monthlyAvgSales": 0,
+        "reason": "近3個月完全沒有銷量，庫存卡住不動"
+      },
+      {
+        "sku": "UHD-4KB-3.3ft",
+        "category": "HDMI線材",
+        "currentStock": 155,
+        "daysOfSupply": 13950,
+        "monthlyAvgSales": 0.3,
+        "reason": "照目前銷售速度，現有庫存要13950天才賣得完"
+      },
+      {
+        "sku": "UHD-10KB-6.6ft",
+        "category": "HDMI線材",
+        "currentStock": 45,
+        "daysOfSupply": 4050,
+        "monthlyAvgSales": 0.3,
+        "reason": "照目前銷售速度，現有庫存要4050天才賣得完"
+      },
+      {
+        "sku": "SAE-5500",
+        "category": "電視天線",
+        "currentStock": 422,
+        "daysOfSupply": 1519.2,
+        "monthlyAvgSales": 8.3,
+        "reason": "照目前銷售速度，現有庫存要1519.2天才賣得完"
+      },
+      {
+        "sku": "UHD-1440X",
+        "category": "HDMI分配/切換",
+        "currentStock": 409,
+        "daysOfSupply": 994.9,
+        "monthlyAvgSales": 12.3,
+        "reason": "照目前銷售速度，現有庫存要994.9天才賣得完"
+      }
     ]
   },
   "inventory": [
@@ -8144,8 +8194,7 @@ const DATA = {
     return card;
   }
 
-  // ---------- 頂部KPI：整體業績目標/實際/達成率 ----------
-  // ---------- 經營者戰情室(P1)：目標→實績→缺口→Forecast→原因→異常→行動 ----------
+  // ---------- 經營者戰情室(P1+P2)：目標→實績→缺口→Forecast→原因→異常→行動 ----------
   // 所有數字都是 parse_reports.mjs 算好放進 DATA.cockpit，這裡純渲染，不在瀏覽器裡重算，
   // 跟整個pipeline"後端算好、前端只畫圖"的架構一致。
   function buildHero() {
@@ -8209,6 +8258,35 @@ const DATA = {
             </div>
           </div>`).join("");
 
+    // 天數代理指標，數字大到幾百幾千天沒有直覺，換算成年方便業務一眼感受「這真的賣不動」。
+    function fmtDaysOfSupply(days) {
+      if (days == null) return "—";
+      if (days >= 365) return `${fmtNum(days)}天(約${(days / 365).toFixed(1)}年)`;
+      return `${days}天`;
+    }
+    const opportunityRowsHtml = (cp.opportunities || []).length === 0
+      ? `<div style="color:var(--text-muted);font-size:13px;">目前沒有偵測到連續2個月成長、庫存又充足的分類</div>`
+      : cp.opportunities.map((o) => {
+          const st = catStyle(o.category);
+          return `<div class="cockpit-radar-row">
+            <span class="rname"><span class="cat-icon">${st.icon}</span>${o.category}${o.inventoryOk ? "" : " ⚠️庫存偏緊"}
+              <span class="rsub">連續2個月成長</span>
+            </span>
+            <span class="rmetric good">${fmtUSD(o.latestUSD)}${o.growthPct != null ? ` <span style="font-size:11px">(+${o.growthPct}%)</span>` : ""}</span>
+          </div>`;
+        }).join("");
+    const capitalTiedUpRowsHtml = (cp.capitalTiedUp || []).length === 0
+      ? `<div style="color:var(--text-muted);font-size:13px;">目前沒有偵測到明顯滯銷、資金積壓的品項</div>`
+      : cp.capitalTiedUp.map((i) => {
+          const st = catStyle(i.category);
+          return `<div class="cockpit-radar-row">
+            <span class="rname"><span class="cat-icon">${st.icon}</span>${i.sku}
+              <span class="rsub">${i.reason}</span>
+            </span>
+            <span class="rmetric warning">庫存${fmtNum(i.currentStock)}<span class="rsub">${fmtDaysOfSupply(i.daysOfSupply)}</span></span>
+          </div>`;
+        }).join("");
+
     hero.innerHTML = `
       <div class="hero-period">${latest.year}年${latest.month}月　官網＋Amazon合計　來源：${latest.source}${provisional ? ' <span class="badge provisional">尚未結算</span>' : ' <span class="badge">財務已結算</span>'}</div>
       <div class="cockpit-headline ${forecastClass}">
@@ -8253,6 +8331,16 @@ const DATA = {
       <div class="cockpit-anomalies-card">
         <div class="cockpit-card-title">⚡ 今天要處理的異常</div>
         ${anomalyRowsHtml}
+      </div>
+      <div class="cockpit-two-col">
+        <div class="cockpit-card">
+          <div class="cockpit-card-title">🚀 機會雷達(連續成長+庫存充足)</div>
+          ${opportunityRowsHtml}
+        </div>
+        <div class="cockpit-card">
+          <div class="cockpit-card-title">🧊 資金積壓雷達(去化天數代理指標，非實際金額)</div>
+          ${capitalTiedUpRowsHtml}
+        </div>
       </div>
     `;
   }
