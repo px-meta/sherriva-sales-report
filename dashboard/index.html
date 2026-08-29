@@ -155,6 +155,44 @@
   .progress-fill.critical { background: var(--critical); }
   .hero-period { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; font-weight: 600; }
 
+  /* ---- 經營者戰情室(P1)---- */
+  .cockpit-kpi-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-bottom: 18px; }
+  .cockpit-headline {
+    display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700;
+    padding: 12px 16px; border-radius: 12px; margin-bottom: 18px;
+    background: var(--surface-2); border-left: 4px solid var(--axis);
+  }
+  .cockpit-headline.good { border-left-color: var(--good); color: var(--good); }
+  .cockpit-headline.warning { border-left-color: var(--warning); color: var(--warning); }
+  .cockpit-headline.critical { border-left-color: var(--critical); color: var(--critical); }
+  .cockpit-headline-icon { font-size: 20px; }
+  .cockpit-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px; }
+  @media (max-width: 720px) { .cockpit-two-col { grid-template-columns: 1fr; } }
+  .cockpit-card, .cockpit-anomalies-card {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px;
+  }
+  .cockpit-anomalies-card { margin-bottom: 18px; }
+  .cockpit-card-title { font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+  .cockpit-channel-row { padding: 8px 0; border-bottom: 1px dashed var(--grid); font-size: 13px; }
+  .cockpit-channel-row:last-child { border-bottom: none; }
+  .cockpit-channel-name { font-weight: 700; margin-bottom: 3px; }
+  .cockpit-channel-stats { color: var(--text-secondary); }
+  .cockpit-channel-stats b.good { color: var(--good); }
+  .cockpit-channel-stats b.warning { color: var(--warning); }
+  .cockpit-channel-stats b.critical { color: var(--critical); }
+  .cockpit-channel-basis { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .cockpit-mover-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px dashed var(--grid); font-size: 13px; }
+  .cockpit-mover-row:last-child { border-bottom: none; }
+  .cockpit-mover-row .good { color: var(--good); font-weight: 700; }
+  .cockpit-mover-row .critical { color: var(--critical); font-weight: 700; }
+  .cockpit-anomaly-row { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--grid); }
+  .cockpit-anomaly-row:last-child { border-bottom: none; }
+  .cockpit-anomaly-icon { font-size: 16px; line-height: 1.4; }
+  .cockpit-anomaly-body { flex: 1; min-width: 0; }
+  .cockpit-anomaly-title { font-size: 13.5px; font-weight: 700; }
+  .cockpit-anomaly-detail { font-size: 12.5px; color: var(--text-secondary); margin-top: 2px; }
+  .cockpit-anomaly-action { font-size: 12.5px; color: var(--text-muted); margin-top: 4px; }
+
   /* ---- 分類/品項兩層明細表 ---- */
   table.cat-table { width: 100%; border-collapse: collapse; font-size: 13px; }
   table.cat-table caption { text-align: left; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
@@ -233,7 +271,7 @@
 
 <script>
 const DATA = {
-  "generatedAt": "2026-08-29T16:47:14.655Z",
+  "generatedAt": "2026-08-29T16:54:49.546Z",
   "periods": [
     {
       "channel": "官網",
@@ -7339,6 +7377,110 @@ const DATA = {
       "provisional": true
     }
   ],
+  "cockpit": {
+    "year": 2026,
+    "month": 8,
+    "provisional": true,
+    "targetUSD": 57142.86,
+    "actualUSD": 24580.82,
+    "achievementRate": 43,
+    "gapUSD": 32562.04,
+    "daysElapsed": 29,
+    "daysRemaining": 2,
+    "daysInMonth": 31,
+    "forecastUSD": 27657.18,
+    "forecastGapUSD": 29485.68,
+    "forecastVerdict": "behind",
+    "headline": "照目前速度，預估月底落後目標 US$29,486（約51.6%），主要缺口在Amazon",
+    "channelBreakdown": [
+      {
+        "channel": "官網",
+        "targetUSD": 6285.71,
+        "actualUSD": 3956.66,
+        "achievementRate": 62.9,
+        "gapUSD": 2329.05,
+        "avgDailyRevenue": 249.17,
+        "forecastUSD": 4455,
+        "forecastGapUSD": 1830.71,
+        "forecastBasis": "近7天日均"
+      },
+      {
+        "channel": "Amazon",
+        "targetUSD": 50857.15,
+        "actualUSD": 20624.16,
+        "achievementRate": 40.6,
+        "gapUSD": 30232.99,
+        "avgDailyRevenue": 1289.01,
+        "forecastUSD": 23202.18,
+        "forecastGapUSD": 27654.97,
+        "forecastBasis": "近2期期報日均(無日粒度資料，準確度較低)"
+      }
+    ],
+    "topGapChannel": "Amazon",
+    "categoryMovers": [
+      {
+        "category": "電視天線",
+        "currentUSD": 5054.66,
+        "previousUSD": 4201,
+        "diffUSD": 853.66
+      },
+      {
+        "category": "未分類",
+        "currentUSD": 509.58,
+        "previousUSD": 0,
+        "diffUSD": 509.58
+      },
+      {
+        "category": "無線傳輸(WTR/WHD)",
+        "currentUSD": 8751.19,
+        "previousUSD": 11034,
+        "diffUSD": -2282.81
+      },
+      {
+        "category": "HDMI分配/切換",
+        "currentUSD": 9201.8,
+        "previousUSD": 18690,
+        "diffUSD": -9488.2
+      }
+    ],
+    "anomalies": [
+      {
+        "level": "critical",
+        "title": "本月預估落後目標 US$29,486",
+        "detail": "主要缺口通路：Amazon(缺口US$30,233)",
+        "action": "檢視該通路的庫存與行銷資源是否足夠，優先補強",
+        "impactUSD": 29485.68
+      },
+      {
+        "level": "critical",
+        "title": "UHD-1440 缺貨風險(剩1.1天)",
+        "detail": "庫存即將見底",
+        "action": "確認補貨/在途貨進度，必要時加急",
+        "impactUSD": 12900
+      },
+      {
+        "level": "critical",
+        "title": "SAF-6500 缺貨風險(剩5.5天)",
+        "detail": "本月已缺貨4天",
+        "action": "確認補貨/在途貨進度，必要時加急",
+        "impactUSD": 8500
+      },
+      {
+        "level": "warning",
+        "title": "Amazon本月達成率僅 40.6%",
+        "detail": "目標 US$50,857，目前 US$20,624",
+        "action": "檢視Amazon近期銷售是否有異常(缺貨/流量下滑/競品)",
+        "impactUSD": 30232.99
+      },
+      {
+        "level": "warning",
+        "title": "HDMI分配/切換 較上月衰退 US$9,488",
+        "detail": "上月 US$18,690 → 本月 US$9,202",
+        "action": "了解是否為季節性、競品或缺貨因素",
+        "impactUSD": 9488.2
+      }
+    ]
+  },
   "inventory": [
     {
       "sku": "UHD-1240X",
@@ -8003,6 +8145,9 @@ const DATA = {
   }
 
   // ---------- 頂部KPI：整體業績目標/實際/達成率 ----------
+  // ---------- 經營者戰情室(P1)：目標→實績→缺口→Forecast→原因→異常→行動 ----------
+  // 所有數字都是 parse_reports.mjs 算好放進 DATA.cockpit，這裡純渲染，不在瀏覽器裡重算，
+  // 跟整個pipeline"後端算好、前端只畫圖"的架構一致。
   function buildHero() {
     const hero = document.getElementById("hero");
     const company = (DATA.company || []).slice().sort((a, b) => a.year - b.year || a.month - b.month);
@@ -8012,69 +8157,103 @@ const DATA = {
     }
     const latest = company[company.length - 1];
     const provisional = /暫估/.test(latest.source);
-    const hasTarget = typeof latest.targetUSD === "number" && latest.targetUSD > 0;
-    const rate = latest.achievementRate;
-    const rateClass = !hasTarget ? "" : rate >= 100 ? "good" : rate >= 80 ? "warning" : "critical";
+    const cp = DATA.cockpit;
 
-    // 進度提醒：只在「當月還沒結束(暫估)」時算，用兩通路目前最新一期的結束日當作「做到哪一天」，
-    // 算出剩下幾天、平均每天還要做到多少才能追上月目標——這是給業務看了能馬上知道要不要加把勁的提示，
-    // 不是精算，畢竟官網/Amazon 兩邊資料進度可能不同天。
-    let paceHtml = "";
-    if (provisional && hasTarget) {
-      const inMonth = (DATA.periods || []).filter((p) => p.year === latest.year && p.month === latest.month);
-      if (inMonth.length > 0) {
-        const asOfDate = inMonth.reduce((max, p) => (p.endDate > max ? p.endDate : max), inMonth[0].endDate);
-        const asOfDay = Number(asOfDate.slice(-2));
-        const daysInMonth = new Date(latest.year, latest.month, 0).getDate();
-        const daysRemaining = daysInMonth - asOfDay;
-        const remainingTarget = latest.targetUSD - latest.totalRevenueUSD;
-        if (remainingTarget <= 0) {
-          paceHtml = `<div class="hero-tile-sub" style="margin-top:10px;">✓ 已經達成本月目標(以推算資料計)</div>`;
-        } else if (daysRemaining > 0) {
-          const perDay = remainingTarget / daysRemaining;
-          paceHtml = `<div class="hero-tile-sub" style="margin-top:10px;">
-            資料做到 ${asOfDate}(還剩 ${daysRemaining} 天)：要追上本月目標，平均每天還要做到 <b style="color:var(--text-primary)">${fmtUSD(perDay)}</b>
-            （約每週 ${fmtUSD(perDay * 7)}）
-          </div>`;
-        } else {
-          paceHtml = `<div class="hero-tile-sub" style="margin-top:10px;">本月天數已到，還差 ${fmtUSD(remainingTarget)} 未達標，待財務結算確認</div>`;
-        }
-      }
+    if (!cp) {
+      // 理論上company有資料cockpit就一定有，這裡只是防呆(例如舊版sales_data.json還沒有這個欄位)
+      hero.innerHTML = `<div class="hero-period">${latest.year}年${latest.month}月</div><div style="color:var(--text-muted)">戰情摘要資料尚未產生，請重新執行 parse_reports.mjs</div>`;
+      return;
     }
+
+    const hasTarget = cp.targetUSD != null;
+    const rate = cp.achievementRate;
+    const rateClass = !hasTarget ? "" : rate >= 100 ? "good" : rate >= 80 ? "warning" : "critical";
+    const gapClass = !hasTarget ? "" : cp.gapUSD <= 0 ? "good" : "warning";
+    const forecastClass = cp.forecastVerdict === "on_track" ? "good" : cp.forecastVerdict === "at_risk" ? "warning" : cp.forecastVerdict === "behind" ? "critical" : "";
+    const headlineIcon = cp.forecastVerdict === "on_track" ? "✅" : cp.forecastVerdict === "at_risk" ? "🟡" : cp.forecastVerdict === "behind" ? "🔴" : "ℹ️";
+
+    const channelRowsHtml = cp.channelBreakdown.map((c) => {
+      const cls = c.achievementRate == null ? "" : c.achievementRate >= 100 ? "good" : c.achievementRate >= 80 ? "warning" : "critical";
+      const icon = c.channel === "官網" ? "🌐" : "🛒";
+      return `<div class="cockpit-channel-row">
+        <div class="cockpit-channel-name">${icon} ${c.channel}</div>
+        <div class="cockpit-channel-stats">
+          達成率 <b class="${cls}">${c.achievementRate != null ? c.achievementRate + "%" : "—"}</b>
+          　缺口 <b>${c.gapUSD != null ? fmtUSD(c.gapUSD) : "—"}</b>
+          　預估月底 <b>${c.forecastUSD != null ? fmtUSD(c.forecastUSD) : "—"}</b>
+        </div>
+        ${c.forecastBasis ? `<div class="cockpit-channel-basis">Forecast依據：${c.forecastBasis}</div>` : ""}
+      </div>`;
+    }).join("");
+
+    const moverRowsHtml = cp.categoryMovers.length === 0
+      ? `<div style="color:var(--text-muted);font-size:13px;">本月跟上月比，各分類金額沒有明顯漲跌</div>`
+      : cp.categoryMovers.slice(0, 6).map((m) => {
+          const st = catStyle(m.category);
+          const up = m.diffUSD >= 0;
+          return `<div class="cockpit-mover-row">
+            <span><span class="cat-icon">${st.icon}</span>${m.category}</span>
+            <span class="${up ? "good" : "critical"}">${up ? "▲" : "▼"} ${fmtUSD(Math.abs(m.diffUSD))}</span>
+          </div>`;
+        }).join("");
+
+    const anomalyRowsHtml = cp.anomalies.length === 0
+      ? `<div style="color:var(--text-muted);font-size:13px;">🎉 目前沒有偵測到需要立即處理的異常</div>`
+      : cp.anomalies.map((a) => `
+          <div class="cockpit-anomaly-row">
+            <div class="cockpit-anomaly-icon">${a.level === "critical" ? "🔴" : "🟡"}</div>
+            <div class="cockpit-anomaly-body">
+              <div class="cockpit-anomaly-title">${a.title}</div>
+              <div class="cockpit-anomaly-detail">${a.detail}</div>
+              <div class="cockpit-anomaly-action">👉 ${a.action}</div>
+            </div>
+          </div>`).join("");
 
     hero.innerHTML = `
       <div class="hero-period">${latest.year}年${latest.month}月　官網＋Amazon合計　來源：${latest.source}${provisional ? ' <span class="badge provisional">尚未結算</span>' : ' <span class="badge">財務已結算</span>'}</div>
-      <div class="hero-grid">
+      <div class="cockpit-headline ${forecastClass}">
+        <span class="cockpit-headline-icon">${headlineIcon}</span>
+        <span>${cp.headline}</span>
+      </div>
+      <div class="hero-grid cockpit-kpi-grid">
         <div class="hero-tile" style="--tile-accent:var(--series-official)">
           <div class="hero-tile-label">🎯 業績目標</div>
-          <div class="hero-tile-value ${hasTarget ? "" : "muted"}">${hasTarget ? fmtUSD(latest.targetUSD) : "尚未設定目標"}</div>
-          ${hasTarget ? "" : `<div class="hero-tile-sub">在 targets.json 填入 monthlyTargetUSD 就會顯示</div>`}
+          <div class="hero-tile-value ${hasTarget ? "" : "muted"}">${hasTarget ? fmtUSD(cp.targetUSD) : "尚未設定目標"}</div>
         </div>
         <div class="hero-tile" style="--tile-accent:var(--good)">
-          <div class="hero-tile-label">💰 實際業績（合計）</div>
-          <div class="hero-tile-value">${fmtUSD(latest.totalRevenueUSD)}</div>
-          <div class="hero-tile-sub" style="margin-top:6px;">
-            ${(() => {
-              const official = (DATA.monthly || []).find((m) => m.channel === "官網" && m.year === latest.year && m.month === latest.month);
-              const amazon = (DATA.monthly || []).find((m) => m.channel === "Amazon" && m.year === latest.year && m.month === latest.month);
-              const uae = (DATA.monthly || []).find((m) => m.channel === "Amazon(中東站/UAE)" && m.year === latest.year && m.month === latest.month);
-              const usaOnly = amazon ? amazon.totalRevenueUSD - (uae ? uae.totalRevenueUSD : 0) : null;
-              const parts = [];
-              if (official) parts.push(`<span class="dot official" style="width:8px;height:8px;vertical-align:middle;"></span> 🌐官網 ${fmtUSD(official.totalRevenueUSD)}`);
-              if (usaOnly != null) parts.push(`<span class="dot amazon" style="width:8px;height:8px;vertical-align:middle;"></span> 🛒Amazon(美國站) ${fmtUSD(usaOnly)}`);
-              if (uae) parts.push(`<span class="dot" style="width:8px;height:8px;vertical-align:middle;background:var(--text-muted);"></span> Amazon(中東站/UAE) ${fmtUSD(uae.totalRevenueUSD)}`);
-              return parts.join("　");
-            })()}
-          </div>
+          <div class="hero-tile-label">💰 目前實績</div>
+          <div class="hero-tile-value">${fmtUSD(cp.actualUSD)}</div>
+          <div class="hero-tile-sub">做到第${cp.daysElapsed}/${cp.daysInMonth}天</div>
         </div>
-        <div class="hero-tile" style="--tile-accent:var(--${hasTarget ? rateClass : "axis"})">
-          <div class="hero-tile-label">${hasTarget ? (rate >= 100 ? "🟢" : rate >= 80 ? "🟡" : "🔴") : "📈"} 達成率</div>
+        <div class="hero-tile" style="--tile-accent:var(--${gapClass || "axis"})">
+          <div class="hero-tile-label">📉 目前缺口</div>
+          <div class="hero-tile-value ${gapClass}">${!hasTarget ? "—" : cp.gapUSD <= 0 ? "已達標" : fmtUSD(cp.gapUSD)}</div>
+        </div>
+        <div class="hero-tile" style="--tile-accent:var(--${forecastClass || "axis"})">
+          <div class="hero-tile-label">🔮 月底Forecast</div>
+          <div class="hero-tile-value ${forecastClass}">${cp.forecastUSD != null ? fmtUSD(cp.forecastUSD) : "資料不足"}</div>
+          <div class="hero-tile-sub">剩${cp.daysRemaining}天</div>
+        </div>
+        <div class="hero-tile" style="--tile-accent:var(--${rateClass || "axis"})">
+          <div class="hero-tile-label">${!hasTarget ? "📈" : rate >= 100 ? "🟢" : rate >= 80 ? "🟡" : "🔴"} 達成率</div>
           <div class="hero-tile-value ${hasTarget ? rateClass : "muted"}">${hasTarget ? rate.toFixed(1) + "%" : "—"}</div>
           ${hasTarget ? `<div class="progress-track"><div class="progress-fill ${rateClass}" style="width:${Math.min(100, rate)}%"></div></div>` : ""}
         </div>
       </div>
-      ${paceHtml}
-      ${inventoryAlertBannerHtml()}
+      <div class="cockpit-two-col">
+        <div class="cockpit-card">
+          <div class="cockpit-card-title">📊 為什麼：通路貢獻缺口</div>
+          ${channelRowsHtml}
+        </div>
+        <div class="cockpit-card">
+          <div class="cockpit-card-title">📈 為什麼：本月分類漲跌(vs 上月)</div>
+          ${moverRowsHtml}
+        </div>
+      </div>
+      <div class="cockpit-anomalies-card">
+        <div class="cockpit-card-title">⚡ 今天要處理的異常</div>
+        ${anomalyRowsHtml}
+      </div>
     `;
   }
 
