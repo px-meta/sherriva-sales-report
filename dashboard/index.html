@@ -7,11 +7,11 @@
 <style>
   :root {
     color-scheme: light;
-    /* 品牌色：直接取自 sherriva.com（黑 #121212、招牌金黃 #FACA00）。sherriva.com本身
-       沒有大色塊，黑/黃只用在小按鈕跟徽章上，所以這裡也只拿來當重點數字的細框/底線/小標籤，
-       數字本體用大而粗的黑字，不整塊上色。 */
+    /* 品牌色：直接取自 sherriva.com 官網跟公司信頭紙（黑 #121212、招牌金黃 #FACA00）。
+       官網的按鈕/徽章只用小面積的黑黃，但信頭紙本身有大塊金黃色條(配一條黑色細底線)，
+       所以圖表這種本來就該用色塊表示數值的地方，直接用招牌金黃沒問題；
+       KPI卡片這種本文字為主的地方，還是維持白底黑字放大，只用金黃當細框/底線。 */
     --brand-yellow:      #FACA00;
-    --brand-yellow-deep: #C99A00;
     --brand-black:       #121212;
     --page:           #f8f7f3;
     --surface-1:      #ffffff;
@@ -28,9 +28,9 @@
     --good-fill:      rgba(31,143,78,0.10);
     --warning-fill:   rgba(185,121,10,0.12);
     --critical-fill:  rgba(207,49,49,0.10);
-    --series-official: #C99A00; /* 官網：品牌金黃(深階，白底才夠對比)，避免整塊黑色長條 */
+    --series-official: #FACA00; /* 官網：品牌招牌金黃，跟公司信頭紙上那條色塊同一個顏色 */
     --series-amazon:   #6b6862; /* Amazon：中性深灰褐，跟金黃區分開 */
-    --series-official-fill: rgba(201,154,0,0.35);
+    --series-official-fill: rgba(250,202,0,0.45);
     --series-amazon-fill:   rgba(107,104,98,0.30);
     --cat-hdmi:      #1f6fb2;
     --cat-wireless:  #6b3fa0;
@@ -8304,14 +8304,18 @@ const DATA = {
         </div>
       `;
 
-      const chartData = w.days.map((d) => ({
-        label: d.date,
-        shortLabel: `週${WEEKDAY_LABEL[new Date(d.date + "T00:00:00").getDay()]}`,
-        value: d.totalRevenueUSD,
-        provisional: d.provisional,
+      // 圖表畫「每週總額的趨勢」(跟週報/月報分頁同一種畫法：一根柱子=一期)，不是「這一週7天」——
+      // 本週進行中時只有5天有資料，畫成7天的長條圖會有2根空的，容易被誤會成資料漏掉；
+      // 而且下面已經有「本週每日明細」表格逐日列數字了，圖表再畫一次日資料沒有新資訊，
+      // 改成跨週趨勢，才能一眼看出這週比前幾週好或差。
+      const chartData = weeks.map((ww) => ({
+        label: `${mdLabel(ww.weekStart)}-${mdLabel(ww.weekEnd)}`,
+        shortLabel: mdLabel(ww.weekStart),
+        value: ww.totalRevenueUSD,
+        provisional: ww.isCurrent,
       }));
       const chartWrap = renderBarChart(chartData, {
-        color: "var(--series-official)", fill: "var(--series-official-fill)", metric: "銷售額", fmt: moneyFmt, title: "本週每日銷售額",
+        color: "var(--series-official)", fill: "var(--series-official-fill)", metric: "週銷售額", fmt: moneyFmt, title: "每週銷售額趨勢",
       });
       body.appendChild(chartWrap);
 
