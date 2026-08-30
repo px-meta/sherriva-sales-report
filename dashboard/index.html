@@ -155,50 +155,12 @@
   .progress-fill.critical { background: var(--critical); }
   .hero-period { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; font-weight: 600; }
 
-  /* ---- 經營者戰情室(P1)---- */
-  .cockpit-kpi-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-bottom: 18px; }
-  .cockpit-headline {
-    display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700;
-    padding: 12px 16px; border-radius: 12px; margin-bottom: 18px;
-    background: var(--surface-2); border-left: 4px solid var(--axis);
-  }
-  .cockpit-headline.good { border-left-color: var(--good); color: var(--good); }
-  .cockpit-headline.warning { border-left-color: var(--warning); color: var(--warning); }
-  .cockpit-headline.critical { border-left-color: var(--critical); color: var(--critical); }
-  .cockpit-headline-icon { font-size: 20px; }
-  .cockpit-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px; }
-  @media (max-width: 720px) { .cockpit-two-col { grid-template-columns: 1fr; } }
-  .cockpit-card, .cockpit-anomalies-card {
-    background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px;
-  }
-  .cockpit-anomalies-card { margin-bottom: 18px; }
-  .cockpit-card-title { font-size: 14px; font-weight: 700; margin-bottom: 12px; }
-  .cockpit-channel-row { padding: 8px 0; border-bottom: 1px dashed var(--grid); font-size: 13px; }
-  .cockpit-channel-row:last-child { border-bottom: none; }
-  .cockpit-channel-name { font-weight: 700; margin-bottom: 3px; }
-  .cockpit-channel-stats { color: var(--text-secondary); }
-  .cockpit-channel-stats b.good { color: var(--good); }
-  .cockpit-channel-stats b.warning { color: var(--warning); }
-  .cockpit-channel-stats b.critical { color: var(--critical); }
-  .cockpit-channel-basis { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-  .cockpit-mover-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px dashed var(--grid); font-size: 13px; }
-  .cockpit-mover-row:last-child { border-bottom: none; }
-  .cockpit-mover-row .good { color: var(--good); font-weight: 700; }
-  .cockpit-mover-row .critical { color: var(--critical); font-weight: 700; }
-  .cockpit-anomaly-row { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--grid); }
-  .cockpit-anomaly-row:last-child { border-bottom: none; }
-  .cockpit-anomaly-icon { font-size: 16px; line-height: 1.4; }
-  .cockpit-anomaly-body { flex: 1; min-width: 0; }
-  .cockpit-anomaly-title { font-size: 13.5px; font-weight: 700; }
-  .cockpit-anomaly-detail { font-size: 12.5px; color: var(--text-secondary); margin-top: 2px; }
-  .cockpit-anomaly-action { font-size: 12.5px; color: var(--text-muted); margin-top: 4px; }
-  .cockpit-radar-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 8px 0; border-bottom: 1px dashed var(--grid); font-size: 13px; }
-  .cockpit-radar-row:last-child { border-bottom: none; }
-  .cockpit-radar-row .rname { font-weight: 700; }
-  .cockpit-radar-row .rsub { font-size: 11.5px; color: var(--text-muted); display: block; margin-top: 1px; }
-  .cockpit-radar-row .rmetric { text-align: right; white-space: nowrap; }
-  .cockpit-radar-row .rmetric.good { color: var(--good); font-weight: 700; }
-  .cockpit-radar-row .rmetric.warning { color: var(--warning); font-weight: 700; }
+  /* ---- 經營提醒(頁尾)：中性、低調，視覺層級低於所有銷售數據 ---- */
+  #remindersCard { margin-top: 26px; }
+  .reminders-title { font-size: 14px; font-weight: 800; margin-bottom: 8px; }
+  .reminder-row { font-size: 13px; color: var(--text-secondary); padding: 5px 0; line-height: 1.6; }
+  .reminder-empty { font-size: 13px; color: var(--text-muted); }
+  .reminder-sub { font-size: 12px; color: var(--text-muted); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--grid); line-height: 1.7; }
 
   /* ---- 分類/品項兩層明細表 ---- */
   table.cat-table { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -270,6 +232,8 @@
   <section id="view-inventory" class="view">
     <div class="card" id="inventoryCard" style="--card-accent: var(--warning)"></div>
   </section>
+
+  <div class="card" id="remindersCard"></div>
 
   <div class="foot-note" id="footNote"></div>
 </div>
@@ -8194,9 +8158,11 @@ const DATA = {
     return card;
   }
 
-  // ---------- 經營者戰情室(P1+P2)：目標→實績→缺口→Forecast→原因→異常→行動 ----------
-  // 所有數字都是 parse_reports.mjs 算好放進 DATA.cockpit，這裡純渲染，不在瀏覽器裡重算，
-  // 跟整個pipeline"後端算好、前端只畫圖"的架構一致。
+  // ---------- 首頁核心KPI：只放「目標/實績/達成率」三張卡 ----------
+  // 2026-08-30 依使用者要求做減法：首頁第一眼只看這三個數字。缺口/Forecast/異常/雷達
+  // 這些分析的「計算」都還在 parse_reports.mjs 的 buildCockpit() 沒動，只是不在首頁
+  // 頂部呈現，改到頁尾「經營提醒」(見 buildReminders)低調帶過。
+  // 所有數字都是後端算好放進 DATA.cockpit，這裡純渲染，不在瀏覽器裡重算。
   function buildHero() {
     const hero = document.getElementById("hero");
     const company = (DATA.company || []).slice().sort((a, b) => a.year - b.year || a.month - b.month);
@@ -8209,108 +8175,26 @@ const DATA = {
     const cp = DATA.cockpit;
 
     if (!cp) {
-      // 理論上company有資料cockpit就一定有，這裡只是防呆(例如舊版sales_data.json還沒有這個欄位)
-      hero.innerHTML = `<div class="hero-period">${latest.year}年${latest.month}月</div><div style="color:var(--text-muted)">戰情摘要資料尚未產生，請重新執行 parse_reports.mjs</div>`;
+      // 防呆(例如舊版sales_data.json還沒有cockpit欄位)
+      hero.innerHTML = `<div class="hero-period">${latest.year}年${latest.month}月</div><div style="color:var(--text-muted)">KPI資料尚未產生，請重新執行 parse_reports.mjs</div>`;
       return;
     }
 
     const hasTarget = cp.targetUSD != null;
     const rate = cp.achievementRate;
     const rateClass = !hasTarget ? "" : rate >= 100 ? "good" : rate >= 80 ? "warning" : "critical";
-    const gapClass = !hasTarget ? "" : cp.gapUSD <= 0 ? "good" : "warning";
-    const forecastClass = cp.forecastVerdict === "on_track" ? "good" : cp.forecastVerdict === "at_risk" ? "warning" : cp.forecastVerdict === "behind" ? "critical" : "";
-    const headlineIcon = cp.forecastVerdict === "on_track" ? "✅" : cp.forecastVerdict === "at_risk" ? "🟡" : cp.forecastVerdict === "behind" ? "🔴" : "ℹ️";
-
-    const channelRowsHtml = cp.channelBreakdown.map((c) => {
-      const cls = c.achievementRate == null ? "" : c.achievementRate >= 100 ? "good" : c.achievementRate >= 80 ? "warning" : "critical";
-      const icon = c.channel === "官網" ? "🌐" : "🛒";
-      return `<div class="cockpit-channel-row">
-        <div class="cockpit-channel-name">${icon} ${c.channel}</div>
-        <div class="cockpit-channel-stats">
-          達成率 <b class="${cls}">${c.achievementRate != null ? c.achievementRate + "%" : "—"}</b>
-          　缺口 <b>${c.gapUSD != null ? fmtUSD(c.gapUSD) : "—"}</b>
-          　預估月底 <b>${c.forecastUSD != null ? fmtUSD(c.forecastUSD) : "—"}</b>
-        </div>
-        ${c.forecastBasis ? `<div class="cockpit-channel-basis">Forecast依據：${c.forecastBasis}</div>` : ""}
-      </div>`;
-    }).join("");
-
-    const moverRowsHtml = cp.categoryMovers.length === 0
-      ? `<div style="color:var(--text-muted);font-size:13px;">本月跟上月比，各分類金額沒有明顯漲跌</div>`
-      : cp.categoryMovers.slice(0, 6).map((m) => {
-          const st = catStyle(m.category);
-          const up = m.diffUSD >= 0;
-          return `<div class="cockpit-mover-row">
-            <span><span class="cat-icon">${st.icon}</span>${m.category}</span>
-            <span class="${up ? "good" : "critical"}">${up ? "▲" : "▼"} ${fmtUSD(Math.abs(m.diffUSD))}</span>
-          </div>`;
-        }).join("");
-
-    const anomalyRowsHtml = cp.anomalies.length === 0
-      ? `<div style="color:var(--text-muted);font-size:13px;">🎉 目前沒有偵測到需要立即處理的異常</div>`
-      : cp.anomalies.map((a) => `
-          <div class="cockpit-anomaly-row">
-            <div class="cockpit-anomaly-icon">${a.level === "critical" ? "🔴" : "🟡"}</div>
-            <div class="cockpit-anomaly-body">
-              <div class="cockpit-anomaly-title">${a.title}</div>
-              <div class="cockpit-anomaly-detail">${a.detail}</div>
-              <div class="cockpit-anomaly-action">👉 ${a.action}</div>
-            </div>
-          </div>`).join("");
-
-    // 天數代理指標，數字大到幾百幾千天沒有直覺，換算成年方便業務一眼感受「這真的賣不動」。
-    function fmtDaysOfSupply(days) {
-      if (days == null) return "—";
-      if (days >= 365) return `${fmtNum(days)}天(約${(days / 365).toFixed(1)}年)`;
-      return `${days}天`;
-    }
-    const opportunityRowsHtml = (cp.opportunities || []).length === 0
-      ? `<div style="color:var(--text-muted);font-size:13px;">目前沒有偵測到連續2個月成長、庫存又充足的分類</div>`
-      : cp.opportunities.map((o) => {
-          const st = catStyle(o.category);
-          return `<div class="cockpit-radar-row">
-            <span class="rname"><span class="cat-icon">${st.icon}</span>${o.category}${o.inventoryOk ? "" : " ⚠️庫存偏緊"}
-              <span class="rsub">連續2個月成長</span>
-            </span>
-            <span class="rmetric good">${fmtUSD(o.latestUSD)}${o.growthPct != null ? ` <span style="font-size:11px">(+${o.growthPct}%)</span>` : ""}</span>
-          </div>`;
-        }).join("");
-    const capitalTiedUpRowsHtml = (cp.capitalTiedUp || []).length === 0
-      ? `<div style="color:var(--text-muted);font-size:13px;">目前沒有偵測到明顯滯銷、資金積壓的品項</div>`
-      : cp.capitalTiedUp.map((i) => {
-          const st = catStyle(i.category);
-          return `<div class="cockpit-radar-row">
-            <span class="rname"><span class="cat-icon">${st.icon}</span>${i.sku}
-              <span class="rsub">${i.reason}</span>
-            </span>
-            <span class="rmetric warning">庫存${fmtNum(i.currentStock)}<span class="rsub">${fmtDaysOfSupply(i.daysOfSupply)}</span></span>
-          </div>`;
-        }).join("");
 
     hero.innerHTML = `
       <div class="hero-period">${latest.year}年${latest.month}月　官網＋Amazon合計　來源：${latest.source}${provisional ? ' <span class="badge provisional">尚未結算</span>' : ' <span class="badge">財務已結算</span>'}</div>
-      <div class="cockpit-headline ${forecastClass}">
-        <span class="cockpit-headline-icon">${headlineIcon}</span>
-        <span>${cp.headline}</span>
-      </div>
-      <div class="hero-grid cockpit-kpi-grid">
-        <div class="hero-tile" style="--tile-accent:var(--series-official)">
+      <div class="hero-grid">
+        <div class="hero-tile" style="--tile-accent:var(--brand-yellow)">
           <div class="hero-tile-label">🎯 業績目標</div>
           <div class="hero-tile-value ${hasTarget ? "" : "muted"}">${hasTarget ? fmtUSD(cp.targetUSD) : "尚未設定目標"}</div>
         </div>
-        <div class="hero-tile" style="--tile-accent:var(--good)">
+        <div class="hero-tile" style="--tile-accent:var(--brand-black)">
           <div class="hero-tile-label">💰 目前實績</div>
           <div class="hero-tile-value">${fmtUSD(cp.actualUSD)}</div>
           <div class="hero-tile-sub">做到第${cp.daysElapsed}/${cp.daysInMonth}天</div>
-        </div>
-        <div class="hero-tile" style="--tile-accent:var(--${gapClass || "axis"})">
-          <div class="hero-tile-label">📉 目前缺口</div>
-          <div class="hero-tile-value ${gapClass}">${!hasTarget ? "—" : cp.gapUSD <= 0 ? "已達標" : fmtUSD(cp.gapUSD)}</div>
-        </div>
-        <div class="hero-tile" style="--tile-accent:var(--${forecastClass || "axis"})">
-          <div class="hero-tile-label">🔮 月底Forecast</div>
-          <div class="hero-tile-value ${forecastClass}">${cp.forecastUSD != null ? fmtUSD(cp.forecastUSD) : "資料不足"}</div>
-          <div class="hero-tile-sub">剩${cp.daysRemaining}天</div>
         </div>
         <div class="hero-tile" style="--tile-accent:var(--${rateClass || "axis"})">
           <div class="hero-tile-label">${!hasTarget ? "📈" : rate >= 100 ? "🟢" : rate >= 80 ? "🟡" : "🔴"} 達成率</div>
@@ -8318,31 +8202,61 @@ const DATA = {
           ${hasTarget ? `<div class="progress-track"><div class="progress-fill ${rateClass}" style="width:${Math.min(100, rate)}%"></div></div>` : ""}
         </div>
       </div>
-      <div class="cockpit-two-col">
-        <div class="cockpit-card">
-          <div class="cockpit-card-title">📊 為什麼：通路貢獻缺口</div>
-          ${channelRowsHtml}
-        </div>
-        <div class="cockpit-card">
-          <div class="cockpit-card-title">📈 為什麼：本月分類漲跌(vs 上月)</div>
-          ${moverRowsHtml}
-        </div>
-      </div>
-      <div class="cockpit-anomalies-card">
-        <div class="cockpit-card-title">⚡ 今天要處理的異常</div>
-        ${anomalyRowsHtml}
-      </div>
-      <div class="cockpit-two-col">
-        <div class="cockpit-card">
-          <div class="cockpit-card-title">🚀 機會雷達(連續成長+庫存充足)</div>
-          ${opportunityRowsHtml}
-        </div>
-        <div class="cockpit-card">
-          <div class="cockpit-card-title">🧊 資金積壓雷達(去化天數代理指標，非實際金額)</div>
-          ${capitalTiedUpRowsHtml}
-        </div>
-      </div>
     `;
+  }
+
+  // ---------- 經營提醒(頁尾)：中性陳述事實，不下判斷、不給行動指令 ----------
+  // 材料一樣來自後端算好的 DATA.cockpit / DATA.inventory，前端只挑重點、換成中性說法。
+  // 克制原則：最多5條，優先序=缺貨(最可能直接影響銷售)>明顯銷售變化>庫存偏高；沒有就說沒有。
+  function buildReminders() {
+    const box = document.getElementById("remindersCard");
+    if (!box) return;
+    const cp = DATA.cockpit;
+    const items = [];
+
+    // 優先1+2：缺貨(有銷量卻快見底的品項)
+    (DATA.inventory || [])
+      .filter((i) => inventoryStatus(i).cls === "critical")
+      .sort((a, b) => (a.daysOfSupply ?? 0) - (b.daysOfSupply ?? 0))
+      .forEach((i) => {
+        const extra = i.stockoutDaysThisMonth > 0 ? `，本月已缺貨 ${i.stockoutDaysThisMonth} 天` : "";
+        items.push(`${i.sku} 庫存約可支撐 ${i.daysOfSupply != null ? i.daysOfSupply.toFixed(1) : "0"} 天${extra}`);
+      });
+
+    // 優先3：明顯的銷售變化(較上月跌三成以上、金額也夠大的分類，避免小分類雜訊)
+    ((cp && cp.categoryMovers) || [])
+      .filter((m) => m.previousUSD > 0 && m.diffUSD <= -1000 && Math.abs(m.diffUSD / m.previousUSD) >= 0.3)
+      .sort((a, b) => a.diffUSD - b.diffUSD)
+      .forEach((m) => {
+        const pct = Math.abs((m.diffUSD / m.previousUSD) * 100).toFixed(0);
+        items.push(`${m.category} 本月較上月下降 ${pct}%（${fmtUSD(m.previousUSD)} → ${fmtUSD(m.currentUSD)}）`);
+      });
+
+    // 優先4：庫存偏高(去化天數異常長，只列最明顯的前2個)
+    ((cp && cp.capitalTiedUp) || []).slice(0, 2).forEach((i) => {
+      if (i.daysOfSupply == null) {
+        items.push(`${i.sku} 近 3 個月沒有銷量（現有庫存 ${fmtNum(i.currentStock)} 件）`);
+      } else {
+        const dTxt = i.daysOfSupply >= 365 ? `${(i.daysOfSupply / 365).toFixed(1)} 年` : `${fmtNum(i.daysOfSupply)} 天`;
+        items.push(`${i.sku} 庫存去化天數偏高（現有 ${fmtNum(i.currentStock)} 件，照目前銷售速度約需 ${dTxt}才賣得完）`);
+      }
+    });
+
+    const shown = items.slice(0, 5);
+    const listHtml = shown.length === 0
+      ? `<div class="reminder-empty">目前沒有重大經營提醒</div>`
+      : shown.map((t) => `<div class="reminder-row">• ${t}</div>`).join("");
+
+    // 缺口/Forecast降為次要資訊：小字灰色一行帶過，視覺層級低於上面所有數據
+    let subLine = "";
+    if (cp) {
+      const parts = [];
+      if (cp.targetUSD != null && cp.gapUSD > 0) parts.push(`本月剩餘缺口 ${fmtUSD(cp.gapUSD)}`);
+      if (cp.forecastUSD != null) parts.push(`依目前銷售速度，月底預估業績約 ${fmtUSD(cp.forecastUSD)}`);
+      if (parts.length) subLine = `<div class="reminder-sub">${parts.join("　·　")}</div>`;
+    }
+
+    box.innerHTML = `<div class="reminders-title">💡 經營提醒</div>${listHtml}${subLine}`;
   }
 
   // ---------- 庫存戰情 ----------
@@ -8354,22 +8268,6 @@ const DATA = {
     }
     if (item.daysOfSupply != null && item.daysOfSupply < 30) return { cls: "warning", label: "🟡 庫存偏低" };
     return { cls: "good", label: "🟢 庫存充足" };
-  }
-
-  function inventoryAlertBannerHtml() {
-    const items = DATA.inventory || [];
-    if (items.length === 0) return "";
-    const critical = items.filter((i) => inventoryStatus(i).cls === "critical");
-    if (critical.length === 0) return "";
-    const names = critical
-      .slice()
-      .sort((a, b) => (a.daysOfSupply ?? 0) - (b.daysOfSupply ?? 0))
-      .map((i) => `${i.sku}(剩${i.daysOfSupply != null ? i.daysOfSupply + "天" : "0"}${i.stockoutDaysThisMonth > 0 ? `，本月已缺貨${i.stockoutDaysThisMonth}天` : ""})`)
-      .join("、");
-    return `<div class="inv-alert-banner" style="margin-top:14px;">
-      <span>⚠</span>
-      <span><b>${critical.length} 個品項有缺貨風險：</b>${names}　<span style="color:var(--text-muted)">(詳見「庫存戰情」分頁)</span></span>
-    </div>`;
   }
 
   function buildInventoryTab() {
@@ -8631,6 +8529,7 @@ const DATA = {
 
   // ---------- 組裝頁面 ----------
   buildHero();
+  buildReminders();
   buildInventoryTab();
   const dailyGrid = document.getElementById("dailyGrid");
   dailyGrid.appendChild(buildDailyCard());
