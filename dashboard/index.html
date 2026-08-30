@@ -8048,14 +8048,18 @@ const DATA = {
         ${topMoverHtml(p.byCategory, prev && prev.byCategory)}
       `;
 
-      const chartData = periods.map((pp) => ({
-        label: pp.label,
-        shortLabel: pp.label.split("-")[0],
-        value: pp.totalRevenueUSD,
-        target: pp.targetUSD,
-      }));
+      // 2026-08-30 使用者指示：圖表只畫「目前選的這期所屬月份」的各期就好，
+      // 不要從4月一路畫到現在(要看長期趨勢去月報分頁)。
+      const chartData = periods
+        .filter((pp) => pp.startDate.slice(0, 7) === p.startDate.slice(0, 7))
+        .map((pp) => ({
+          label: pp.label,
+          shortLabel: pp.label.split("-")[0],
+          value: pp.totalRevenueUSD,
+          target: pp.targetUSD,
+        }));
       const chartWrap = renderBarChart(chartData, {
-        color: chDef.color, fill: chDef.fill, metric: "銷售額", fmt: moneyFmt, title: chDef.label + " 各期銷售額",
+        color: chDef.color, fill: chDef.fill, metric: "銷售額", fmt: moneyFmt, title: chDef.label + " 本月各期銷售額",
       });
       const oldChart = body.querySelector(".chart-wrap");
       if (oldChart) oldChart.remove();
