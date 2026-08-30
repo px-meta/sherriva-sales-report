@@ -134,8 +134,6 @@
   .badge { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 999px; border: 1px solid var(--border); color: var(--text-muted); margin-left: 8px; }
   .badge.provisional { color: var(--critical); border-color: var(--critical); }
 
-  .foot-note { color: var(--text-muted); font-size: 12px; margin-top: 28px; line-height: 1.7; }
-
   /* ---- 頂部KPI：目標/實際/達成率 ---- */
   .hero { margin-bottom: 22px; border-top-color: var(--series-official); }
   .hero-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
@@ -234,8 +232,6 @@
   </section>
 
   <div class="card" id="remindersCard"></div>
-
-  <div class="foot-note" id="footNote"></div>
 </div>
 
 <div class="tooltip" id="tooltip"></div>
@@ -8481,21 +8477,8 @@ const DATA = {
         </div>
       `;
 
-      // 圖表畫「每週總額的趨勢」(跟週報/月報分頁同一種畫法：一根柱子=一期)，不是「這一週7天」——
-      // 本週進行中時只有5天有資料，畫成7天的長條圖會有2根空的，容易被誤會成資料漏掉；
-      // 而且下面已經有「本週每日明細」表格逐日列數字了，圖表再畫一次日資料沒有新資訊，
-      // 改成跨週趨勢，才能一眼看出這週比前幾週好或差。
-      const chartData = weeks.map((ww) => ({
-        label: `${mdLabel(ww.weekStart)}-${mdLabel(ww.weekEnd)}`,
-        shortLabel: mdLabel(ww.weekStart),
-        value: ww.totalRevenueUSD,
-        provisional: ww.isCurrent,
-      }));
-      const chartWrap = renderBarChart(chartData, {
-        color: "var(--series-official)", fill: "var(--series-official-fill)", metric: "週銷售額", fmt: moneyFmt, title: "每週銷售額趨勢",
-      });
-      body.appendChild(chartWrap);
-
+      // 2026-08-30 使用者指示：每日分頁不放週趨勢圖，只要業績數字(上面的統計卡+下面的逐日明細表)。
+      // 跨週趨勢要看的話，週報/月報分頁的圖表都還在。
       const dayRows = w.days.map((d) => {
         const wd = WEEKDAY_LABEL[new Date(d.date + "T00:00:00").getDay()];
         const isToday = d.date === todayStr;
@@ -8560,18 +8543,8 @@ const DATA = {
     <b>表2 官網 / 表3 Amazon 彙總</b>數字為準。
   `;
 
-  document.getElementById("footNote").innerHTML = `
-    產品分類(HDMI分配/切換、無線傳輸、電視天線、HDMI線材)對應 sherriva.com 官網選單分類；SKU 明細比對不到分類的歸入「未分類」。
-    官網訂單金額以訂單編號去重計算；已取消/全額退款訂單、換貨與樣品這類0元出貨不列入。
-    <b>「銷售額」跟「SKU明細金額加總」口徑不同，本來就不會完全相等</b>：銷售額是客人實際付的錢(已扣折扣，但含運費/稅金)；
-    SKU明細金額是各商品折扣後的金額(不含運費/稅金，運費/稅金不屬於任何單一商品)，兩者的差距通常就是運費+稅金，是正常現象不是算錯。
-    有些較早期別因原始檔案本身缺欄位(例如缺單價)，SKU明細金額不可信，該期的卡片上會有⚠️警示標明。
-    週期資料涵蓋範圍請見各期「來源」檔名；4月初(官網4/11前、Amazon 4/13前)無存檔故未列入。
-    頂部「整體業績」取財務結算後的「表1 全公司業績」(官網+Amazon已合計)；業績目標來自公司「2026年目標」表(Sherriva列，萬元台幣換算，
-    換算匯率：固定1美元=${DATA.meta.targetFxRateTWDperUSD}台幣，不隨市場匯率每天變動)。
-    ${DATA.meta.marketFxRateTWDperUSD ? `(僅供參考：${DATA.meta.marketFxRateDate}市場匯率約1美元=${DATA.meta.marketFxRateTWDperUSD}台幣，未用於任何計算)` : ""}
-    週報卡片的「本期目標達成率」是把月目標按天數、以及官網/Amazon歷史營收佔比拆算出來的推算值，不是管理層另外訂的官網/Amazon個別目標，僅供參考抓感覺，正式檢討仍以月報為準。
-  `;
+  // 2026-08-30 使用者指示：頁尾不放大段口徑說明。這些說明(銷售額vs SKU明細口徑、資料涵蓋範圍、
+  // 目標換算匯率等)保留在專案交接筆記.md，需要時再查，網頁上不顯示。
 })();
 </script>
 </body>
