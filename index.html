@@ -238,7 +238,7 @@
 
 <script>
 const DATA = {
-  "generatedAt": "2026-09-01T10:39:34.077Z",
+  "generatedAt": "2026-09-01T10:48:38.340Z",
   "periods": [
     {
       "channel": "官網",
@@ -7884,90 +7884,95 @@ const DATA = {
   ],
   "cockpit": {
     "year": 2026,
-    "month": 9,
+    "month": 8,
     "provisional": true,
+    "isFallback": true,
+    "skippedMonth": {
+      "year": 2026,
+      "month": 9
+    },
     "targetUSD": 57142.86,
-    "actualUSD": 0,
-    "achievementRate": 0,
-    "gapUSD": 57142.86,
-    "daysElapsed": 1,
-    "daysRemaining": 29,
-    "daysInMonth": 30,
-    "forecastUSD": 43956.54,
-    "forecastGapUSD": 13186.32,
+    "actualUSD": 45398.18,
+    "achievementRate": 79.4,
+    "gapUSD": 11744.68,
+    "daysElapsed": 31,
+    "daysRemaining": 0,
+    "daysInMonth": 31,
+    "forecastUSD": 45398.18,
+    "forecastGapUSD": 11744.68,
     "forecastVerdict": "behind",
-    "headline": "照目前速度，預估月底落後目標 US$13,186（約23.1%），主要缺口在官網",
+    "headline": "照目前速度，預估月底落後目標 US$11,745（約20.6%），主要缺口在Amazon",
     "channelBreakdown": [
       {
         "channel": "官網",
         "targetUSD": 6285.71,
-        "actualUSD": 0,
-        "achievementRate": 0,
-        "gapUSD": 6285.71,
+        "actualUSD": 3956.66,
+        "achievementRate": 62.9,
+        "gapUSD": 2329.05,
         "avgDailyRevenue": 127.92,
-        "forecastUSD": 3709.64,
-        "forecastGapUSD": 2576.07,
+        "forecastUSD": 3956.66,
+        "forecastGapUSD": 2329.05,
         "forecastBasis": "近7天日均"
       },
       {
         "channel": "Amazon",
-        "targetUSD": null,
-        "actualUSD": 0,
-        "achievementRate": null,
-        "gapUSD": null,
+        "targetUSD": 50857.15,
+        "actualUSD": 41441.52,
+        "achievementRate": 81.5,
+        "gapUSD": 9415.63,
         "avgDailyRevenue": 1387.82,
-        "forecastUSD": 40246.9,
-        "forecastGapUSD": null,
+        "forecastUSD": 41441.52,
+        "forecastGapUSD": 9415.63,
         "forecastBasis": "近2期期報日均(無日粒度資料，準確度較低)"
       }
     ],
-    "topGapChannel": "官網",
+    "topGapChannel": "Amazon",
     "categoryMovers": [
       {
-        "category": "HDMI線材",
-        "currentUSD": 0,
-        "previousUSD": 26.72,
-        "diffUSD": -26.72
-      },
-      {
-        "category": "未分類",
-        "currentUSD": 0,
-        "previousUSD": 1892.23,
-        "diffUSD": -1892.23
-      },
-      {
         "category": "電視天線",
-        "currentUSD": 0,
-        "previousUSD": 8664.78,
-        "diffUSD": -8664.78
+        "currentUSD": 8664.78,
+        "previousUSD": 4201,
+        "diffUSD": 4463.78
       },
       {
         "category": "無線傳輸(WTR/WHD)",
-        "currentUSD": 0,
-        "previousUSD": 14671.19,
-        "diffUSD": -14671.19
+        "currentUSD": 14671.19,
+        "previousUSD": 11034,
+        "diffUSD": 3637.19
+      },
+      {
+        "category": "未分類",
+        "currentUSD": 1892.23,
+        "previousUSD": 0,
+        "diffUSD": 1892.23
       },
       {
         "category": "HDMI分配/切換",
-        "currentUSD": 0,
-        "previousUSD": 19079.67,
-        "diffUSD": -19079.67
+        "currentUSD": 19079.67,
+        "previousUSD": 18690,
+        "diffUSD": 389.67
+      },
+      {
+        "category": "HDMI線材",
+        "currentUSD": 26.72,
+        "previousUSD": 0,
+        "diffUSD": 26.72
       }
     ],
     "anomalies": [
-      {
-        "level": "critical",
-        "title": "本月預估落後目標 US$13,186",
-        "detail": "主要缺口通路：官網(缺口US$6,286)",
-        "action": "檢視該通路的庫存與行銷資源是否足夠，優先補強",
-        "impactUSD": 13186.32
-      },
       {
         "level": "critical",
         "title": "UHD-1440 缺貨風險(剩1.1天)",
         "detail": "庫存即將見底",
         "action": "確認補貨/在途貨進度，必要時加急",
         "impactUSD": 12900
+      },
+      {
+        "level": "critical",
+        "title": "本月預估落後目標 US$11,745",
+        "detail": "主要缺口通路：Amazon(缺口US$9,416)",
+        "action": "檢視該通路的庫存與行銷資源是否足夠，優先補強",
+        "impactUSD": 11744.68
       },
       {
         "level": "critical",
@@ -7978,17 +7983,10 @@ const DATA = {
       },
       {
         "level": "warning",
-        "title": "無線傳輸(WTR/WHD) 較上月衰退 US$14,671",
-        "detail": "上月 US$14,671 → 本月 US$0",
-        "action": "了解是否為季節性、競品或缺貨因素",
-        "impactUSD": 14671.19
-      },
-      {
-        "level": "warning",
-        "title": "電視天線 較上月衰退 US$8,665",
-        "detail": "上月 US$8,665 → 本月 US$0",
-        "action": "了解是否為季節性、競品或缺貨因素",
-        "impactUSD": 8664.78
+        "title": "官網本月達成率僅 62.9%",
+        "detail": "目標 US$6,286，目前 US$3,957",
+        "action": "檢視官網近期銷售是否有異常(缺貨/流量下滑/競品)",
+        "impactUSD": 2329.05
       }
     ],
     "opportunities": [],
@@ -8714,9 +8712,15 @@ const DATA = {
       hero.style.display = "none";
       return;
     }
-    const latest = company[company.length - 1];
-    const provisional = /暫估/.test(latest.source);
     const cp = DATA.cockpit;
+    // 標題要跟 cockpit 實際採用的月份一致。月初新月份還沒資料時，cockpit 會退回
+    // 上一個有實績的月份(見 parse_reports.mjs buildCockpit)，這裡必須跟著顯示同一個月，
+    // 否則會出現「標題寫9月、數字是8月」的錯亂。
+    const shown = cp
+      ? company.find((c) => c.year === cp.year && c.month === cp.month) || company[company.length - 1]
+      : company[company.length - 1];
+    const latest = shown;
+    const provisional = /暫估/.test(latest.source);
 
     if (!cp) {
       // 防呆(例如舊版sales_data.json還沒有cockpit欄位)
@@ -8729,7 +8733,7 @@ const DATA = {
     const rateClass = !hasTarget ? "" : rate >= 100 ? "good" : rate >= 80 ? "warning" : "critical";
 
     hero.innerHTML = `
-      <div class="hero-period">${latest.year}年${latest.month}月　官網＋Amazon合計　來源：${latest.source}${provisional ? ' <span class="badge provisional">尚未結算</span>' : ' <span class="badge">財務已結算</span>'}</div>
+      <div class="hero-period">${latest.year}年${latest.month}月　官網＋Amazon合計　來源：${latest.source}${provisional ? ' <span class="badge provisional">尚未結算</span>' : ' <span class="badge">財務已結算</span>'}${cp.isFallback && cp.skippedMonth ? ` <span class="badge provisional">${cp.skippedMonth.month}月資料尚未進來，顯示上一期</span>` : ""}</div>
       <div class="hero-grid">
         <div class="hero-tile" style="--tile-accent:var(--brand-yellow)">
           <div class="hero-tile-label">🎯 業績目標</div>
