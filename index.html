@@ -134,6 +134,15 @@
   .badge { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 999px; border: 1px solid var(--border); color: var(--text-muted); margin-left: 8px; }
   .badge.provisional { color: var(--critical); border-color: var(--critical); }
 
+  /* ---- 資料過期警示橫幅 ---- */
+  .stale-banner{
+    border-radius:10px; padding:12px 16px; margin-bottom:16px; line-height:1.6;
+    font-size:14px; border-left:5px solid;
+  }
+  .stale-banner.warning{ background:#fff8e6; border-color:#e0a800; color:#6b4e00; }
+  .stale-banner.critical{ background:#fdecea; border-color:#d33; color:#8a1c14; }
+  .stale-note{ margin-top:6px; font-size:12.5px; opacity:.8; }
+
   /* ---- 頂部KPI：目標/實際/達成率 ---- */
   .hero { margin-bottom: 22px; border-top-color: var(--series-official); }
   .hero-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
@@ -238,7 +247,7 @@
 
 <script>
 const DATA = {
-  "generatedAt": "2026-09-02T00:47:29.244Z",
+  "generatedAt": "2026-09-02T01:50:27.732Z",
   "periods": [
     {
       "channel": "官網",
@@ -814,6 +823,7 @@ const DATA = {
       "excludedCancelled": 0,
       "excludedRefunded": 0,
       "excludedZeroTotal": 0,
+      "excludedUnfulfilled": 0,
       "currency": "USD",
       "source": "Shopify Admin API(暫估，本旬尚未結束)",
       "targetUSD": 419.05,
@@ -7650,6 +7660,22 @@ const DATA = {
       "year": 2026,
       "month": 9
     },
+    "freshness": [
+      {
+        "channel": "官網",
+        "latestEndDate": "2026-09-02",
+        "daysBehind": 0,
+        "level": "ok",
+        "staleThresholdDays": 14
+      },
+      {
+        "channel": "Amazon",
+        "latestEndDate": "2026-08-31",
+        "daysBehind": 2,
+        "level": "ok",
+        "staleThresholdDays": 10
+      }
+    ],
     "targetUSD": 57142.86,
     "actualUSD": 44830.39,
     "achievementRate": 78.5,
@@ -8501,7 +8527,19 @@ const DATA = {
     const rate = cp.achievementRate;
     const rateClass = !hasTarget ? "" : rate >= 100 ? "good" : rate >= 80 ? "warning" : "critical";
 
-    hero.innerHTML = `
+    // 資料過期警示：擺在 KPI 上方，因為「數字是不是完整的」比數字本身更優先。
+    // 中性陳述事實(最新資料到哪天、距今幾天)，不下判斷、不指責誰沒寄。
+    const fresh = (cp.freshness || []).filter((f) => f.level !== "ok");
+    const freshBanner = fresh.length === 0 ? "" : `
+      <div class="stale-banner ${fresh.some((f) => f.level === "critical") ? "critical" : "warning"}">
+        ${fresh.map((f) => f.latestEndDate
+          ? `⚠️ <b>${f.channel}</b> 最新資料只到 <b>${f.latestEndDate}</b>，距今 <b>${f.daysBehind} 天</b>（正常約 ${f.staleThresholdDays} 天內會有新報表）`
+          : `⚠️ <b>${f.channel}</b> 目前沒有任何資料`
+        ).join("<br>")}
+        <div class="stale-note">下方數字未包含尚未收到的期間，看趨勢時請把這點考慮進去。</div>
+      </div>`;
+
+    hero.innerHTML = freshBanner + `
       <div class="hero-period">${latest.year}年${latest.month}月　官網＋Amazon合計　來源：${latest.source}${provisional ? ' <span class="badge provisional">尚未結算</span>' : ' <span class="badge">財務已結算</span>'}${cp.isFallback && cp.skippedMonth ? ` <span class="badge provisional">${cp.skippedMonth.month}月資料尚未進來，顯示上一期</span>` : ""}</div>
       <div class="hero-grid">
         <div class="hero-tile" style="--tile-accent:var(--brand-yellow)">
