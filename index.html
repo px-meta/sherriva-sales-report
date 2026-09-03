@@ -247,7 +247,7 @@
 
 <script>
 const DATA = {
-  "generatedAt": "2026-09-02T23:00:05.391Z",
+  "generatedAt": "2026-09-03T00:47:07.976Z",
   "periods": [
     {
       "channel": "官網",
@@ -813,8 +813,8 @@ const DATA = {
       "year": 2026,
       "month": 9,
       "startDate": "2026-09-01",
-      "endDate": "2026-09-02",
-      "label": "9/1-9/2",
+      "endDate": "2026-09-03",
+      "label": "9/1-9/3",
       "totalRevenueUSD": 0,
       "totalUnits": 0,
       "byProduct": {},
@@ -826,7 +826,7 @@ const DATA = {
       "excludedUnfulfilled": 0,
       "currency": "USD",
       "source": "Shopify Admin API(暫估，本旬尚未結束)",
-      "targetUSD": 419.05,
+      "targetUSD": 628.57,
       "achievementRate": 0
     },
     {
@@ -6521,7 +6521,7 @@ const DATA = {
       "byCategory": {},
       "source": "暫估(加總1份期報,尚未經財務結算)",
       "periodsIncluded": [
-        "9/1-9/2"
+        "9/1-9/3"
       ],
       "targetUSD": 6285.71,
       "achievementRate": 0
@@ -7193,15 +7193,6 @@ const DATA = {
   ],
   "dailyOfficial": [
     {
-      "date": "2026-08-04",
-      "totalRevenueUSD": 0,
-      "totalUnits": 0,
-      "ordersCount": 0,
-      "byProduct": {},
-      "byCategory": {},
-      "provisional": false
-    },
-    {
       "date": "2026-08-05",
       "totalRevenueUSD": 2377,
       "totalUnits": 20,
@@ -7648,6 +7639,15 @@ const DATA = {
       "ordersCount": 0,
       "byProduct": {},
       "byCategory": {},
+      "provisional": false
+    },
+    {
+      "date": "2026-09-03",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "ordersCount": 0,
+      "byProduct": {},
+      "byCategory": {},
       "provisional": true
     }
   ],
@@ -7663,8 +7663,8 @@ const DATA = {
     "freshness": [
       {
         "channel": "官網",
-        "latestEndDate": "2026-09-02",
-        "daysBehind": 1,
+        "latestEndDate": "2026-09-03",
+        "daysBehind": 0,
         "level": "ok",
         "staleThresholdDays": 14
       },
@@ -7694,7 +7694,7 @@ const DATA = {
         "actualUSD": 3388.87,
         "achievementRate": 53.9,
         "gapUSD": 2896.84,
-        "avgDailyRevenue": 127.92,
+        "avgDailyRevenue": 16.7,
         "forecastUSD": 3388.87,
         "forecastGapUSD": 2896.84,
         "forecastBasis": "近7天日均"
@@ -7739,13 +7739,6 @@ const DATA = {
       }
     ],
     "anomalies": [
-      {
-        "level": "critical",
-        "title": "UHD-1440 缺貨風險(剩1.1天)",
-        "detail": "庫存即將見底",
-        "action": "確認補貨/在途貨進度，必要時加急",
-        "impactUSD": 12900
-      },
       {
         "level": "critical",
         "title": "本月預估落後目標 US$12,312",
@@ -7822,7 +7815,9 @@ const DATA = {
       "inTransitTotal": 300,
       "etaDate": "2026-08-23",
       "monthlyAvgSales": 50.3,
-      "daysOfSupply": 100.1
+      "daysOfSupply": 100.1,
+      "discontinued": false,
+      "replacementSku": null
     },
     {
       "sku": "UHD-1240",
@@ -7833,7 +7828,9 @@ const DATA = {
       "inTransitTotal": 0,
       "etaDate": null,
       "monthlyAvgSales": 0,
-      "daysOfSupply": null
+      "daysOfSupply": null,
+      "discontinued": false,
+      "replacementSku": null
     },
     {
       "sku": "UHD-1280",
@@ -7844,7 +7841,9 @@ const DATA = {
       "inTransitTotal": 0,
       "etaDate": null,
       "monthlyAvgSales": 26,
-      "daysOfSupply": 886.2
+      "daysOfSupply": 886.2,
+      "discontinued": false,
+      "replacementSku": null
     },
     {
       "sku": "UHD-1440X",
@@ -7855,7 +7854,9 @@ const DATA = {
       "inTransitTotal": 0,
       "etaDate": null,
       "monthlyAvgSales": 12.3,
-      "daysOfSupply": 994.9
+      "daysOfSupply": 994.9,
+      "discontinued": false,
+      "replacementSku": null
     },
     {
       "sku": "UHD-1440",
@@ -7866,7 +7867,9 @@ const DATA = {
       "inTransitTotal": 0,
       "etaDate": null,
       "monthlyAvgSales": 53.7,
-      "daysOfSupply": 1.1
+      "daysOfSupply": 1.1,
+      "discontinued": true,
+      "replacementSku": "UHD-1440X"
     },
     {
       "sku": "UHD-1480",
@@ -7877,7 +7880,9 @@ const DATA = {
       "inTransitTotal": 760,
       "etaDate": "2026-08-23",
       "monthlyAvgSales": 95,
-      "daysOfSupply": 105.5
+      "daysOfSupply": 105.5,
+      "discontinued": false,
+      "replacementSku": null
     },
     {
       "sku": "UHD-2180",
@@ -7888,7 +7893,9 @@ const DATA = {
       "inTransitTotal": 2240,
       "etaDate": "2026-08-23",
       "monthlyAvgSales": 345.3,
-      "daysOfSupply": 40.6
+      "daysOfSupply": 40.6,
+      "discontinued": false,
+      "replacementSku": null
     },
     {
       "sku": "UHD-3180",
@@ -7899,7 +7906,9 @@ const DATA = {
       "inTransitTotal": 220,
       "etaDate": "2026-08-23",
       "monthlyAvgSales": 0,
-      "daysOfSupply": null
+      "daysOfSupply": null,
+      "discontinued": false,
+      "replacementSku": null
     },
     {
       "sku": "WHD-1000",
@@ -7910,7 +7919,9 @@ const DATA = {
       "inTransitTotal": 900,
       "etaDate": "2026-08-23",
       "monthlyAvgSales": 53.3,
-      "daysOfSupply": 274.5
+      "daysOfSupply": 274.5,
+      "discontinued": false,
+      "replacementSku": null
     },
     {
       "sku": "WHD-5000",
@@ -7921,7 +7932,9 @@ const DATA = {
       "inTransitTotal": 0,
       "etaDate": null,
       "monthlyAvgSales": 15,
-      "daysOfSupply": 704
+      "daysOfSupply": 704,
+      "discontinued": false,
+      "replacementSku": null
     },
     {
       "sku": "WHD-5100",
@@ -7932,7 +7945,9 @@ const DATA = {
       "inTransitTotal": 0,
       "etaDate": null,
       "monthlyAvgSales": 26.3,
-      "daysOfSupply": 419.2
+      "daysOfSupply": 419.2,
+      "discontinued": false,
+      "replacementSku": null
     },
     {
       "sku": "WHD-5000C",
@@ -7943,7 +7958,9 @@ const DATA = {
       "inTransitTotal": 0,
       "etaDate": null,
       "monthlyAvgSales": 2,
-      "daysOfSupply": 495
+      "daysOfSupply": 495,
+      "discontinued": false,
+      "replacementSku": null
     },
     {
       "sku": "WHD-5000H",
@@ -7954,7 +7971,9 @@ const DATA = {
       "inTransitTotal": 0,
       "etaDate": null,
       "monthlyAvgSales": 0,
-      "daysOfSupply": null
+      "daysOfSupply": null,
+      "discontinued": false,
+      "replacementSku": null
     },
     {
       "sku": "UHD-4KB-3.3ft",
@@ -7965,7 +7984,9 @@ const DATA = {
       "inTransitTotal": 0,
       "etaDate": null,
       "monthlyAvgSales": 0.3,
-      "daysOfSupply": 13950
+      "daysOfSupply": 13950,
+      "discontinued": false,
+      "replacementSku": null
     },
     {
       "sku": "UHD-10KB-3.3ft",
@@ -7976,7 +7997,9 @@ const DATA = {
       "inTransitTotal": 0,
       "etaDate": null,
       "monthlyAvgSales": 0,
-      "daysOfSupply": null
+      "daysOfSupply": null,
+      "discontinued": false,
+      "replacementSku": null
     },
     {
       "sku": "UHD-10KB-6.6ft",
@@ -7987,7 +8010,9 @@ const DATA = {
       "inTransitTotal": 0,
       "etaDate": null,
       "monthlyAvgSales": 0.3,
-      "daysOfSupply": 4050
+      "daysOfSupply": 4050,
+      "discontinued": false,
+      "replacementSku": null
     },
     {
       "sku": "UHD-10KB-10ft",
@@ -7998,7 +8023,9 @@ const DATA = {
       "inTransitTotal": 0,
       "etaDate": null,
       "monthlyAvgSales": 0.7,
-      "daysOfSupply": 45
+      "daysOfSupply": 45,
+      "discontinued": false,
+      "replacementSku": null
     },
     {
       "sku": "SAE-5500",
@@ -8009,7 +8036,9 @@ const DATA = {
       "inTransitTotal": 0,
       "etaDate": null,
       "monthlyAvgSales": 8.3,
-      "daysOfSupply": 1519.2
+      "daysOfSupply": 1519.2,
+      "discontinued": false,
+      "replacementSku": null
     },
     {
       "sku": "SAF-6500",
@@ -8020,7 +8049,9 @@ const DATA = {
       "inTransitTotal": 500,
       "etaDate": "2026-09-15",
       "monthlyAvgSales": 93.3,
-      "daysOfSupply": 5.5
+      "daysOfSupply": 5.5,
+      "discontinued": false,
+      "replacementSku": null
     },
     {
       "sku": "SAF-7500",
@@ -8031,7 +8062,9 @@ const DATA = {
       "inTransitTotal": 0,
       "etaDate": null,
       "monthlyAvgSales": 30.3,
-      "daysOfSupply": 368.9
+      "daysOfSupply": 368.9,
+      "discontinued": false,
+      "replacementSku": null
     }
   ],
   "inventorySnapshotAt": "2026-08-28T10:10:02.000Z",
@@ -8617,6 +8650,9 @@ const DATA = {
   // ---------- 庫存戰情 ----------
   // 庫存快照是手動/定期下載的，不是每次網頁更新都同步，時間點要清楚標出來避免業務誤會是即時庫存。
   function inventoryStatus(item) {
+    // 2026-09-03：有些SKU賣完不會再重訂貨，是刻意轉列給升級款接手(targets.json的
+    // discontinuedSkus)，不是缺貨問題，不能跟正常商品一樣判定成"缺貨風險"。
+    if (item.discontinued) return { cls: "na", label: `⚪ 停產中(轉列${item.replacementSku})` };
     if (!item.monthlyAvgSales) return { cls: "na", label: "⚪ 近3月無銷量" };
     if (item.stockoutDaysThisMonth > 0 || (item.daysOfSupply != null && item.daysOfSupply < 14)) {
       return { cls: "critical", label: "🔴 缺貨風險" };
