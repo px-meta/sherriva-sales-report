@@ -9221,16 +9221,23 @@ const DATA = {
   // Amazon 還是靠 Holly 每7天寄信，沒有逐日資料來源) ----------
   // 這裡是「自然週(週一~週日) + 逐日」的報表，跟「週報」分頁(官網10天一旬)是不同的兩件事。
   const WEEKDAY_LABEL = ["日", "一", "二", "三", "四", "五", "六"];
+  // 2026-09-09查到的bug：這兩個函式原本用 toISOString() 取回算好的日期，但瀏覽器在
+  // UTC+8時區(台灣)時，午夜本地時間換算成UTC會退到前一天，導致「週標籤」(weekStart/weekEnd，
+  // 顯示在下拉選單跟表頭)比「這週實際列出來的日期」整整早一天——跟之前後端pipeline那個
+  // toISOString()時區bug是同一種錯誤，只是這次在前端。一律用本機時區的年月日組字串，不要用toISOString()。
+  function localYmd(d) {
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  }
   function isoMonday(dateStr) {
     const d = new Date(dateStr + "T00:00:00");
     const day = d.getDay();
     d.setDate(d.getDate() + (day === 0 ? -6 : 1 - day));
-    return d.toISOString().slice(0, 10);
+    return localYmd(d);
   }
   function addDays(dateStr, n) {
     const d = new Date(dateStr + "T00:00:00");
     d.setDate(d.getDate() + n);
-    return d.toISOString().slice(0, 10);
+    return localYmd(d);
   }
   function mdLabel(dateStr) {
     const [, m, d] = dateStr.split("-");
