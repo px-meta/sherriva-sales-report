@@ -247,7 +247,7 @@
 
 <script>
 const DATA = {
-  "generatedAt": "2026-09-14T09:00:05.971Z",
+  "generatedAt": "2026-09-14T09:57:51.169Z",
   "periods": [
     {
       "channel": "官網",
@@ -8033,6 +8033,166 @@ const DATA = {
       "provisional": true
     }
   ],
+  "officialByAmazonPeriod": [
+    {
+      "startDate": "2026-08-17",
+      "endDate": "2026-08-23",
+      "label": "8/17-8/23",
+      "officialUSD": 1076.92,
+      "officialUnits": 6,
+      "officialOrders": 6,
+      "officialByProduct": {
+        "WHD-5100": {
+          "qty": 2,
+          "revenue": 361.16999999999996
+        },
+        "WHD-5000": {
+          "qty": 4,
+          "revenue": 551.62
+        }
+      },
+      "officialByCategory": {
+        "無線傳輸(WTR/WHD)": {
+          "qty": 6,
+          "revenue": 912.79
+        }
+      },
+      "amazonUSD": 11069.85,
+      "amazonUnits": 200,
+      "provisional": false,
+      "source": "官網依每日Shopify API加總對齊Amazon期別；Amazon為期報實際數字"
+    },
+    {
+      "startDate": "2026-08-24",
+      "endDate": "2026-08-31",
+      "label": "8/24-8/31",
+      "officialUSD": 680.81,
+      "officialUnits": 4,
+      "officialOrders": 4,
+      "officialByProduct": {
+        "WHD-5100": {
+          "qty": 2,
+          "revenue": 357.98
+        },
+        "WHD-5000": {
+          "qty": 1,
+          "revenue": 138.04
+        },
+        "WHD-1000": {
+          "qty": 1,
+          "revenue": 98.12
+        }
+      },
+      "officialByCategory": {
+        "無線傳輸(WTR/WHD)": {
+          "qty": 4,
+          "revenue": 594.1400000000001
+        }
+      },
+      "amazonUSD": 9747.51,
+      "amazonUnits": 190,
+      "provisional": false,
+      "source": "官網依每日Shopify API加總對齊Amazon期別；Amazon為期報實際數字"
+    },
+    {
+      "startDate": "2026-09-01",
+      "endDate": "2026-09-06",
+      "label": "9/1-9/6",
+      "officialUSD": 977.54,
+      "officialUnits": 9,
+      "officialOrders": 3,
+      "officialByProduct": {
+        "UHD-1440": {
+          "qty": 1,
+          "revenue": 51.05
+        },
+        "WHD-5100": {
+          "qty": 3,
+          "revenue": 533.59
+        },
+        "UHD-2180": {
+          "qty": 1,
+          "revenue": 29.97
+        },
+        "WHD-1000": {
+          "qty": 1,
+          "revenue": 95.97
+        },
+        "WHD-5000": {
+          "qty": 1,
+          "revenue": 135.97
+        },
+        "SAE-5500": {
+          "qty": 1,
+          "revenue": 46.97
+        },
+        "SAF-7500": {
+          "qty": 1,
+          "revenue": 46.97
+        }
+      },
+      "officialByCategory": {
+        "HDMI分配/切換": {
+          "qty": 2,
+          "revenue": 81.02
+        },
+        "無線傳輸(WTR/WHD)": {
+          "qty": 5,
+          "revenue": 765.53
+        },
+        "電視天線": {
+          "qty": 1,
+          "revenue": 46.97
+        },
+        "未分類": {
+          "qty": 1,
+          "revenue": 46.97
+        }
+      },
+      "amazonUSD": 6788.52,
+      "amazonUnits": 130,
+      "provisional": false,
+      "source": "官網依每日Shopify API加總對齊Amazon期別；Amazon為期報實際數字"
+    },
+    {
+      "startDate": "2026-09-07",
+      "endDate": "2026-09-13",
+      "label": "9/7-9/13",
+      "officialUSD": 135.97,
+      "officialUnits": 1,
+      "officialOrders": 1,
+      "officialByProduct": {
+        "WHD-5000": {
+          "qty": 1,
+          "revenue": 135.97
+        }
+      },
+      "officialByCategory": {
+        "無線傳輸(WTR/WHD)": {
+          "qty": 1,
+          "revenue": 135.97
+        }
+      },
+      "amazonUSD": null,
+      "amazonUnits": null,
+      "provisional": false,
+      "source": "官網依每日Shopify API加總；Amazon尚未收到這期報表"
+    },
+    {
+      "startDate": "2026-09-14",
+      "endDate": "2026-09-14",
+      "label": "9/14",
+      "officialUSD": 0,
+      "officialUnits": 0,
+      "officialOrders": 0,
+      "officialByProduct": {},
+      "officialByCategory": {},
+      "amazonUSD": null,
+      "amazonUnits": null,
+      "provisional": true,
+      "source": "官網依每日Shopify API加總；Amazon尚未收到這期報表"
+    }
+  ],
   "cockpit": {
     "year": 2026,
     "month": 9,
@@ -9171,6 +9331,66 @@ const DATA = {
     return card;
   }
 
+  // ---------- 官網 vs Amazon 期間對齊對照(2026-09-14新增，使用者要求) ----------
+  // 官網原本10天一旬、Amazon是Holly寄信剛好涵蓋的區間(不固定)，兩邊天生對不上，直接比較
+  // 容易誤會。這張卡片單獨用「官網每日API加總」重算成跟Amazon同樣的起訖日，純供對照進度用，
+  // 不是正式數字——正式的官網旬報/月報數字在「週報」「月報」分頁，這裡完全不影響那些。
+  function buildChannelAlignCard() {
+    const rows = DATA.officialByAmazonPeriod || [];
+    const card = document.createElement("div");
+    card.className = "card";
+    card.style.gridColumn = "1 / -1";
+    card.style.setProperty("--card-accent", "var(--series-official)");
+    if (rows.length === 0) {
+      return card; // 沒有daily資料(沒設定Shopify API)就不顯示這張卡片
+    }
+    const head = document.createElement("div");
+    head.className = "card-head";
+    head.innerHTML = `<div class="channel-name"><span class="channel-icon">🔄</span>官網 vs Amazon 期間對齊對照</div><select class="period-select"></select>`;
+    card.appendChild(head);
+    const select = head.querySelector("select");
+    rows.forEach((p, i) => {
+      const opt = document.createElement("option");
+      opt.value = i;
+      opt.textContent = p.label + (i === rows.length - 1 ? "（最新）" : "");
+      select.appendChild(opt);
+    });
+    select.value = rows.length - 1;
+
+    const body = document.createElement("div");
+    card.appendChild(body);
+
+    function render() {
+      const p = rows[+select.value];
+      const hasAmazon = p.amazonUSD != null;
+      body.innerHTML = `
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:4px;">${p.startDate} ~ ${p.endDate}${p.provisional ? '<span class="week-pill">進行中</span>' : ""}</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:14px;">官網數字＝依每日Shopify API加總估算，僅供跟Amazon對照進度用；正式官網數字以「週報」「月報」分頁為準，兩邊可能有小差異。${hasAmazon ? "" : "　Amazon尚未收到這期報表，先看官網自己的進度。"}</div>
+        <div class="stat-row">
+          <div class="stat-tile" style="--tile-accent:var(--series-official)">
+            <div class="stat-label">🌐 官網(估算) 銷售額</div>
+            <div class="stat-value">${fmtUSD(p.officialUSD)}</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-label">🌐 官網(估算) 訂單數</div>
+            <div class="stat-value">${fmtNum(p.officialOrders)}</div>
+          </div>
+          <div class="stat-tile" style="--tile-accent:var(--series-amazon)">
+            <div class="stat-label">🛒 Amazon(實際) 銷售額</div>
+            <div class="stat-value">${hasAmazon ? fmtUSD(p.amazonUSD) : "—"}</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-label">🛒 Amazon(實際) 銷售數量</div>
+            <div class="stat-value">${hasAmazon ? fmtNum(p.amazonUnits) : "—"}</div>
+          </div>
+        </div>
+      `;
+    }
+    select.addEventListener("change", render);
+    render();
+    return card;
+  }
+
   // ---------- 每週的日銷售報表(目前只有官網，因為只有 Shopify API 有辦法抓到日粒度；
   // Amazon 還是靠 Holly 每7天寄信，沒有逐日資料來源) ----------
   // 這裡是「自然週(週一~週日) + 逐日」的報表，跟「週報」分頁(官網10天一旬)是不同的兩件事。
@@ -9328,6 +9548,7 @@ const DATA = {
   const weeklyGrid = document.getElementById("weeklyGrid");
   CH.forEach((c) => weeklyGrid.appendChild(buildWeeklyCard(c)));
   weeklyGrid.appendChild(buildRegionCard("UAE", "AED", "Amazon(中東站/UAE)"));
+  weeklyGrid.appendChild(buildChannelAlignCard());
 
   const monthlyGrid = document.getElementById("monthlyGrid");
   CH.forEach((c) => monthlyGrid.appendChild(buildMonthlyCard(c)));
