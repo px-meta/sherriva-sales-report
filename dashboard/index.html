@@ -247,7 +247,7 @@
 
 <script>
 const DATA = {
-  "generatedAt": "2026-09-30T13:00:07.245Z",
+  "generatedAt": "2026-09-30T23:00:05.684Z",
   "periods": [
     {
       "channel": "官網",
@@ -918,6 +918,26 @@ const DATA = {
       "source": "Shopify Admin API",
       "targetUSD": 2095.24,
       "achievementRate": 11.5
+    },
+    {
+      "channel": "官網",
+      "year": 2026,
+      "month": 10,
+      "startDate": "2026-10-01",
+      "endDate": "2026-10-01",
+      "label": "10/1-10/1",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "byProduct": {},
+      "byCategory": {},
+      "ordersCount": 0,
+      "excludedCancelled": 0,
+      "excludedRefunded": 0,
+      "excludedZeroTotal": 0,
+      "currency": "USD",
+      "source": "Shopify Admin API(暫估，本旬尚未結束)",
+      "targetUSD": 270.35,
+      "achievementRate": 0
     },
     {
       "channel": "Amazon",
@@ -7350,6 +7370,20 @@ const DATA = {
       "byProduct": {},
       "byCategory": {},
       "source": "推算(加總當月週期資料換算，僅供參考，已包含在Amazon總額內)"
+    },
+    {
+      "channel": "官網",
+      "year": 2026,
+      "month": 10,
+      "totalRevenueUSD": 0,
+      "byProduct": {},
+      "byCategory": {},
+      "source": "暫估(加總1份期報,尚未經財務結算)",
+      "periodsIncluded": [
+        "10/1-10/1"
+      ],
+      "targetUSD": 8380.95,
+      "achievementRate": 0
     }
   ],
   "company": [
@@ -8096,18 +8130,19 @@ const DATA = {
       "source": "暫估(官網+Amazon加總,尚未經財務結算)",
       "targetUSD": 57142.86,
       "achievementRate": 42.8
+    },
+    {
+      "year": 2026,
+      "month": 10,
+      "totalRevenueUSD": 0,
+      "byCategory": {},
+      "byProduct": {},
+      "source": "暫估(官網+Amazon加總,尚未經財務結算)",
+      "targetUSD": 76190.48,
+      "achievementRate": 0
     }
   ],
   "dailyOfficial": [
-    {
-      "date": "2026-09-01",
-      "totalRevenueUSD": 0,
-      "totalUnits": 0,
-      "ordersCount": 0,
-      "byProduct": {},
-      "byCategory": {},
-      "provisional": false
-    },
     {
       "date": "2026-09-02",
       "totalRevenueUSD": 0,
@@ -8475,70 +8510,19 @@ const DATA = {
       "ordersCount": 0,
       "byProduct": {},
       "byCategory": {},
+      "provisional": false
+    },
+    {
+      "date": "2026-10-01",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "ordersCount": 0,
+      "byProduct": {},
+      "byCategory": {},
       "provisional": true
     }
   ],
   "officialByAmazonPeriod": [
-    {
-      "startDate": "2026-09-01",
-      "endDate": "2026-09-06",
-      "label": "9/1-9/6",
-      "officialUSD": 977.54,
-      "officialUnits": 9,
-      "officialOrders": 3,
-      "officialByProduct": {
-        "UHD-1440": {
-          "qty": 1,
-          "revenue": 51.05
-        },
-        "WHD-5100": {
-          "qty": 3,
-          "revenue": 533.59
-        },
-        "UHD-2180": {
-          "qty": 1,
-          "revenue": 29.97
-        },
-        "WHD-1000": {
-          "qty": 1,
-          "revenue": 95.97
-        },
-        "WHD-5000": {
-          "qty": 1,
-          "revenue": 135.97
-        },
-        "SAE-5500": {
-          "qty": 1,
-          "revenue": 46.97
-        },
-        "SAF-7500": {
-          "qty": 1,
-          "revenue": 46.97
-        }
-      },
-      "officialByCategory": {
-        "HDMI分配/切換": {
-          "qty": 2,
-          "revenue": 81.02
-        },
-        "無線傳輸(WTR/WHD)": {
-          "qty": 5,
-          "revenue": 765.53
-        },
-        "電視天線": {
-          "qty": 1,
-          "revenue": 46.97
-        },
-        "未分類": {
-          "qty": 1,
-          "revenue": 46.97
-        }
-      },
-      "amazonUSD": 6788.52,
-      "amazonUnits": 130,
-      "provisional": false,
-      "source": "官網依每日Shopify API加總對齊Amazon期別；Amazon為期報實際數字"
-    },
     {
       "startDate": "2026-09-07",
       "endDate": "2026-09-13",
@@ -8607,8 +8591,8 @@ const DATA = {
     },
     {
       "startDate": "2026-09-28",
-      "endDate": "2026-09-30",
-      "label": "9/28-9/30",
+      "endDate": "2026-10-01",
+      "label": "9/28-10/1",
       "officialUSD": 240.88,
       "officialUnits": 2,
       "officialOrders": 2,
@@ -8642,12 +8626,15 @@ const DATA = {
     "year": 2026,
     "month": 9,
     "provisional": true,
-    "isFallback": false,
-    "skippedMonth": null,
+    "isFallback": true,
+    "skippedMonth": {
+      "year": 2026,
+      "month": 10
+    },
     "freshness": [
       {
         "channel": "官網",
-        "latestEndDate": "2026-09-30",
+        "latestEndDate": "2026-10-01",
         "daysBehind": 0,
         "level": "ok",
         "staleThresholdDays": 14
@@ -8655,8 +8642,8 @@ const DATA = {
       {
         "channel": "Amazon",
         "latestEndDate": "2026-09-20",
-        "daysBehind": 10,
-        "level": "ok",
+        "daysBehind": 11,
+        "level": "warning",
         "staleThresholdDays": 10
       }
     ],
@@ -8759,14 +8746,7 @@ const DATA = {
         "impactUSD": 6965.64
       }
     ],
-    "opportunities": [
-      {
-        "category": "HDMI線材",
-        "latestUSD": 32.91,
-        "growthPct": null,
-        "inventoryOk": true
-      }
-    ],
+    "opportunities": [],
     "capitalTiedUp": [
       {
         "sku": "WHD-5000H",
