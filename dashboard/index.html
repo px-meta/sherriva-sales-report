@@ -265,6 +265,23 @@
   .week-day-table tr.today-row { background: rgba(250,202,0,0.14); }
   .week-pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 999px; background: var(--series-official-fill); color: #6b5300; margin-left: 8px; }
 
+
+  /* ---- ③ 社群數據：FB / IG / YouTube 三張卡(2026-10-06 新增，版型參考 PX 電商儀表板「社群／行銷資料」) ---- */
+  .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
+  @media (max-width: 980px) { .social-grid { grid-template-columns: 1fr; } }
+  .social-grid > .card { margin-top: 0; min-width: 0; }
+  .soc-big-label { font-size: 12.5px; color: var(--text-muted); font-weight: 600; margin-top: 6px; }
+  .soc-big { font-size: 32px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -0.5px; line-height: 1.15; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .soc-big.empty { color: var(--axis); }
+  .soc-rows { margin-top: 12px; border-top: 1px solid var(--grid); }
+  .soc-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 9px 0; border-bottom: 1px solid var(--grid); font-size: 13px; }
+  .soc-row .k { color: var(--text-secondary); }
+  .soc-row .k small { display: block; font-size: 11px; color: var(--text-muted); }
+  .soc-row .v { font-weight: 700; font-variant-numeric: tabular-nums; display: flex; align-items: center; gap: 8px; }
+  .soc-row .v.empty { color: var(--axis); font-weight: 600; }
+  .soc-look { margin-top: 12px; font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+  .soc-look b { color: var(--text-secondary); display: block; font-size: 11.5px; margin-bottom: 2px; }
+
   /* ---- 2026-10-06 校正：格線內卡片對齊、小螢幕防溢出、庫存表欄位對齊 ---- */
   .channels-grid > .card { margin-top: 0; min-width: 0; }
   .kpi, .stat-tile, .inv-sum { min-width: 0; }
@@ -321,7 +338,10 @@
     <div class="card" id="inventoryCard" style="--card-accent: var(--warning)"></div>
   </section>
 
-  <div class="sec-head"><span class="sec-no">3</span><h2>經營提醒</h2><span class="sec-sub">中性陳述事實，最多 5 條</span></div>
+  <div class="sec-head"><span class="sec-no">3</span><h2>社群數據</h2><span class="sec-sub">Facebook、Instagram、YouTube，資料陸續接入中</span></div>
+  <div class="social-grid" id="socialGrid"></div>
+
+  <div class="sec-head"><span class="sec-no">4</span><h2>經營提醒</h2><span class="sec-sub">中性陳述事實，最多 5 條</span></div>
   <div id="remindersCard"></div>
 </div>
 
@@ -329,7 +349,7 @@
 
 <script>
 const DATA = {
-  "generatedAt": "2026-10-06T15:26:17.837Z",
+  "generatedAt": "2026-10-06T15:39:35.350Z",
   "periods": [
     {
       "channel": "官網",
@@ -10341,10 +10361,80 @@ const DATA = {
     return card;
   }
 
+  // ---------- ③ 社群數據：FB / IG / YouTube ----------
+  // 資料還沒接入時顯示「建置中」的空卡片；之後只要 sales_data.json 多一個 social 欄位，卡片就會自動填上數字，
+  // 前端不用再改版面。欄位格式(都由後端算好，前端純渲染，不在瀏覽器裡重算)：
+  //   DATA.social = {
+  //     fb: { asOf: "2026-10-05", headline: 12345, headlineDeltaPct: 1.2,
+  //           metrics: { pageViews: {value, deltaPct, asOf}, engagement: {...}, videoViews: {...}, newFollowers: {...} } },
+  //     ig: { ...同上, metrics: { reach, views, engagement, newFollowers } },
+  //     yt: { ...同上, metrics: { views, watchMinutes, videos, subsNet } }
+  //   }
+  // 指標選法參考電商儀表板「社群成效」，並考慮 Meta 已下架 FB 單篇貼文的觸及/CTR(只有帳號層級趨勢)。
+  const SOCIAL_DEFS = [
+    { key: "fb", name: "Facebook 粉絲專頁", icon: "📘", color: "#1f6fb2", headlineLabel: "粉絲數", source: "Meta Graph API",
+      look: "粉專整體趨勢與近 7 天貼文互動。FB 單篇貼文已沒有觸及／點擊率可看，只看帳號層級。",
+      metrics: [
+        { key: "pageViews", label: "粉專瀏覽" }, { key: "engagement", label: "貼文互動" },
+        { key: "videoViews", label: "影片觀看" }, { key: "newFollowers", label: "新增追蹤" } ] },
+    { key: "ig", name: "Instagram 帳號", icon: "📷", color: "#c13584", headlineLabel: "追蹤數", source: "Meta Graph API",
+      look: "近 7 天觸及、觀看與互動(按讚＋留言＋分享＋儲存)，看內容有沒有被更多人看到。",
+      metrics: [
+        { key: "reach", label: "觸及" }, { key: "views", label: "觀看" },
+        { key: "engagement", label: "互動" }, { key: "newFollowers", label: "新增追蹤" } ] },
+    { key: "yt", name: "YouTube 頻道", icon: "▶️", color: "#cf3131", headlineLabel: "訂閱數", source: "YouTube Data／Analytics API",
+      look: "頻道觀看與觀看時長。YouTube 分析數字本來就會晚 2～3 天才完整。",
+      metrics: [
+        { key: "views", label: "觀看次數" }, { key: "watchMinutes", label: "觀看時長(分鐘)" },
+        { key: "videos", label: "影片數" }, { key: "subsNet", label: "訂閱淨增" } ] },
+  ];
+
+  function socDeltaChip(pct) {
+    if (pct == null || isNaN(pct)) return "";
+    const up = pct > 0.05, down = pct < -0.05;
+    return chip(`${up ? "▲" : down ? "▼" : "•"} ${Math.abs(pct).toFixed(1)}%`, up ? "good" : down ? "critical" : "");
+  }
+
+  function buildSocial() {
+    const box = document.getElementById("socialGrid");
+    if (!box) return;
+    const S = DATA.social || {};
+    SOCIAL_DEFS.forEach((def) => {
+      const d = S[def.key];
+      const connected = !!(d && (d.headline != null || d.metrics));
+      const card = document.createElement("div");
+      card.className = "card";
+      card.style.setProperty("--card-accent", def.color);
+
+      const rows = def.metrics.map((m) => {
+        const v = connected && d.metrics ? d.metrics[m.key] : null;
+        const has = v && v.value != null;
+        return `<div class="soc-row">
+          <span class="k">${m.label}${has && v.asOf ? `<small>資料到 ${v.asOf}</small>` : ""}</span>
+          <span class="v ${has ? "" : "empty"}">${has ? fmtNum(v.value) : "—"}${has ? socDeltaChip(v.deltaPct) : ""}</span>
+        </div>`;
+      }).join("");
+
+      const hasHeadline = connected && d.headline != null;
+      card.innerHTML = `
+        <div class="card-head">
+          <div class="channel-name"><span class="dot" style="background:${def.color}"></span>${def.name}${connected ? chip("已連線", "good") : chip("建置中", "gold")}</div>
+        </div>
+        <div class="soc-big-label">${def.headlineLabel}</div>
+        <div class="soc-big ${hasHeadline ? "" : "empty"}">${hasHeadline ? fmtNum(d.headline) : "—"}${hasHeadline ? socDeltaChip(d.headlineDeltaPct) : ""}</div>
+        <div class="soc-rows">${rows}</div>
+        <div class="soc-look"><b>看什麼</b>${def.look}</div>
+        <div class="card-foot">資料來源：${def.source}　${connected && d.asOf ? "資料到 " + d.asOf : "尚未接入"}</div>
+      `;
+      box.appendChild(card);
+    });
+  }
+
   // ---------- 組裝頁面 ----------
   buildHero();
   buildReminders();
   buildInventoryTab();
+  buildSocial();
   const dailyGrid = document.getElementById("dailyGrid");
   dailyGrid.appendChild(buildDailyCard());
 
