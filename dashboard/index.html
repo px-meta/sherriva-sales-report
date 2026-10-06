@@ -197,9 +197,10 @@
   .kpi-value.good { color: var(--good); }
   .kpi-value.warning { color: var(--warning); }
   .kpi-value.critical { color: var(--critical); }
-  .kpi.dark { background: var(--brand-black); border-color: var(--brand-black); color: #fff; }
-  .kpi.dark .kpi-label, .kpi.dark .kpi-sub { color: rgba(255,255,255,0.7); }
-  .kpi.dark .kpi-value .unit { color: rgba(255,255,255,0.7); }
+  /* 2026-10-06 使用者指示：「目前實績」不用黑底，改用品牌標準黃(#FACA00)當底，文字維持黑色 */
+  .kpi.dark { background: var(--brand-yellow); border-color: var(--brand-yellow); color: var(--brand-black); }
+  .kpi.dark .kpi-label, .kpi.dark .kpi-sub { color: rgba(18,18,18,0.72); }
+  .kpi.dark .kpi-value .unit { color: rgba(18,18,18,0.72); }
 
   .prog-card { margin-top: 14px; background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px; padding: 14px 18px 12px; }
   .prog-track { position: relative; height: 10px; border-radius: 999px; background: var(--grid); margin: 8px 0 8px; }
@@ -328,7 +329,7 @@
 
 <script>
 const DATA = {
-  "generatedAt": "2026-10-06T14:46:12.974Z",
+  "generatedAt": "2026-10-06T15:26:17.837Z",
   "periods": [
     {
       "channel": "官網",
