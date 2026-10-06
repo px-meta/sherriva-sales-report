@@ -8,28 +8,29 @@
   :root {
     color-scheme: light;
     /* 品牌色：直接取自 sherriva.com 官網跟公司信頭紙（黑 #121212、招牌金黃 #FACA00）。
-       官網的按鈕/徽章只用小面積的黑黃，但信頭紙本身有大塊金黃色條(配一條黑色細底線)，
-       所以圖表這種本來就該用色塊表示數值的地方，直接用招牌金黃沒問題；
-       KPI卡片這種本文字為主的地方，還是維持白底黑字放大，只用金黃當細框/底線。 */
+       2026-10-06 版面改版：版型參考 PX 電商儀表板 / CE 儀表板（頂部標題列、編號段落、KPI卡、
+       進度條時間刻度、表格內嵌佔比長條、卡片底部資料來源），但配色維持 Sherriva 黑金，
+       不改成參考版的藍色。 */
     --brand-yellow:      #FACA00;
     --brand-black:       #121212;
-    --page:           #f8f7f3;
+    --page:           #f6f5f1;
     --surface-1:      #ffffff;
     --surface-2:      #f2f1ea;
     --text-primary:   #121212;
     --text-secondary: #55534c;
-    --text-muted:     #918f85;
-    --grid:           #e7e5db;
+    --text-muted:     #8a887e;
+    --grid:           #ebe9df;
     --axis:           #d2d0c3;
-    --border:         rgba(18,18,18,0.10);
+    --border:         #e4e2d8;
+    --link:           #1f6fb2;
     --good:           #1f8f4e;
     --warning:        #b9790a;
     --critical:       #cf3131;
     --good-fill:      rgba(31,143,78,0.10);
     --warning-fill:   rgba(185,121,10,0.12);
     --critical-fill:  rgba(207,49,49,0.10);
-    --series-official: #FACA00; /* 官網：品牌招牌金黃，跟公司信頭紙上那條色塊同一個顏色 */
-    --series-amazon:   #6b6862; /* Amazon：中性深灰褐，跟金黃區分開 */
+    --series-official: #FACA00;
+    --series-amazon:   #6b6862;
     --series-official-fill: rgba(250,202,0,0.45);
     --series-amazon-fill:   rgba(107,104,98,0.30);
     --cat-hdmi:      #1f6fb2;
@@ -44,60 +45,92 @@
     background: var(--page);
     color: var(--text-primary);
     font-family: system-ui, -apple-system, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    font-size: 14px; line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: 1220px; margin: 0 auto; padding: 28px 20px 80px; }
-  header.top { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
-  h1 { font-size: 24px; font-weight: 800; margin: 0; letter-spacing: 0.2px; }
-  .updated { color: var(--text-muted); font-size: 13px; }
-  .subnote { color: var(--text-secondary); font-size: 13px; margin: 4px 0 20px; line-height: 1.6; }
-  .subnote b { color: var(--text-primary); }
 
-  nav.tabs { display: flex; gap: 6px; margin-bottom: 22px; flex-wrap: wrap; }
+  /* ---- 頂部標題列（參考電商/CE儀表板的細長 header） ---- */
+  .topbar { background: var(--surface-1); border-bottom: 1px solid var(--border); }
+  .topbar-in { max-width: 1220px; margin: 0 auto; padding: 11px 20px; display: flex; align-items: center; justify-content: space-between; gap: 10px 20px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 15px; }
+  .logo { width: 26px; height: 26px; border-radius: 7px; background: var(--brand-black); color: var(--brand-yellow); display: inline-grid; place-items: center; font-weight: 800; font-size: 14px; }
+  .meta { font-size: 12px; color: var(--text-muted); display: flex; gap: 4px 16px; flex-wrap: wrap; }
+  .meta b { color: var(--text-secondary); font-weight: 600; }
+
+  .wrap { max-width: 1220px; margin: 0 auto; padding: 22px 20px 72px; }
+  .eyebrow { font-size: 12px; color: var(--text-muted); letter-spacing: 0.3px; }
+  h1 { font-size: 26px; font-weight: 800; margin: 2px 0 6px; letter-spacing: 0.2px; }
+  .subnote { color: var(--text-secondary); font-size: 12.5px; line-height: 1.7; }
+  .subnote b { color: var(--text-primary); }
+  details.note { margin-top: 4px; }
+  details.note summary { cursor: pointer; color: var(--link); font-size: 12.5px; font-weight: 600; list-style: none; width: fit-content; }
+  details.note summary::-webkit-details-marker { display: none; }
+  details.note[open] summary { margin-bottom: 6px; }
+  details.note .note-body { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+
+  /* ---- 編號段落標題 ---- */
+  .sec-head { display: flex; align-items: baseline; gap: 6px 10px; flex-wrap: wrap; margin: 26px 0 12px; }
+  .sec-no { width: 22px; height: 22px; border-radius: 50%; background: var(--brand-black); color: var(--brand-yellow); font-size: 12px; font-weight: 800; display: inline-grid; place-items: center; align-self: center; flex: none; }
+  .sec-head h2 { font-size: 17px; font-weight: 800; margin: 0; }
+  .sec-sub { font-size: 12.5px; color: var(--text-muted); }
+
+  /* ---- 小標籤 ---- */
+  .chip { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 700; padding: 2px 9px; border-radius: 999px; background: var(--surface-2); color: var(--text-secondary); white-space: nowrap; }
+  .chip.good { background: var(--good-fill); color: var(--good); }
+  .chip.warning { background: var(--warning-fill); color: var(--warning); }
+  .chip.critical { background: var(--critical-fill); color: var(--critical); }
+  .chip.gold { background: rgba(250,202,0,0.28); color: #6b5300; }
+  .chip.dark { background: var(--brand-black); color: #fff; }
+
+  /* ---- 分頁：分段式切換 ---- */
+  nav.tabs { display: inline-flex; gap: 3px; padding: 3px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; flex-wrap: wrap; }
   nav.tabs button {
-    appearance: none; border: 1px solid var(--border); background: var(--surface-1); cursor: pointer;
-    padding: 10px 18px; font-size: 14px; font-weight: 700; color: var(--text-secondary);
-    border-radius: 999px; transition: all 0.12s;
+    appearance: none; border: 0; background: transparent; cursor: pointer; font: inherit;
+    padding: 8px 18px; font-size: 13.5px; font-weight: 700; color: var(--text-secondary);
+    border-radius: 9px; transition: all 0.12s;
   }
-  nav.tabs button:hover { color: var(--text-primary); border-color: var(--brand-black); }
-  nav.tabs button.active { color: #ffffff; background: var(--brand-black); border-color: var(--brand-black); }
+  nav.tabs button:hover { color: var(--text-primary); }
+  nav.tabs button.active { color: var(--text-primary); background: var(--surface-1); box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
 
   .view { display: none; }
   .view.active { display: block; }
 
-  .channels-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .channels-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
   @media (max-width: 820px) { .channels-grid { grid-template-columns: 1fr; } }
 
+  /* ---- 卡片：扁平、細框，只有通路卡有頂部色條 ---- */
   .card {
-    background: var(--surface-1); border: 1px solid var(--border); border-radius: 16px;
-    padding: 20px 22px; box-shadow: 0 10px 30px -18px rgba(0,0,0,0.6);
-    border-top: 3px solid var(--card-accent, var(--axis));
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px;
+    padding: 18px 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    border-top: 3px solid var(--card-accent, var(--border));
   }
-  .card + .card { margin-top: 18px; }
-  .card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
-  .channel-name { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 800; }
-  .channel-icon { font-size: 18px; line-height: 1; }
+  .card + .card { margin-top: 16px; }
+  .card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 4px; flex-wrap: wrap; }
+  .channel-name { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 800; flex-wrap: wrap; }
+  .channel-icon { font-size: 17px; line-height: 1; }
   .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
   .dot.official { background: var(--series-official); }
   .dot.amazon { background: var(--series-amazon); }
+  .card-meta { font-size: 12.5px; color: var(--text-muted); margin: 0 0 14px; }
+  .card-foot { margin-top: 16px; padding-top: 10px; border-top: 1px dashed var(--grid); font-size: 11.5px; color: var(--text-muted); line-height: 1.6; }
+  .sub-title { font-size: 12.5px; font-weight: 700; color: var(--text-secondary); margin: 18px 0 6px; }
 
   select.period-select {
     font: inherit; font-size: 13px; padding: 6px 10px; border-radius: 8px;
-    border: 1px solid var(--border); background: var(--surface-2); color: var(--text-primary);
+    border: 1px solid var(--border); background: var(--surface-1); color: var(--text-primary); cursor: pointer;
   }
 
-  /* 重點數字放大凸顯，但不用色塊底——sherriva.com 本身沒有大色塊，金黃/黑只用在
-     小按鈕跟徽章上；這裡改成白底 + 細線上邊框(色條) + 加大加粗數字。 */
-  .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  /* ---- 卡片內小統計 ---- */
+  .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 10px; margin-bottom: 14px; }
   .stat-tile {
-    padding: 12px 14px; border-radius: 10px;
+    padding: 11px 13px; border-radius: 10px;
     background: var(--surface-1);
     border: 1px solid var(--border);
-    border-top: 3px solid var(--tile-accent, var(--axis));
+    border-left: 3px solid var(--tile-accent, var(--border));
   }
-  .stat-label { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; font-weight: 700; }
-  .stat-value { font-size: 28px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -0.3px; color: var(--tile-value-color, var(--text-primary)); }
-  .stat-delta { font-size: 12px; margin-top: 5px; font-variant-numeric: tabular-nums; font-weight: 700; }
+  .stat-label { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; font-weight: 600; }
+  .stat-value { font-size: 24px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -0.3px; line-height: 1.2; color: var(--tile-value-color, var(--text-primary)); }
+  .stat-delta { font-size: 12px; margin-top: 4px; font-variant-numeric: tabular-nums; font-weight: 700; }
   .stat-delta.up { color: var(--good); }
   .stat-delta.down { color: var(--critical); }
   .stat-delta.flat { color: var(--text-muted); }
@@ -105,15 +138,24 @@
   .stat-value.warning { color: var(--warning); }
   .stat-value.critical { color: var(--critical); }
 
-  table.prod-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  table.prod-table caption { text-align: left; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
-  table.prod-table th, table.prod-table td { padding: 6px 8px; text-align: right; border-bottom: 1px solid var(--grid); }
-  table.prod-table th:first-child, table.prod-table td:first-child { text-align: left; }
-  table.prod-table thead th { color: var(--text-muted); font-weight: 600; font-size: 12px; }
-  table.prod-table td.num, table.prod-table th.num { font-variant-numeric: tabular-nums; }
-  table.prod-table tbody tr:last-child td { border-bottom: none; }
+  /* ---- 表格共用 ---- */
+  .tbl-scroll { overflow-x: auto; }
+  table.prod-table, table.cat-table, table.inv-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.prod-table th, table.prod-table td,
+  table.cat-table th, table.cat-table td,
+  table.inv-table th, table.inv-table td { padding: 8px 8px; text-align: right; border-bottom: 1px solid var(--grid); }
+  table.prod-table th:first-child, table.prod-table td:first-child,
+  table.cat-table th:first-child, table.cat-table td:first-child,
+  table.inv-table th:first-child, table.inv-table td:first-child { text-align: left; }
+  table.prod-table thead th, table.cat-table thead th, table.inv-table thead th {
+    color: var(--text-muted); font-weight: 600; font-size: 12px; background: var(--page); white-space: nowrap;
+  }
+  table.prod-table thead th:first-child, table.cat-table thead th:first-child, table.inv-table thead th:first-child { border-radius: 8px 0 0 8px; }
+  table.prod-table thead th:last-child, table.cat-table thead th:last-child, table.inv-table thead th:last-child { border-radius: 0 8px 8px 0; }
+  table td.num, table th.num { font-variant-numeric: tabular-nums; }
+  table.prod-table tbody tr:last-child td, table.cat-table tbody tr:last-child td, table.inv-table tbody tr:last-child td { border-bottom: none; }
 
-  .chart-wrap { margin-top: 4px; }
+  .chart-wrap { margin-top: 2px; }
   .chart-wrap svg { width: 100%; height: auto; display: block; overflow: visible; }
   .bar { transition: opacity 0.1s; cursor: pointer; }
   .bar:hover { opacity: 0.75; }
@@ -136,47 +178,51 @@
 
   /* ---- 資料過期警示橫幅 ---- */
   .stale-banner{
-    border-radius:10px; padding:12px 16px; margin-bottom:16px; line-height:1.6;
-    font-size:14px; border-left:5px solid;
+    border-radius:12px; padding:12px 16px; margin-bottom:6px; line-height:1.6;
+    font-size:13.5px; border-left:5px solid;
   }
   .stale-banner.warning{ background:#fff8e6; border-color:#e0a800; color:#6b4e00; }
   .stale-banner.critical{ background:#fdecea; border-color:#d33; color:#8a1c14; }
   .stale-note{ margin-top:6px; font-size:12.5px; opacity:.8; }
 
-  /* ---- 頂部KPI：目標/實際/達成率 ---- */
-  .hero { margin-bottom: 22px; border-top-color: var(--series-official); }
-  .hero-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-  @media (max-width: 720px) { .hero-grid { grid-template-columns: 1fr; } }
-  .hero-tile { border-radius: 14px; padding: 18px 20px; background: var(--surface-1); border: 1px solid var(--border); border-top: 4px solid var(--tile-accent, var(--axis)); }
-  .hero-tile-label { font-size: 13px; color: var(--text-muted); margin-bottom: 10px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
-  .hero-tile-value { font-size: 42px; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1.1; letter-spacing: -0.5px; color: var(--text-primary); }
-  .hero-tile-sub { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
-  .hero-tile-value.muted { font-size: 20px; color: var(--text-muted); font-weight: 600; }
-  .hero-tile-value.good { color: var(--good); }
-  .hero-tile-value.warning { color: var(--warning); }
-  .hero-tile-value.critical { color: var(--critical); }
-  .progress-track { height: 8px; border-radius: 999px; background: var(--grid); margin-top: 12px; overflow: hidden; }
-  .progress-fill { height: 100%; border-radius: 999px; }
-  .progress-fill.good { background: var(--good); }
-  .progress-fill.warning { background: var(--warning); }
-  .progress-fill.critical { background: var(--critical); }
-  .hero-period { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; font-weight: 600; }
+  /* ---- ① 本月進度：KPI 卡 + 時間刻度進度條 ---- */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  @media (max-width: 980px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+  .kpi { border-radius: 14px; padding: 16px 18px; background: var(--surface-1); border: 1px solid var(--border); min-height: 112px; }
+  .kpi-label { font-size: 12.5px; color: var(--text-muted); margin-bottom: 8px; font-weight: 600; }
+  .kpi-value { font-size: 32px; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1.1; letter-spacing: -0.5px; }
+  .kpi-value .unit { font-size: 14px; font-weight: 700; margin-left: 3px; color: var(--text-muted); }
+  .kpi-sub { font-size: 12.5px; color: var(--text-muted); margin-top: 8px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .kpi-value.muted { font-size: 18px; color: var(--text-muted); font-weight: 600; }
+  .kpi-value.good { color: var(--good); }
+  .kpi-value.warning { color: var(--warning); }
+  .kpi-value.critical { color: var(--critical); }
+  .kpi.dark { background: var(--brand-black); border-color: var(--brand-black); color: #fff; }
+  .kpi.dark .kpi-label, .kpi.dark .kpi-sub { color: rgba(255,255,255,0.7); }
+  .kpi.dark .kpi-value .unit { color: rgba(255,255,255,0.7); }
 
-  /* ---- 經營提醒(頁尾)：中性、低調，視覺層級低於所有銷售數據 ---- */
-  #remindersCard { margin-top: 26px; }
-  .reminders-title { font-size: 14px; font-weight: 800; margin-bottom: 8px; }
-  .reminder-row { font-size: 13px; color: var(--text-secondary); padding: 5px 0; line-height: 1.6; }
-  .reminder-empty { font-size: 13px; color: var(--text-muted); }
-  .reminder-sub { font-size: 12px; color: var(--text-muted); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--grid); line-height: 1.7; }
+  .prog-card { margin-top: 14px; background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px; padding: 14px 18px 12px; }
+  .prog-track { position: relative; height: 10px; border-radius: 999px; background: var(--grid); margin: 8px 0 8px; }
+  .prog-fill { height: 100%; border-radius: 999px; min-width: 3px; }
+  .prog-fill.good { background: var(--good); }
+  .prog-fill.warning { background: var(--warning); }
+  .prog-fill.critical { background: var(--critical); }
+  .prog-fill.none { background: var(--brand-black); }
+  .prog-mark { position: absolute; top: -5px; width: 2px; height: 20px; background: var(--brand-black); border-radius: 1px; }
+  .prog-legend { display: flex; gap: 6px 18px; flex-wrap: wrap; font-size: 12px; color: var(--text-secondary); }
+  .prog-legend i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+  .prog-legend i.mark { width: 2px; height: 11px; border-radius: 1px; background: var(--brand-black); margin-right: 6px; vertical-align: -2px; }
+
+  /* ---- ③ 經營提醒：中性、低調 ---- */
+  .remind-card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px; padding: 6px 20px; }
+  .reminder-row { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--grid); font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+  .reminder-row:last-of-type { border-bottom: none; }
+  .reminder-row .chip { flex: none; margin-top: 1px; min-width: 62px; justify-content: center; }
+  .reminder-empty { font-size: 13px; color: var(--text-muted); padding: 12px 0; }
+  .reminder-sub { font-size: 12px; color: var(--text-muted); padding: 10px 0 12px; border-top: 1px dashed var(--grid); line-height: 1.7; }
 
   /* ---- 分類/品項兩層明細表 ---- */
-  table.cat-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  table.cat-table caption { text-align: left; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
-  table.cat-table th, table.cat-table td { padding: 7px 8px; text-align: right; border-bottom: 1px solid var(--grid); }
-  table.cat-table th:first-child, table.cat-table td:first-child { text-align: left; }
-  table.cat-table thead th { color: var(--text-muted); font-weight: 600; font-size: 12px; }
-  table.cat-table td.num, table.cat-table th.num { font-variant-numeric: tabular-nums; }
-  table.cat-table tbody tr:last-child td { border-bottom: none; }
+  table.cat-table caption { text-align: left; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; caption-side: top; }
   tr.cat-row { cursor: pointer; font-weight: 700; }
   tr.cat-row:hover { background: var(--page); }
   tr.cat-row .caret { display: inline-block; width: 12px; transition: transform 0.1s; color: var(--text-muted); }
@@ -186,37 +232,71 @@
   tr.sku-row td:first-child { padding-left: 26px; }
   .cat-icon { display: inline-block; width: 20px; text-align: center; margin-right: 4px; }
   .cat-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 8px; }
+  td.share-cell { width: 150px; min-width: 120px; }
+  .share { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+  .share-bar { flex: 1; height: 6px; border-radius: 999px; background: var(--grid); overflow: hidden; min-width: 50px; }
+  .share-bar > span { display: block; height: 100%; border-radius: 999px; }
+  .share-pct { width: 40px; text-align: right; font-size: 12px; color: var(--text-muted); font-variant-numeric: tabular-nums; font-weight: 600; }
 
-  /* ---- 庫存戰情表 ---- */
-  table.inv-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  table.inv-table th, table.inv-table td { padding: 9px 8px; text-align: right; border-bottom: 1px solid var(--grid); }
-  table.inv-table th:first-child, table.inv-table td:first-child { text-align: left; }
-  table.inv-table thead th { color: var(--text-muted); font-weight: 600; font-size: 12px; }
-  table.inv-table td.num, table.inv-table th.num { font-variant-numeric: tabular-nums; }
-  table.inv-table tbody tr:last-child td { border-bottom: none; }
-  .inv-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; padding: 4px 11px; border-radius: 999px; }
+  /* ---- 庫存戰情 ---- */
+  .inv-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+  @media (max-width: 720px) { .inv-summary { grid-template-columns: repeat(2, 1fr); } }
+  .inv-sum { border: 1px solid var(--border); border-top: 3px solid var(--sum-accent, var(--axis)); border-radius: 12px; padding: 11px 14px; background: var(--surface-1); }
+  .inv-sum .l { font-size: 12px; color: var(--text-muted); font-weight: 600; }
+  .inv-sum .v { font-size: 26px; font-weight: 800; line-height: 1.2; font-variant-numeric: tabular-nums; }
+  .inv-sum .v small { font-size: 12.5px; font-weight: 600; color: var(--text-muted); margin-left: 3px; }
+  .inv-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
   .inv-badge.critical { color: var(--critical); background: var(--critical-fill); }
   .inv-badge.warning { color: var(--warning); background: var(--warning-fill); }
   .inv-badge.good { color: var(--good); background: var(--good-fill); }
   .inv-badge.na { color: var(--text-muted); background: var(--surface-2); }
   .inv-alert-banner { display: flex; align-items: flex-start; gap: 10px; background: var(--critical-fill); border: 1px solid color-mix(in srgb, var(--critical) 45%, transparent); border-radius: 12px; padding: 12px 16px; font-size: 13px; margin-bottom: 16px; }
   .inv-alert-banner b { color: var(--critical); }
+  .dos { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+  .dos-bar { width: 56px; height: 6px; border-radius: 999px; background: var(--grid); overflow: hidden; }
+  .dos-bar > span { display: block; height: 100%; border-radius: 999px; }
+  .dos-bar > span.critical { background: var(--critical); }
+  .dos-bar > span.warning { background: var(--warning); }
+  .dos-bar > span.good { background: var(--good); }
 
   /* ---- 每週日銷售 ---- */
-  .week-day-table td.today { color: var(--series-official); font-weight: 800; }
-  .week-pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 999px; background: var(--series-official-fill); color: var(--series-official); margin-left: 8px; }
+  .week-day-table td.today { color: var(--text-primary); font-weight: 800; }
+  .week-day-table tr.today-row { background: rgba(250,202,0,0.14); }
+  .week-pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 999px; background: var(--series-official-fill); color: #6b5300; margin-left: 8px; }
+
+  /* ---- 2026-10-06 校正：格線內卡片對齊、小螢幕防溢出、庫存表欄位對齊 ---- */
+  .channels-grid > .card { margin-top: 0; min-width: 0; }
+  .kpi, .stat-tile, .inv-sum { min-width: 0; }
+  table.inv-table th:nth-child(2), table.inv-table td:nth-child(2),
+  table.inv-table th:nth-child(7), table.inv-table td:nth-child(7),
+  table.inv-table th:nth-child(8), table.inv-table td:nth-child(8) { text-align: left; }
+  .dos-bar > span.na { background: var(--axis); }
+  @media (max-width: 560px) {
+    .wrap { padding: 16px 16px 56px; }
+    .topbar-in { padding: 10px 16px; }
+    h1 { font-size: 22px; }
+    .kpi-value { font-size: 24px; }
+    .kpi { padding: 14px 14px; min-height: 0; }
+    .card { padding: 16px 14px; }
+    .stat-value { font-size: 21px; }
+    td.share-cell { width: 100px; min-width: 90px; }
+  }
 </style>
 </head>
 <body>
+<div class="topbar"><div class="topbar-in">
+  <div class="brand"><span class="logo">S</span><span>Sherriva 銷售儀表板</span></div>
+  <div class="meta" id="metaBar"></div>
+</div></div>
 <div class="wrap">
-  <header class="top">
-    <h1>Sherriva 銷售儀表板</h1>
-    <div class="updated" id="updatedAt"></div>
-  </header>
+  <div class="eyebrow">Sherriva · 官網＋Amazon</div>
+  <h1>銷售經營總覽</h1>
   <div class="subnote" id="subnote"></div>
 
-  <div class="hero card" id="hero"></div>
+  <div class="sec-head"><span class="sec-no">1</span><h2>本月進度</h2><span class="sec-sub" id="heroSub"></span></div>
+  <div id="hero"></div>
 
+  <div class="sec-head"><span class="sec-no">2</span><h2>銷售明細</h2><span class="sec-sub">每日、每期、每月與庫存，點上方分頁切換</span></div>
   <nav class="tabs">
     <button data-view="daily" class="active">📅 每日</button>
     <button data-view="weekly">📊 週報</button>
@@ -240,14 +320,15 @@
     <div class="card" id="inventoryCard" style="--card-accent: var(--warning)"></div>
   </section>
 
-  <div class="card" id="remindersCard"></div>
+  <div class="sec-head"><span class="sec-no">3</span><h2>經營提醒</h2><span class="sec-sub">中性陳述事實，最多 5 條</span></div>
+  <div id="remindersCard"></div>
 </div>
 
 <div class="tooltip" id="tooltip"></div>
 
 <script>
 const DATA = {
-  "generatedAt": "2026-10-06T13:00:05.473Z",
+  "generatedAt": "2026-10-06T14:46:12.974Z",
   "periods": [
     {
       "channel": "官網",
@@ -9380,6 +9461,9 @@ const DATA = {
 //    看這個網頁的人在台灣時區(UTC+8)，但 toISOString().slice(0,10) 是換算成格林威治時間的
 //    日期，會比台灣本地日期少一天。這個檔案裡處理「今天」「本週」的地方一律用 localYmd()
 //    (isoMonday函式旁邊那個)取本地年/月/日組字串，禁止用 toISOString() 處理日曆日期。
+//
+// 2026-10-06 版面改版(參考 PX 電商儀表板 / CE 儀表板)：只動「長相與排版」，所有數字仍由後端
+// (parse_reports.mjs → sales_data.json)算好，這裡純渲染，沒有新增任何分析指標。
 (function () {
   const CH = [
     { key: "官網", label: "官網", icon: "🌐", color: "var(--series-official)", fill: "var(--series-official-fill)", dotClass: "official" },
@@ -9400,6 +9484,8 @@ const DATA = {
   const fmtUSD = (n) => "US$" + Math.round(n).toLocaleString("en-US");
   const fmtNum = (n) => Math.round(n).toLocaleString("en-US");
   const tooltip = document.getElementById("tooltip");
+  const chip = (text, cls) => `<span class="chip ${cls || ""}">${text}</span>`;
+  const rateClass = (r) => (r >= 100 ? "good" : r >= 80 ? "warning" : "critical");
 
   function showTip(evt, html) {
     tooltip.innerHTML = html;
@@ -9448,7 +9534,7 @@ const DATA = {
 
     const div = document.createElement("div");
     div.className = "chart-wrap";
-    div.innerHTML = svg;
+    div.innerHTML = (opts.heading ? `<div class="sub-title">${opts.heading}</div>` : "") + svg;
     if (hasAnyTarget) {
       const legend = document.createElement("div");
       legend.style.cssText = "font-size:11px;color:var(--text-muted);margin-top:2px;";
@@ -9485,7 +9571,7 @@ const DATA = {
     if (top && top.diff > 0) parts.push(`<span style="color:var(--good)">▲ ${top.cat}</span> 較上期多賣 US$${fmtNum(top.diff)}`);
     if (bottom && bottom.diff < 0 && bottom.cat !== top.cat) parts.push(`<span style="color:var(--critical)">▼ ${bottom.cat}</span> 較上期少賣 US$${fmtNum(Math.abs(bottom.diff))}`);
     if (parts.length === 0) return "";
-    return `<div style="font-size:13px;color:var(--text-secondary);margin:-4px 0 14px;">📌 ${parts.join("　")}</div>`;
+    return `<div style="font-size:13px;color:var(--text-secondary);margin:-2px 0 4px;">📌 ${parts.join("　")}</div>`;
   }
 
   // 週目標是用月目標按天數/歷史通路佔比推算的參考值，標籤加「推算」避免被誤會成官方訂的個別目標
@@ -9494,12 +9580,12 @@ const DATA = {
     // 只檢查targetUSD==null擋不住這種情況，下面rate.toFixed()會直接丟出例外讓整張卡片壞掉。
     if (p.targetUSD == null || p.achievementRate == null) return "";
     const rate = p.achievementRate;
-    const cls = rate >= 100 ? "good" : rate >= 80 ? "warning" : "critical";
+    const cls = rateClass(rate);
     const icon = rate >= 100 ? "🟢" : rate >= 80 ? "🟡" : "🔴";
     return `<div class="stat-tile" style="--tile-accent:var(--${cls})">
       <div class="stat-label">${icon} 本期目標達成率(推算)</div>
       <div class="stat-value ${cls}">${rate.toFixed(1)}%</div>
-      <div class="progress-track"><div class="progress-fill ${cls}" style="width:${Math.min(100, rate)}%"></div></div>
+      <div class="prog-track" style="height:6px;margin:8px 0 0"><div class="prog-fill ${cls}" style="width:${Math.min(100, rate)}%"></div></div>
     </div>`;
   }
 
@@ -9527,19 +9613,25 @@ const DATA = {
       skuByCategory[cat].push([sku, v]);
     }
 
-    let html = `<table class="cat-table">
-      <caption>${opts.caption}（點分類可展開細項）</caption>
-      <thead><tr><th>分類</th><th class="num">數量</th><th class="num">金額</th></tr></thead>
+    // 佔比＝該分類金額 ÷ 本表所有分類金額加總(純粹把表上的數字畫成長條，不是新指標)
+    const totalRev = catRows.reduce((s, [, v]) => s + (v.revenue || 0), 0);
+    const pctOf = (rev, base) => (base > 0 ? Math.round((rev / base) * 100) : 0);
+
+    let html = `<div class="sub-title">${opts.caption}<span style="font-weight:400;color:var(--text-muted)">（點分類可展開細項）</span></div>
+      <div class="tbl-scroll"><table class="cat-table">
+      <thead><tr><th>分類</th><th class="num">數量</th><th class="num">金額</th><th class="num">佔比</th></tr></thead>
       <tbody>`;
     catRows.forEach(([cat, v], i) => {
       const skus = (skuByCategory[cat] || []).sort((a, b) => b[1].revenue - a[1].revenue);
       const st = catStyle(cat);
-      html += `<tr class="cat-row" data-cat-idx="${i}"><td><span class="caret">▸</span><span class="cat-icon">${st.icon}</span>${cat}</td><td class="num">${fmtNum(v.qty)}</td><td class="num" style="color:${st.color}">${opts.moneyFmt(v.revenue)}</td></tr>`;
+      const pct = pctOf(v.revenue, totalRev);
+      html += `<tr class="cat-row" data-cat-idx="${i}"><td><span class="caret">▸</span><span class="cat-icon">${st.icon}</span>${cat}</td><td class="num">${fmtNum(v.qty)}</td><td class="num" style="color:${st.color}">${opts.moneyFmt(v.revenue)}</td>
+        <td class="share-cell"><div class="share"><div class="share-bar"><span style="width:${pct}%;background:${st.color}"></span></div><span class="share-pct">${pct}%</span></div></td></tr>`;
       skus.forEach(([sku, sv]) => {
-        html += `<tr class="sku-row" data-cat-idx="${i}"><td>${sku}</td><td class="num">${fmtNum(sv.qty)}</td><td class="num">${opts.moneyFmt(sv.revenue)}</td></tr>`;
+        html += `<tr class="sku-row" data-cat-idx="${i}"><td>${sku}</td><td class="num">${fmtNum(sv.qty)}</td><td class="num">${opts.moneyFmt(sv.revenue)}</td><td class="num" style="color:var(--text-muted)">${pctOf(sv.revenue, totalRev)}%</td></tr>`;
       });
     });
-    html += `</tbody></table>`;
+    html += `</tbody></table></div>`;
     return html;
   }
 
@@ -9555,6 +9647,12 @@ const DATA = {
     });
   }
 
+  function setStatus(card, html) {
+    const el = card.querySelector('[data-role="status"]');
+    if (el) el.outerHTML = html || '<span data-role="status"></span>';
+  }
+  const STATUS_SLOT = `<span data-role="status"></span>`;
+
   // ---------- 週報 ----------
   function buildWeeklyCard(chDef) {
     const periods = DATA.periods.filter((p) => p.channel === chDef.key).sort((a, b) => a.startDate.localeCompare(b.startDate));
@@ -9567,7 +9665,7 @@ const DATA = {
     }
     const head = document.createElement("div");
     head.className = "card-head";
-    head.innerHTML = `<div class="channel-name"><span class="channel-icon">${chDef.icon}</span>${chDef.label}</div>
+    head.innerHTML = `<div class="channel-name"><span class="channel-icon">${chDef.icon}</span>${chDef.label}${STATUS_SLOT}</div>
       <select class="period-select"></select>`;
     card.appendChild(head);
 
@@ -9590,6 +9688,10 @@ const DATA = {
       const prev = periods[idx - 1];
       const moneyFmt = fmtUSD;
 
+      const hasDq = p.dataQualityWarnings && p.dataQualityWarnings.length;
+      setStatus(head, hasDq ? `<span class="chip warning" data-role="status">⚠️ 資料品質存疑</span>`
+        : /暫估/.test(p.source || "") ? `<span class="chip warning" data-role="status">暫估</span>` : "");
+
       let extraRegion = "";
       if (chDef.key === "Amazon" && p.byRegion) {
         const included = Object.entries(p.byRegion).filter(([, v]) => v.includedInUSDTotal && v.currency !== "USD");
@@ -9602,15 +9704,15 @@ const DATA = {
           lines.push(`未併入(無可靠匯率，僅列數量)：${excluded.map(([r, v]) => `${r} ${fmtNum(v.qty)}件`).join("　")}`);
         }
         if (lines.length) {
-          extraRegion = `<div style="font-size:12px;color:var(--text-muted);margin-top:-6px;margin-bottom:14px;">${lines.join("　｜　")}</div>`;
+          extraRegion = `<div style="font-size:12px;color:var(--text-muted);margin:-4px 0 12px;">${lines.join("　｜　")}</div>`;
         }
       }
 
-      const dqWarning = (p.dataQualityWarnings && p.dataQualityWarnings.length)
+      const dqWarning = hasDq
         ? `<div class="inv-alert-banner" style="margin-bottom:14px;"><span>⚠️</span><span><b>這期資料品質存疑：</b>${p.dataQualityWarnings.join("；")}</span></div>`
         : "";
       body.innerHTML = `
-        <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px;">${p.startDate} ~ ${p.endDate}　來源：${p.source}</div>
+        <div class="card-meta">${p.startDate} ~ ${p.endDate}</div>
         ${dqWarning}
         <div class="stat-row">
           <div class="stat-tile" style="--tile-accent:${chDef.color}">
@@ -9625,7 +9727,7 @@ const DATA = {
           </div>
           <div class="stat-tile">
             <div class="stat-label">${chDef.key === "官網" ? "🧾 訂單數" : "🗓️ 區間"}</div>
-            <div class="stat-value" style="${chDef.key !== "官網" ? "font-size:20px" : ""}">${chDef.key === "官網" ? fmtNum(p.ordersCount) : p.label}</div>
+            <div class="stat-value" style="${chDef.key !== "官網" ? "font-size:18px" : ""}">${chDef.key === "官網" ? fmtNum(p.ordersCount) : p.label}</div>
           </div>
           ${targetTile(p)}
         </div>
@@ -9643,20 +9745,20 @@ const DATA = {
           value: pp.totalRevenueUSD,
           target: pp.targetUSD,
         }));
-      const chartWrap = renderBarChart(chartData, {
+      body.appendChild(renderBarChart(chartData, {
         color: chDef.color, fill: chDef.fill, metric: "銷售額", fmt: moneyFmt, title: chDef.label + " 本月各期銷售額",
-      });
-      const oldChart = body.querySelector(".chart-wrap");
-      if (oldChart) oldChart.remove();
-      body.appendChild(chartWrap);
+        heading: "本月各期銷售額",
+      }));
 
       const tableWrap = document.createElement("div");
-      tableWrap.style.marginTop = "16px";
       tableWrap.innerHTML = categoryTable(p.byCategory, p.byProduct, { caption: "本期產品明細", moneyFmt, productGroups: DATA.meta.productGroups });
-      const oldTable = body.querySelector("table.cat-table");
-      if (oldTable) oldTable.closest("div").remove();
       body.appendChild(tableWrap);
       wireCategoryTable(tableWrap);
+
+      const foot = document.createElement("div");
+      foot.className = "card-foot";
+      foot.textContent = "資料來源：" + p.source;
+      body.appendChild(foot);
     }
     select.addEventListener("change", render);
     render();
@@ -9679,7 +9781,7 @@ const DATA = {
     }
     const head = document.createElement("div");
     head.className = "card-head";
-    head.innerHTML = `<div class="channel-name"><span class="channel-icon">${chDef.icon}</span>${chDef.label}</div>
+    head.innerHTML = `<div class="channel-name"><span class="channel-icon">${chDef.icon}</span>${chDef.label}${STATUS_SLOT}</div>
       <select class="period-select"></select>`;
     card.appendChild(head);
 
@@ -9702,12 +9804,10 @@ const DATA = {
       const prev = months[idx - 1];
       const moneyFmt = fmtUSD;
       const provisional = /暫估/.test(m.source);
+      setStatus(head, provisional ? `<span class="chip critical" data-role="status">尚未結算</span>` : `<span class="chip good" data-role="status">財務已結算</span>`);
 
       body.innerHTML = `
-        <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px;">
-          ${m.year}年${m.month}月　來源：${m.source}
-          ${provisional ? `<span class="badge provisional">尚未結算</span>` : `<span class="badge">財務已結算</span>`}
-        </div>
+        <div class="card-meta">${m.year}年${m.month}月</div>
         <div class="stat-row">
           <div class="stat-tile" style="--tile-accent:${chDef.color}">
             <div class="stat-label">💰 月銷售額</div>
@@ -9725,31 +9825,35 @@ const DATA = {
         target: mm.targetUSD,
         provisional: /暫估/.test(mm.source),
       }));
-      const chartWrap = renderBarChart(chartData, {
+      body.appendChild(renderBarChart(chartData, {
         color: chDef.color, fill: chDef.fill, metric: "月銷售額", fmt: moneyFmt, title: chDef.label + " 月銷售額趨勢",
-      });
-      body.appendChild(chartWrap);
+        heading: "月銷售額趨勢",
+      }));
 
-      const oldTable = body.querySelector("table.cat-table");
-      if (oldTable) oldTable.closest("div").remove();
       const tableWrap = document.createElement("div");
-      tableWrap.style.marginTop = "16px";
       tableWrap.innerHTML = categoryTable(m.byCategory, m.byProduct, { caption: "本月產品明細", moneyFmt, productGroups: DATA.meta.productGroups });
       body.appendChild(tableWrap);
       wireCategoryTable(tableWrap);
+
+      const foot = document.createElement("div");
+      foot.className = "card-foot";
+      foot.textContent = "資料來源：" + m.source;
+      body.appendChild(foot);
     }
     select.addEventListener("change", render);
     render();
     return card;
   }
 
-  // ---------- 首頁核心KPI：只放「目標/實績/達成率」三張卡 ----------
-  // 2026-08-30 依使用者要求做減法：首頁第一眼只看這三個數字。缺口/Forecast/異常/雷達
+  // ---------- ① 本月進度：目標/實績/達成率/上月整月 四張 KPI + 帶時間刻度的進度條 ----------
+  // 2026-08-30 依使用者要求做減法：首頁第一眼只看數字。缺口/Forecast/異常/雷達
   // 這些分析的「計算」都還在 parse_reports.mjs 的 buildCockpit() 沒動，只是不在首頁
   // 頂部呈現，改到頁尾「經營提醒」(見 buildReminders)低調帶過。
-  // 所有數字都是後端算好放進 DATA.cockpit，這裡純渲染，不在瀏覽器裡重算。
+  // 所有數字都是後端算好放進 DATA.cockpit / DATA.company，這裡純渲染，不在瀏覽器裡重算
+  // (唯一的運算是把「做到第幾天/本月天數」換成%，畫進度條上的時間刻度)。
   function buildHero() {
     const hero = document.getElementById("hero");
+    const sub = document.getElementById("heroSub");
     const company = (DATA.company || []).slice().sort((a, b) => a.year - b.year || a.month - b.month);
     if (company.length === 0) {
       hero.style.display = "none";
@@ -9759,27 +9863,30 @@ const DATA = {
     // 標題要跟 cockpit 實際採用的月份一致。月初新月份還沒資料時，cockpit 會退回
     // 上一個有實績的月份(見 parse_reports.mjs buildCockpit)，這裡必須跟著顯示同一個月，
     // 否則會出現「標題寫9月、數字是8月」的錯亂。
-    const shown = cp
+    const latest = cp
       ? company.find((c) => c.year === cp.year && c.month === cp.month) || company[company.length - 1]
       : company[company.length - 1];
-    const latest = shown;
     const provisional = /暫估/.test(latest.source);
+
+    sub.innerHTML = `${latest.year}年${latest.month}月　官網＋Amazon合計　`
+      + (provisional ? chip("尚未結算", "critical") : chip("財務已結算", "good"))
+      + (cp && cp.isFallback && cp.skippedMonth ? " " + chip(`${cp.skippedMonth.month}月資料尚未進來，顯示上一期`, "critical") : "");
 
     if (!cp) {
       // 防呆(例如舊版sales_data.json還沒有cockpit欄位)
-      hero.innerHTML = `<div class="hero-period">${latest.year}年${latest.month}月</div><div style="color:var(--text-muted)">KPI資料尚未產生，請重新執行 parse_reports.mjs</div>`;
+      hero.innerHTML = `<div style="color:var(--text-muted)">KPI資料尚未產生，請重新執行 parse_reports.mjs</div>`;
       return;
     }
 
     const hasTarget = cp.targetUSD != null;
     const rate = cp.achievementRate;
-    const rateClass = !hasTarget ? "" : rate >= 100 ? "good" : rate >= 80 ? "warning" : "critical";
+    const rc = !hasTarget || rate == null ? "" : rateClass(rate);
 
     // 資料過期警示：擺在 KPI 上方，因為「數字是不是完整的」比數字本身更優先。
     // 中性陳述事實(最新資料到哪天、距今幾天)，不下判斷、不指責誰沒寄。
     const fresh = (cp.freshness || []).filter((f) => f.level !== "ok");
     const freshBanner = fresh.length === 0 ? "" : `
-      <div class="stale-banner ${fresh.some((f) => f.level === "critical") ? "critical" : "warning"}">
+      <div class="stale-banner ${fresh.some((f) => f.level === "critical") ? "critical" : "warning"}" style="margin-bottom:14px">
         ${fresh.map((f) => f.latestEndDate
           ? `⚠️ <b>${f.channel}</b> 最新資料只到 <b>${f.latestEndDate}</b>，距今 <b>${f.daysBehind} 天</b>（正常約 ${f.staleThresholdDays} 天內會有新報表）`
           : `⚠️ <b>${f.channel}</b> 目前沒有任何資料`
@@ -9787,28 +9894,52 @@ const DATA = {
         <div class="stale-note">下方數字未包含尚未收到的期間，看趨勢時請把這點考慮進去。</div>
       </div>`;
 
+    // 上月整月：直接取 DATA.company 裡上一個月的既有數字(後端算好的)，不重算
+    const prevKey = latest.year * 12 + latest.month - 1;
+    const prevC = company.find((c) => c.year * 12 + c.month === prevKey);
+    const prevCard = prevC
+      ? `<div class="kpi">
+          <div class="kpi-label">上月整月（${prevC.year}-${String(prevC.month).padStart(2, "0")}）</div>
+          <div class="kpi-value">${fmtUSD(prevC.totalRevenueUSD)}</div>
+          <div class="kpi-sub">${prevC.achievementRate != null ? chip(`${prevC.achievementRate >= 100 ? "▲" : "▼"} 達成 ${prevC.achievementRate.toFixed(1)}%`, rateClass(prevC.achievementRate)) : ""}${/暫估/.test(prevC.source) ? chip("暫估", "warning") : ""}</div>
+        </div>`
+      : `<div class="kpi"><div class="kpi-label">上月整月</div><div class="kpi-value muted">—</div></div>`;
+
+    const timePct = cp.daysInMonth ? Math.min(100, (cp.daysElapsed / cp.daysInMonth) * 100) : null;
+
     hero.innerHTML = freshBanner + `
-      <div class="hero-period">${latest.year}年${latest.month}月　官網＋Amazon合計　來源：${latest.source}${provisional ? ' <span class="badge provisional">尚未結算</span>' : ' <span class="badge">財務已結算</span>'}${cp.isFallback && cp.skippedMonth ? ` <span class="badge provisional">${cp.skippedMonth.month}月資料尚未進來，顯示上一期</span>` : ""}</div>
-      <div class="hero-grid">
-        <div class="hero-tile" style="--tile-accent:var(--brand-yellow)">
-          <div class="hero-tile-label">🎯 業績目標</div>
-          <div class="hero-tile-value ${hasTarget ? "" : "muted"}">${hasTarget ? fmtUSD(cp.targetUSD) : "尚未設定目標"}</div>
+      <div class="kpi-grid">
+        <div class="kpi">
+          <div class="kpi-label">🎯 業績目標</div>
+          <div class="kpi-value ${hasTarget ? "" : "muted"}">${hasTarget ? fmtUSD(cp.targetUSD) : "尚未設定目標"}</div>
         </div>
-        <div class="hero-tile" style="--tile-accent:var(--brand-black)">
-          <div class="hero-tile-label">💰 目前實績</div>
-          <div class="hero-tile-value">${fmtUSD(cp.actualUSD)}</div>
-          <div class="hero-tile-sub">做到第${cp.daysElapsed}/${cp.daysInMonth}天</div>
+        <div class="kpi dark">
+          <div class="kpi-label">💰 目前實績</div>
+          <div class="kpi-value">${fmtUSD(cp.actualUSD)}</div>
+          <div class="kpi-sub">做到第 ${cp.daysElapsed} / ${cp.daysInMonth} 天</div>
         </div>
-        <div class="hero-tile" style="--tile-accent:var(--${rateClass || "axis"})">
-          <div class="hero-tile-label">${!hasTarget ? "📈" : rate >= 100 ? "🟢" : rate >= 80 ? "🟡" : "🔴"} 達成率</div>
-          <div class="hero-tile-value ${hasTarget ? rateClass : "muted"}">${hasTarget ? rate.toFixed(1) + "%" : "—"}</div>
-          ${hasTarget ? `<div class="progress-track"><div class="progress-fill ${rateClass}" style="width:${Math.min(100, rate)}%"></div></div>` : ""}
+        <div class="kpi">
+          <div class="kpi-label">${!hasTarget ? "📈" : rate >= 100 ? "🟢" : rate >= 80 ? "🟡" : "🔴"} 達成率</div>
+          <div class="kpi-value ${hasTarget ? rc : "muted"}">${hasTarget && rate != null ? rate.toFixed(1) + "%" : "—"}</div>
         </div>
+        ${prevCard}
       </div>
+      ${hasTarget && rate != null ? `
+      <div class="prog-card">
+        <div class="prog-track">
+          <div class="prog-fill ${rc}" style="width:${Math.min(100, rate)}%"></div>
+          ${timePct != null ? `<div class="prog-mark" style="left:calc(${timePct.toFixed(1)}% - 1px)"></div>` : ""}
+        </div>
+        <div class="prog-legend">
+          <span><i style="background:var(--${rc})"></i>已達成 ${rate.toFixed(1)}%</span>
+          ${timePct != null ? `<span><i class="mark"></i>時間進度 ${timePct.toFixed(1)}%（${cp.daysElapsed} / ${cp.daysInMonth} 天）</span>` : ""}
+        </div>
+      </div>` : ""}
+      <div style="font-size:11.5px;color:var(--text-muted);margin-top:8px;">資料來源：${latest.source}</div>
     `;
   }
 
-  // ---------- 經營提醒(頁尾)：中性陳述事實，不下判斷、不給行動指令 ----------
+  // ---------- ③ 經營提醒：中性陳述事實，不下判斷、不給行動指令 ----------
   // 材料一樣來自後端算好的 DATA.cockpit / DATA.inventory，前端只挑重點、換成中性說法。
   // 克制原則：最多5條，優先序=缺貨(最可能直接影響銷售)>明顯銷售變化>庫存偏高；沒有就說沒有。
   function buildReminders() {
@@ -9823,7 +9954,7 @@ const DATA = {
       .sort((a, b) => (a.daysOfSupply ?? 0) - (b.daysOfSupply ?? 0))
       .forEach((i) => {
         const extra = i.stockoutDaysThisMonth > 0 ? `，本月已缺貨 ${i.stockoutDaysThisMonth} 天` : "";
-        items.push(`${i.sku} 庫存約可支撐 ${i.daysOfSupply != null ? i.daysOfSupply.toFixed(1) : "0"} 天${extra}`);
+        items.push({ tag: "缺貨風險", cls: "critical", text: `${i.sku} 庫存約可支撐 ${i.daysOfSupply != null ? i.daysOfSupply.toFixed(1) : "0"} 天${extra}` });
       });
 
     // 優先3：明顯的銷售變化(較上月跌三成以上、金額也夠大的分類，避免小分類雜訊)
@@ -9832,23 +9963,23 @@ const DATA = {
       .sort((a, b) => a.diffUSD - b.diffUSD)
       .forEach((m) => {
         const pct = Math.abs((m.diffUSD / m.previousUSD) * 100).toFixed(0);
-        items.push(`${m.category} 本月較上月下降 ${pct}%（${fmtUSD(m.previousUSD)} → ${fmtUSD(m.currentUSD)}）`);
+        items.push({ tag: "銷售變化", cls: "warning", text: `${m.category} 本月較上月下降 ${pct}%（${fmtUSD(m.previousUSD)} → ${fmtUSD(m.currentUSD)}）` });
       });
 
     // 優先4：庫存偏高(去化天數異常長，只列最明顯的前2個)
     ((cp && cp.capitalTiedUp) || []).slice(0, 2).forEach((i) => {
       if (i.daysOfSupply == null) {
-        items.push(`${i.sku} 近 3 個月沒有銷量（現有庫存 ${fmtNum(i.currentStock)} 件）`);
+        items.push({ tag: "庫存偏高", cls: "gold", text: `${i.sku} 近 3 個月沒有銷量（現有庫存 ${fmtNum(i.currentStock)} 件）` });
       } else {
         const dTxt = i.daysOfSupply >= 365 ? `${(i.daysOfSupply / 365).toFixed(1)} 年` : `${fmtNum(i.daysOfSupply)} 天`;
-        items.push(`${i.sku} 庫存去化天數偏高（現有 ${fmtNum(i.currentStock)} 件，照目前銷售速度約需 ${dTxt}才賣得完）`);
+        items.push({ tag: "庫存偏高", cls: "gold", text: `${i.sku} 庫存去化天數偏高（現有 ${fmtNum(i.currentStock)} 件，照目前銷售速度約需 ${dTxt}才賣得完）` });
       }
     });
 
     const shown = items.slice(0, 5);
     const listHtml = shown.length === 0
       ? `<div class="reminder-empty">目前沒有重大經營提醒</div>`
-      : shown.map((t) => `<div class="reminder-row">• ${t}</div>`).join("");
+      : shown.map((t) => `<div class="reminder-row">${chip(t.tag, t.cls)}<span>${t.text}</span></div>`).join("");
 
     // 缺口/Forecast降為次要資訊：小字灰色一行帶過，視覺層級低於上面所有數據
     let subLine = "";
@@ -9859,7 +9990,7 @@ const DATA = {
       if (parts.length) subLine = `<div class="reminder-sub">${parts.join("　·　")}</div>`;
     }
 
-    box.innerHTML = `<div class="reminders-title">💡 經營提醒</div>${listHtml}${subLine}`;
+    box.innerHTML = `<div class="remind-card">${listHtml}${subLine}</div>`;
   }
 
   // ---------- 庫存戰情 ----------
@@ -9890,11 +10021,22 @@ const DATA = {
       return (a.daysOfSupply ?? 99999) - (b.daysOfSupply ?? 99999);
     });
     const snapshotAt = DATA.inventorySnapshotAt ? new Date(DATA.inventorySnapshotAt).toLocaleString("zh-TW", { hour12: false }) : "未知";
+    const cnt = { critical: 0, warning: 0, good: 0, na: 0 };
+    items.forEach((i) => { cnt[inventoryStatus(i).cls]++; });
+    const sumTile = (label, n, accent) => `<div class="inv-sum" style="--sum-accent:${accent}"><div class="l">${label}</div><div class="v">${n}<small>項</small></div></div>`;
+
     container.innerHTML = `
-      <div style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">
-        庫存快照時間：${snapshotAt}（手動/定期從「Sherriva 庫銷管理表」下載，不是即時庫存，請留意快照時間）
+      <div class="card-head">
+        <div class="channel-name"><span class="channel-icon">📦</span>庫存戰情${chip("快照 " + snapshotAt, "")}</div>
       </div>
-      <table class="inv-table">
+      <div class="card-meta">依各 SKU 的可撐天數與本月斷貨天數判斷狀態</div>
+      <div class="inv-summary">
+        ${sumTile("🔴 缺貨風險", cnt.critical, "var(--critical)")}
+        ${sumTile("🟡 庫存偏低", cnt.warning, "var(--warning)")}
+        ${sumTile("🟢 庫存充足", cnt.good, "var(--good)")}
+        ${sumTile("⚪ 停產／無銷量", cnt.na, "var(--axis)")}
+      </div>
+      <div class="tbl-scroll"><table class="inv-table">
         <thead><tr>
           <th>分類</th><th>SKU</th><th class="num">目前庫存</th><th class="num">本月斷貨天數</th>
           <th class="num">可撐天數</th><th class="num">在途數量</th><th>預計到港</th><th>狀態</th>
@@ -9902,19 +10044,23 @@ const DATA = {
         <tbody>
           ${items.map((i) => {
             const st = inventoryStatus(i);
+            const dos = i.daysOfSupply != null
+              ? `<div class="dos"><div class="dos-bar"><span class="${st.cls}" style="width:${Math.min(100, (i.daysOfSupply / 60) * 100).toFixed(0)}%"></span></div><span>${i.daysOfSupply.toFixed(1)}</span></div>`
+              : "—";
             return `<tr>
               <td><span class="cat-icon">${catStyle(i.category).icon}</span>${i.category}</td>
               <td>${i.sku}</td>
               <td class="num">${fmtNum(i.currentStock)}</td>
               <td class="num">${i.stockoutDaysThisMonth > 0 ? `<b style="color:var(--critical)">${i.stockoutDaysThisMonth}</b>` : "0"}</td>
-              <td class="num">${i.daysOfSupply != null ? i.daysOfSupply.toFixed(1) : "—"}</td>
+              <td class="num">${dos}</td>
               <td class="num">${fmtNum(i.inTransitTotal)}</td>
               <td>${i.etaDate || "—"}</td>
               <td><span class="inv-badge ${st.cls}">${st.label}</span></td>
             </tr>`;
           }).join("")}
         </tbody>
-      </table>
+      </table></div>
+      <div class="card-foot">庫存快照時間：${snapshotAt}（手動/定期從「Sherriva 庫銷管理表」下載，不是即時庫存，請留意快照時間）。可撐天數的長條以 60 天為滿格。</div>
     `;
   }
 
@@ -9926,13 +10072,14 @@ const DATA = {
     const card = document.createElement("div");
     card.className = "card";
     card.style.gridColumn = "1 / -1";
+    card.style.setProperty("--card-accent", "var(--series-amazon)");
     if (periods.length === 0) {
       card.innerHTML = `<div class="channel-name">${label}</div><div style="color:var(--text-muted)">近期無銷售資料</div>`;
       return card;
     }
     const head = document.createElement("div");
     head.className = "card-head";
-    head.innerHTML = `<div class="channel-name">${label}</div><select class="period-select"></select>`;
+    head.innerHTML = `<div class="channel-name"><span class="channel-icon">🛒</span>${label}</div><select class="period-select"></select>`;
     card.appendChild(head);
     const select = head.querySelector("select");
     periods.forEach((p, i) => {
@@ -9957,9 +10104,9 @@ const DATA = {
         ? `已用固定匯率(1USD=${rate} ${currencyLabel})換算，併入上方 Amazon 實際業績`
         : `金額為當地幣別，目前沒有可靠匯率來源，未併入 Amazon 實際業績`;
       body.innerHTML = `
-        <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px;">${p.startDate} ~ ${p.endDate}　${convertedNote}</div>
+        <div class="card-meta">${p.startDate} ~ ${p.endDate}</div>
         <div class="stat-row">
-          <div class="stat-tile">
+          <div class="stat-tile" style="--tile-accent:var(--series-amazon)">
             <div class="stat-label">銷售額</div>
             <div class="stat-value">${moneyFmt(regionTotal.revenue)}</div>
             ${regionTotal.includedInUSDTotal ? `<div class="stat-delta flat">≈ ${fmtUSD(regionTotal.revenue / rate)}</div>` : ""}
@@ -9971,10 +10118,13 @@ const DATA = {
         </div>
       `;
       const tableWrap = document.createElement("div");
-      tableWrap.style.marginTop = "16px";
       tableWrap.innerHTML = categoryTable(detail.byCategory, detail.byProduct, { caption: "本期產品明細", moneyFmt, productGroups: DATA.meta.productGroups });
       body.appendChild(tableWrap);
       wireCategoryTable(tableWrap);
+      const foot = document.createElement("div");
+      foot.className = "card-foot";
+      foot.textContent = convertedNote;
+      body.appendChild(foot);
     }
     select.addEventListener("change", render);
     render();
@@ -9996,7 +10146,7 @@ const DATA = {
     }
     const head = document.createElement("div");
     head.className = "card-head";
-    head.innerHTML = `<div class="channel-name"><span class="channel-icon">🔄</span>官網 vs Amazon 期間對齊對照</div><select class="period-select"></select>`;
+    head.innerHTML = `<div class="channel-name"><span class="channel-icon">🔄</span>官網 vs Amazon 期間對齊對照${chip("僅供對照", "gold")}</div><select class="period-select"></select>`;
     card.appendChild(head);
     const select = head.querySelector("select");
     rows.forEach((p, i) => {
@@ -10014,8 +10164,7 @@ const DATA = {
       const p = rows[+select.value];
       const hasAmazon = p.amazonUSD != null;
       body.innerHTML = `
-        <div style="font-size:13px;color:var(--text-muted);margin-bottom:4px;">${p.startDate} ~ ${p.endDate}${p.provisional ? '<span class="week-pill">進行中</span>' : ""}</div>
-        <div style="font-size:12px;color:var(--text-muted);margin-bottom:14px;">官網數字＝依每日Shopify API加總估算，僅供跟Amazon對照進度用；正式官網數字以「週報」「月報」分頁為準，兩邊可能有小差異。${hasAmazon ? "" : "　Amazon尚未收到這期報表，先看官網自己的進度。"}</div>
+        <div class="card-meta">${p.startDate} ~ ${p.endDate}${p.provisional ? '<span class="week-pill">進行中</span>' : ""}</div>
         <div class="stat-row">
           <div class="stat-tile" style="--tile-accent:var(--series-official)">
             <div class="stat-label">🌐 官網(估算) 銷售額</div>
@@ -10034,6 +10183,7 @@ const DATA = {
             <div class="stat-value">${hasAmazon ? fmtNum(p.amazonUnits) : "—"}</div>
           </div>
         </div>
+        <div class="card-foot">官網數字＝依每日Shopify API加總估算，僅供跟Amazon對照進度用；正式官網數字以「週報」「月報」分頁為準，兩邊可能有小差異。${hasAmazon ? "" : "Amazon尚未收到這期報表，先看官網自己的進度。"}</div>
       `;
     }
     select.addEventListener("change", render);
@@ -10108,7 +10258,7 @@ const DATA = {
 
     const head = document.createElement("div");
     head.className = "card-head";
-    head.innerHTML = `<div class="channel-name"><span class="channel-icon">🌐</span>官網 每週日銷售報表</div>
+    head.innerHTML = `<div class="channel-name"><span class="channel-icon">🌐</span>官網 每週日銷售報表${STATUS_SLOT}</div>
       <select class="period-select"></select>`;
     card.appendChild(head);
 
@@ -10131,11 +10281,10 @@ const DATA = {
       const prev = weeks[idx - 1];
       const now = new Date();
       const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+      setStatus(head, w.isCurrent ? `<span class="chip gold" data-role="status">本週進行中</span>` : "");
 
       body.innerHTML = `
-        <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px;">
-          ${w.weekStart} ~ ${w.weekEnd}${w.isCurrent ? '<span class="week-pill">本週進行中</span>' : ""}
-        </div>
+        <div class="card-meta">${w.weekStart} ~ ${w.weekEnd}</div>
         <div class="stat-row">
           <div class="stat-tile" style="--tile-accent:var(--series-official)">
             <div class="stat-label">💰 本週銷售額</div>
@@ -10160,7 +10309,7 @@ const DATA = {
       const dayRows = w.days.map((d) => {
         const wd = WEEKDAY_LABEL[new Date(d.date + "T00:00:00").getDay()];
         const isToday = d.date === todayStr;
-        return `<tr>
+        return `<tr class="${isToday ? "today-row" : ""}">
           <td class="${isToday ? "today" : ""}">${d.date}${d.provisional ? ' <span class="badge provisional">今日</span>' : ""}</td>
           <td>週${wd}</td>
           <td class="num ${isToday ? "today" : ""}">${moneyFmt(d.totalRevenueUSD)}</td>
@@ -10169,19 +10318,22 @@ const DATA = {
         </tr>`;
       }).join("");
       const tableWrap = document.createElement("div");
-      tableWrap.style.marginTop = "16px";
-      tableWrap.innerHTML = `<table class="prod-table week-day-table">
-        <caption>本週每日明細</caption>
+      tableWrap.innerHTML = `<div class="sub-title">本週每日明細</div>
+        <div class="tbl-scroll"><table class="prod-table week-day-table">
         <thead><tr><th>日期</th><th>星期</th><th class="num">銷售額</th><th class="num">數量</th><th class="num">訂單數</th></tr></thead>
         <tbody>${dayRows}</tbody>
-      </table>`;
+      </table></div>`;
       body.appendChild(tableWrap);
 
       const catWrap = document.createElement("div");
-      catWrap.style.marginTop = "16px";
       catWrap.innerHTML = categoryTable(w.byCategory, w.byProduct, { caption: "本週產品明細", moneyFmt, productGroups: DATA.meta.productGroups });
       body.appendChild(catWrap);
       wireCategoryTable(catWrap);
+
+      const foot = document.createElement("div");
+      foot.className = "card-foot";
+      foot.textContent = "資料來源：Shopify Admin API（每日）";
+      body.appendChild(foot);
     }
     select.addEventListener("change", render);
     render();
@@ -10212,14 +10364,21 @@ const DATA = {
     });
   });
 
+  // 頂部標題列的時間資訊
   const updated = new Date(DATA.generatedAt);
-  document.getElementById("updatedAt").textContent = "資料更新時間：" + updated.toLocaleString("zh-TW", { hour12: false });
+  const invAt = DATA.inventorySnapshotAt ? new Date(DATA.inventorySnapshotAt) : null;
+  const tfmt = (d) => d.toLocaleString("zh-TW", { hour12: false });
+  document.getElementById("metaBar").innerHTML =
+    `<span>資料更新時間 <b>${tfmt(updated)}</b></span>` + (invAt ? `<span>庫存快照 <b>${tfmt(invAt)}</b></span>` : "");
 
+  // 說明文字：一行摘要 + 可展開的口徑說明(參考 CE 儀表板的「這張表怎麼看」)
   document.getElementById("subnote").innerHTML = `
     官網＋Amazon 銷售量彙整，供業務查詢每週逐日(僅官網)、每期(週報)與每月銷售狀況。
-    <b>Amazon 金額已換算為USD：美國站(USD，匯率1:1)＋阿聯酋站(AED，固定匯率 1USD=${DATA.meta.fxRateAEDperUSD} AED)${DATA.meta.fxRateCADperUSD ? `＋加拿大站(CAD，固定匯率 1USD=${DATA.meta.fxRateCADperUSD} CAD)` : ""}</b>，
-    ${DATA.meta.fxRateCADperUSD ? "" : "加拿大、"}沙特等其他站點目前沒有可靠匯率來源，只列數量、金額未併入；月報總額則採財務結算後的
-    <b>表2 官網 / 表3 Amazon 彙總</b>數字為準。
+    <details class="note"><summary>ⓘ 金額口徑說明（點開）</summary><div class="note-body">
+      <b>Amazon 金額已換算為USD：美國站(USD，匯率1:1)＋阿聯酋站(AED，固定匯率 1USD=${DATA.meta.fxRateAEDperUSD} AED)${DATA.meta.fxRateCADperUSD ? `＋加拿大站(CAD，固定匯率 1USD=${DATA.meta.fxRateCADperUSD} CAD)` : ""}</b>，
+      ${DATA.meta.fxRateCADperUSD ? "" : "加拿大、"}沙特等其他站點目前沒有可靠匯率來源，只列數量、金額未併入；月報總額則採財務結算後的
+      <b>表2 官網 / 表3 Amazon 彙總</b>數字為準。
+    </div></details>
   `;
 
   // 2026-08-30 使用者指示：頁尾不放大段口徑說明。這些說明(銷售額vs SKU明細口徑、資料涵蓋範圍、
