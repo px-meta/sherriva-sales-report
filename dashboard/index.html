@@ -247,7 +247,7 @@
 
 <script>
 const DATA = {
-  "generatedAt": "2026-10-06T07:40:25.749Z",
+  "generatedAt": "2026-10-06T07:49:10.561Z",
   "periods": [
     {
       "channel": "官網",
@@ -1124,13 +1124,13 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "USA",
-        "UAE"
-      ],
-      "regionsExcluded": [
-        "SA",
+        "UAE",
         "CA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "regionsExcluded": [
+        "SA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Apr13-2026Apr19CustomUnifiedTransaction_0413~0419.xlsx",
       "targetUSD": 9888.89,
       "achievementRate": 71.9
@@ -1317,14 +1317,14 @@ const DATA = {
         }
       },
       "regionsIncludedInUSD": [
+        "CA",
         "UAE",
         "USA"
       ],
       "regionsExcluded": [
-        "CA",
         "SA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Apr20-2026Apr26CustomTransaction.xlsx",
       "targetUSD": 9888.89,
       "achievementRate": 105.5
@@ -1512,13 +1512,13 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "USA",
-        "UAE"
-      ],
-      "regionsExcluded": [
-        "SA",
+        "UAE",
         "CA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "regionsExcluded": [
+        "SA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Apr27-2026Apr30CustomUnifiedTransaction.xlsx",
       "targetUSD": 5650.79,
       "achievementRate": 63.7
@@ -1726,13 +1726,13 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "USA",
-        "UAE"
+        "UAE",
+        "CA"
       ],
       "regionsExcluded": [
-        "CA",
         "SA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026May1-2026May10CustomUnifiedTransaction.xlsx + SA---2026May1-2026May10CustomTransaction .csv",
       "targetUSD": 13671.28,
       "achievementRate": 68.1
@@ -1928,13 +1928,13 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "USA",
-        "UAE"
-      ],
-      "regionsExcluded": [
-        "SA",
+        "UAE",
         "CA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "regionsExcluded": [
+        "SA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "20260511-0517.xlsx",
       "targetUSD": 9569.89,
       "achievementRate": 89.2
@@ -2130,13 +2130,13 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "UAE",
-        "USA"
-      ],
-      "regionsExcluded": [
-        "SA",
+        "USA",
         "CA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "regionsExcluded": [
+        "SA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026May18-2026May24CustomUnifiedTransaction.xlsx",
       "targetUSD": 9569.89,
       "achievementRate": 104.3
@@ -2332,13 +2332,13 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "USA",
-        "UAE"
-      ],
-      "regionsExcluded": [
-        "SA",
+        "UAE",
         "CA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "regionsExcluded": [
+        "SA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026May25-2026May31CustomUnifiedTransaction.xlsx",
       "targetUSD": 9569.89,
       "achievementRate": 69.3
@@ -2350,7 +2350,7 @@ const DATA = {
       "endDate": "2026-06-07",
       "label": "6/1-6/7",
       "month": 6,
-      "totalRevenueUSD": 9017.17,
+      "totalRevenueUSD": 9033.26,
       "totalUnits": 185,
       "byProduct": {
         "UHD-2180": {
@@ -2400,6 +2400,10 @@ const DATA = {
         "WHD-5000": {
           "qty": 1,
           "revenue": 132.04
+        },
+        "UHD-10KB-3.3FT": {
+          "qty": 1,
+          "revenue": 16.09372807632945
         }
       },
       "byCategory": {
@@ -2414,6 +2418,10 @@ const DATA = {
         "電視天線": {
           "qty": 24,
           "revenue": 919.2800000000004
+        },
+        "HDMI線材": {
+          "qty": 1,
+          "revenue": 16.09372807632945
         }
       },
       "byRegion": {
@@ -2438,8 +2446,8 @@ const DATA = {
         "CA": {
           "qty": 1,
           "revenue": 22.94,
-          "currency": "本地幣別",
-          "includedInUSDTotal": false
+          "currency": "CAD",
+          "includedInUSDTotal": true
         }
       },
       "byRegionDetail": {
@@ -2570,16 +2578,16 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "UAE",
-        "USA"
-      ],
-      "regionsExcluded": [
-        "SA",
+        "USA",
         "CA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "regionsExcluded": [
+        "SA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Jun1-2026Jun7CustomTransaction.xlsx",
       "targetUSD": 9888.89,
-      "achievementRate": 91.2
+      "achievementRate": 91.3
     },
     {
       "channel": "Amazon",
@@ -2804,13 +2812,13 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "USA",
+        "CA",
         "UAE"
       ],
       "regionsExcluded": [
-        "CA",
         "SA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Jun8-2026Jun14CustomUnifiedTransaction.xlsx",
       "targetUSD": 9888.89,
       "achievementRate": 109.1
@@ -2822,7 +2830,7 @@ const DATA = {
       "endDate": "2026-06-21",
       "label": "6/15-6/21",
       "month": 6,
-      "totalRevenueUSD": 9361.07,
+      "totalRevenueUSD": 9398.53,
       "totalUnits": 189,
       "byProduct": {
         "WHD-5000": {
@@ -2830,8 +2838,8 @@ const DATA = {
           "revenue": 896.5328046289993
         },
         "UHD-2180": {
-          "qty": 76,
-          "revenue": 2131.7988291354673
+          "qty": 77,
+          "revenue": 2169.2619973689457
         },
         "UHD-1440": {
           "qty": 11,
@@ -2880,8 +2888,8 @@ const DATA = {
           "revenue": 2330.032804628999
         },
         "HDMI分配/切換": {
-          "qty": 133,
-          "revenue": 5673.114063989106
+          "qty": 134,
+          "revenue": 5710.577232222585
         },
         "電視天線": {
           "qty": 36,
@@ -2904,8 +2912,8 @@ const DATA = {
         "CA": {
           "qty": 1,
           "revenue": 53.4,
-          "currency": "本地幣別",
-          "includedInUSDTotal": false
+          "currency": "CAD",
+          "includedInUSDTotal": true
         }
       },
       "byRegionDetail": {
@@ -3022,16 +3030,16 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "UAE",
-        "USA"
-      ],
-      "regionsExcluded": [
-        "SA",
+        "USA",
         "CA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "regionsExcluded": [
+        "SA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Jun15-2026Jun21CustomTransaction.xlsx",
       "targetUSD": 9888.89,
-      "achievementRate": 94.7
+      "achievementRate": 95
     },
     {
       "channel": "Amazon",
@@ -3219,14 +3227,14 @@ const DATA = {
         }
       },
       "regionsIncludedInUSD": [
-        "USA"
+        "USA",
+        "CA"
       ],
       "regionsExcluded": [
-        "CA",
         "AE",
         "SA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Jun22-2026Jun28CustomUnifiedTransaction.xlsx",
       "targetUSD": 9888.89,
       "achievementRate": 130.3
@@ -3397,14 +3405,14 @@ const DATA = {
         }
       },
       "regionsIncludedInUSD": [
+        "CA",
         "UAE",
         "USA"
       ],
       "regionsExcluded": [
-        "SA",
-        "CA"
+        "SA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Jun29-2026Jun30CustomTransaction.xlsx",
       "targetUSD": 2825.4,
       "achievementRate": 105.8
@@ -3596,13 +3604,13 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "UAE",
-        "USA"
-      ],
-      "regionsExcluded": [
-        "SA",
+        "USA",
         "CA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "regionsExcluded": [
+        "SA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Jul1-2026Jul5CustomTransaction.xlsx",
       "targetUSD": 8202.77,
       "achievementRate": 74.2
@@ -3794,13 +3802,13 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "USA",
-        "UAE"
-      ],
-      "regionsExcluded": [
-        "SA",
+        "UAE",
         "CA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "regionsExcluded": [
+        "SA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Jul6-2026Jul12CustomUnifiedTransaction.xlsx",
       "targetUSD": 11483.87,
       "achievementRate": 67.5
@@ -3996,13 +4004,13 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "UAE",
-        "USA"
-      ],
-      "regionsExcluded": [
-        "SA",
+        "USA",
         "CA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "regionsExcluded": [
+        "SA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Jul27-2026Jul31CustomTransaction.xlsx + July_payment_transactions_7.21-7.31.csv",
       "targetUSD": 41013.83,
       "achievementRate": 13.8
@@ -4206,13 +4214,13 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "USA",
-        "UAE"
-      ],
-      "regionsExcluded": [
-        "SA",
+        "UAE",
         "CA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "regionsExcluded": [
+        "SA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Jul13-2026Jul19CustomUnifiedTransaction.xlsx",
       "targetUSD": 11483.87,
       "achievementRate": 81.2
@@ -4404,13 +4412,13 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "USA",
-        "UAE"
-      ],
-      "regionsExcluded": [
-        "SA",
+        "UAE",
         "CA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "regionsExcluded": [
+        "SA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Jul20-2026Jul26CustomUnifiedTransaction.xlsx",
       "targetUSD": 11483.87,
       "achievementRate": 56.7
@@ -4606,13 +4614,13 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "UAE",
-        "USA"
-      ],
-      "regionsExcluded": [
-        "SA",
+        "USA",
         "CA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "regionsExcluded": [
+        "SA"
+      ],
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Jul27-2026Jul31CustomTransaction.xlsx",
       "targetUSD": 8202.77,
       "achievementRate": 68.9
@@ -4800,12 +4808,11 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "USA",
-        "UAE"
-      ],
-      "regionsExcluded": [
+        "UAE",
         "CA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "regionsExcluded": [],
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Aug1-2026Aug2CustomUnifiedTransaction.xlsx + 2026Aug3-2026Aug9CustomUnifiedTransaction.xlsx",
       "targetUSD": 14764.98,
       "achievementRate": 81
@@ -4993,12 +5000,11 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "USA",
-        "UAE"
-      ],
-      "regionsExcluded": [
+        "UAE",
         "CA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "regionsExcluded": [],
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Aug10-2026Aug16CustomUnifiedTransaction.xlsx",
       "targetUSD": 11483.87,
       "achievementRate": 75.5
@@ -5210,12 +5216,11 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "USA",
-        "UAE"
-      ],
-      "regionsExcluded": [
+        "UAE",
         "CA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "regionsExcluded": [],
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Aug17-2026Aug23CustomUnifiedTransaction.xlsx",
       "targetUSD": 11483.87,
       "achievementRate": 96.4
@@ -5227,12 +5232,12 @@ const DATA = {
       "endDate": "2026-08-31",
       "label": "8/24-8/31",
       "month": 8,
-      "totalRevenueUSD": 9747.51,
+      "totalRevenueUSD": 9784.97,
       "totalUnits": 190,
       "byProduct": {
         "UHD-2180": {
-          "qty": 52,
-          "revenue": 1447.970483321989
+          "qty": 53,
+          "revenue": 1485.4336515554673
         },
         "UHD-1240X": {
           "qty": 20,
@@ -5285,8 +5290,8 @@ const DATA = {
       },
       "byCategory": {
         "HDMI分配/切換": {
-          "qty": 113,
-          "revenue": 5004.60948264125
+          "qty": 114,
+          "revenue": 5042.072650874728
         },
         "無線傳輸(WTR/WHD)": {
           "qty": 26,
@@ -5317,8 +5322,8 @@ const DATA = {
         "CA": {
           "qty": 1,
           "revenue": 53.4,
-          "currency": "本地幣別",
-          "includedInUSDTotal": false
+          "currency": "CAD",
+          "includedInUSDTotal": true
         }
       },
       "byRegionDetail": {
@@ -5443,15 +5448,14 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "UAE",
-        "USA"
-      ],
-      "regionsExcluded": [
+        "USA",
         "CA"
       ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "regionsExcluded": [],
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Aug24-2026Aug31CustomTransaction.xlsx",
       "targetUSD": 13124.42,
-      "achievementRate": 74.3
+      "achievementRate": 74.6
     },
     {
       "channel": "Amazon",
@@ -5460,8 +5464,8 @@ const DATA = {
       "endDate": "2026-09-06",
       "label": "9/1-9/6",
       "month": 9,
-      "totalRevenueUSD": 6788.52,
-      "totalUnits": 130,
+      "totalRevenueUSD": 6825.98,
+      "totalUnits": 131,
       "byProduct": {
         "SAE-5500": {
           "qty": 6,
@@ -5480,8 +5484,8 @@ const DATA = {
           "revenue": 1041.3300000000004
         },
         "UHD-2180": {
-          "qty": 23,
-          "revenue": 613.9400000000003
+          "qty": 24,
+          "revenue": 651.4031682334786
         },
         "SAF-7500": {
           "qty": 9,
@@ -5522,8 +5526,8 @@ const DATA = {
           "revenue": 1679.880000000001
         },
         "HDMI分配/切換": {
-          "qty": 67,
-          "revenue": 3007.7826276378464
+          "qty": 68,
+          "revenue": 3045.245795871325
         },
         "無線傳輸(WTR/WHD)": {
           "qty": 19,
@@ -5541,6 +5545,12 @@ const DATA = {
           "qty": 6,
           "revenue": 2944.86,
           "currency": "AED",
+          "includedInUSDTotal": true
+        },
+        "CA": {
+          "qty": 1,
+          "revenue": 53.4,
+          "currency": "CAD",
           "includedInUSDTotal": true
         }
       },
@@ -5636,17 +5646,32 @@ const DATA = {
               "revenue": 411.55
             }
           }
+        },
+        "CA": {
+          "byProduct": {
+            "UHD-2180": {
+              "qty": 1,
+              "revenue": 53.4
+            }
+          },
+          "byCategory": {
+            "HDMI分配/切換": {
+              "qty": 1,
+              "revenue": 53.4
+            }
+          }
         }
       },
       "regionsIncludedInUSD": [
         "USA",
-        "UAE"
+        "UAE",
+        "CA"
       ],
       "regionsExcluded": [],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
-      "source": "2026Sep1-2026Sep6CustomUnifiedTransaction.xlsx",
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
+      "source": "2026Sep1-2026Sep6CustomUnifiedTransaction.xlsx + 補充(加拿大站CSV 1筆訂單)",
       "targetUSD": 10171.43,
-      "achievementRate": 66.7
+      "achievementRate": 67.1
     },
     {
       "channel": "Amazon",
@@ -5826,7 +5851,7 @@ const DATA = {
         "UAE"
       ],
       "regionsExcluded": [],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Sep7-2026Sep13CustomUnifiedTransaction.xlsx",
       "targetUSD": 11866.67,
       "achievementRate": 81.3
@@ -5838,7 +5863,7 @@ const DATA = {
       "endDate": "2026-09-20",
       "label": "9/14-9/20",
       "month": 9,
-      "totalRevenueUSD": 6783.89,
+      "totalRevenueUSD": 6821.35,
       "totalUnits": 136,
       "byProduct": {
         "SAF-7500": {
@@ -5846,8 +5871,8 @@ const DATA = {
           "revenue": 986.3700000000003
         },
         "UHD-2180": {
-          "qty": 47,
-          "revenue": 1324.528829135467
+          "qty": 48,
+          "revenue": 1361.9919973689455
         },
         "SAE-5500": {
           "qty": 8,
@@ -5896,8 +5921,8 @@ const DATA = {
           "revenue": 1739.940000000001
         },
         "HDMI分配/切換": {
-          "qty": 72,
-          "revenue": 3034.9241797140885
+          "qty": 73,
+          "revenue": 3072.387347947567
         },
         "無線傳輸(WTR/WHD)": {
           "qty": 17,
@@ -5918,8 +5943,8 @@ const DATA = {
         "CA": {
           "qty": 1,
           "revenue": 53.4,
-          "currency": "本地幣別",
-          "includedInUSDTotal": false
+          "currency": "CAD",
+          "includedInUSDTotal": true
         },
         "UAE": {
           "qty": 6,
@@ -6046,15 +6071,14 @@ const DATA = {
       },
       "regionsIncludedInUSD": [
         "USA",
+        "CA",
         "UAE"
       ],
-      "regionsExcluded": [
-        "CA"
-      ],
-      "currency": "USD(已換算美國站+阿聯酋站，其餘站點未列入)",
+      "regionsExcluded": [],
+      "currency": "USD(已換算美國站+阿聯酋站+加拿大站，其餘站點未列入)",
       "source": "2026Sep14-2026Sep20CustomUnifiedTransaction.xlsx",
       "targetUSD": 11866.67,
-      "achievementRate": 57.2
+      "achievementRate": 57.5
     }
   ],
   "monthly": [
@@ -6121,8 +6145,8 @@ const DATA = {
         "CA": {
           "revenue": 38,
           "currency": "USD",
-          "revenueUSD": null,
-          "includedInUSDTotal": false
+          "revenueUSD": 26.66,
+          "includedInUSDTotal": true
         },
         "UAE": {
           "revenue": 15942,
@@ -6395,8 +6419,8 @@ const DATA = {
         "CA": {
           "revenue": 39,
           "currency": "USD",
-          "revenueUSD": null,
-          "includedInUSDTotal": false
+          "revenueUSD": 27.36,
+          "includedInUSDTotal": true
         },
         "UAE": {
           "revenue": 4939,
@@ -6827,8 +6851,8 @@ const DATA = {
         "CA": {
           "revenue": 58,
           "currency": "USD",
-          "revenueUSD": null,
-          "includedInUSDTotal": false
+          "revenueUSD": 40.69,
+          "includedInUSDTotal": true
         },
         "UAE": {
           "revenue": 10635,
@@ -7138,11 +7162,11 @@ const DATA = {
       "channel": "Amazon",
       "year": 2026,
       "month": 8,
-      "totalRevenueUSD": 41441.52,
+      "totalRevenueUSD": 41478.98,
       "byProduct": {
         "UHD-2180": {
-          "qty": 241,
-          "revenue": 6709.603968686186
+          "qty": 242,
+          "revenue": 6747.067136919664
         },
         "SAF-6500": {
           "qty": 182,
@@ -7199,8 +7223,8 @@ const DATA = {
       },
       "byCategory": {
         "HDMI分配/切換": {
-          "qty": 445,
-          "revenue": 19049.695418652125
+          "qty": 446,
+          "revenue": 19087.158586885602
         },
         "電視天線": {
           "qty": 230,
@@ -7223,7 +7247,7 @@ const DATA = {
         "8/24-8/31"
       ],
       "targetUSD": 50857.15,
-      "achievementRate": 81.5
+      "achievementRate": 81.6
     },
     {
       "channel": "Amazon(中東站/UAE)",
@@ -7285,7 +7309,7 @@ const DATA = {
       "channel": "Amazon",
       "year": 2026,
       "month": 9,
-      "totalRevenueUSD": 23222.29,
+      "totalRevenueUSD": 23297.21,
       "byProduct": {
         "SAE-5500": {
           "qty": 23,
@@ -7304,8 +7328,8 @@ const DATA = {
           "revenue": 3373.980000000002
         },
         "UHD-2180": {
-          "qty": 111,
-          "revenue": 3025.138829135468
+          "qty": 113,
+          "revenue": 3100.0651656024247
         },
         "SAF-7500": {
           "qty": 50,
@@ -7350,8 +7374,8 @@ const DATA = {
           "revenue": 6466.8499999999985
         },
         "HDMI分配/切換": {
-          "qty": 217,
-          "revenue": 9129.625064669835
+          "qty": 219,
+          "revenue": 9204.551401136792
         },
         "無線傳輸(WTR/WHD)": {
           "qty": 63,
@@ -7369,7 +7393,7 @@ const DATA = {
         "9/14-9/20"
       ],
       "targetUSD": 50857.15,
-      "achievementRate": 45.7
+      "achievementRate": 45.8
     },
     {
       "channel": "Amazon(中東站/UAE)",
@@ -7962,7 +7986,7 @@ const DATA = {
     {
       "year": 2026,
       "month": 8,
-      "totalRevenueUSD": 44830.39,
+      "totalRevenueUSD": 44867.85,
       "byCategory": {
         "無線傳輸(WTR/WHD)": {
           "qty": 146,
@@ -7973,8 +7997,8 @@ const DATA = {
           "revenue": 0
         },
         "HDMI分配/切換": {
-          "qty": 445,
-          "revenue": 19049.695418652125
+          "qty": 446,
+          "revenue": 19087.158586885602
         },
         "電視天線": {
           "qty": 230,
@@ -8011,8 +8035,8 @@ const DATA = {
           "revenue": 9805.699176310416
         },
         "UHD-2180": {
-          "qty": 241,
-          "revenue": 6709.603968686186
+          "qty": 242,
+          "revenue": 6747.067136919664
         },
         "SAF-6500": {
           "qty": 182,
@@ -8062,15 +8086,15 @@ const DATA = {
     {
       "year": 2026,
       "month": 9,
-      "totalRevenueUSD": 24444.42,
+      "totalRevenueUSD": 24519.34,
       "byCategory": {
         "無線傳輸(WTR/WHD)": {
           "qty": 69,
           "revenue": 8623.268284547314
         },
         "HDMI分配/切換": {
-          "qty": 218,
-          "revenue": 9180.675064669835
+          "qty": 220,
+          "revenue": 9255.601401136792
         },
         "未分類": {
           "qty": 1,
@@ -8119,8 +8143,8 @@ const DATA = {
           "revenue": 3373.980000000002
         },
         "UHD-2180": {
-          "qty": 111,
-          "revenue": 3025.138829135468
+          "qty": 113,
+          "revenue": 3100.0651656024247
         },
         "SAF-7500": {
           "qty": 50,
@@ -8149,7 +8173,7 @@ const DATA = {
       },
       "source": "暫估(官網+Amazon加總,尚未經財務結算)",
       "targetUSD": 57142.86,
-      "achievementRate": 42.8
+      "achievementRate": 42.9
     },
     {
       "year": 2026,
@@ -8550,7 +8574,7 @@ const DATA = {
           "revenue": 496.71999999999997
         }
       },
-      "amazonUSD": 6783.89,
+      "amazonUSD": 6821.35,
       "amazonUnits": 136,
       "provisional": false,
       "source": "官網依每日Shopify API加總對齊Amazon期別；Amazon為期報實際數字"
@@ -8655,10 +8679,10 @@ const DATA = {
     "daysElapsed": 6,
     "daysRemaining": 25,
     "daysInMonth": 31,
-    "forecastUSD": 31906.6,
-    "forecastGapUSD": 44283.88,
+    "forecastUSD": 31973.49,
+    "forecastGapUSD": 44216.99,
     "forecastVerdict": "behind",
-    "headline": "照目前速度，預估月底落後目標 US$44,284（約58.1%），主要缺口在官網",
+    "headline": "照目前速度，預估月底落後目標 US$44,217（約58%），主要缺口在官網",
     "channelBreakdown": [
       {
         "channel": "官網",
@@ -8677,8 +8701,8 @@ const DATA = {
         "actualUSD": 0,
         "achievementRate": null,
         "gapUSD": null,
-        "avgDailyRevenue": 1173.84,
-        "forecastUSD": 29346.02,
+        "avgDailyRevenue": 1176.52,
+        "forecastUSD": 29412.91,
         "forecastGapUSD": null,
         "forecastBasis": "近2期期報日均(無日粒度資料，準確度較低)"
       }
@@ -8700,17 +8724,17 @@ const DATA = {
       {
         "category": "HDMI分配/切換",
         "currentUSD": 0,
-        "previousUSD": 1836.14,
-        "diffUSD": -1836.14
+        "previousUSD": 1851.12,
+        "diffUSD": -1851.12
       }
     ],
     "anomalies": [
       {
         "level": "critical",
-        "title": "本月預估落後目標 US$44,284",
+        "title": "本月預估落後目標 US$44,217",
         "detail": "主要缺口通路：官網(缺口US$8,009)",
         "action": "檢視該通路的庫存與行銷資源是否足夠，優先補強",
-        "impactUSD": 44283.88
+        "impactUSD": 44216.99
       },
       {
         "level": "critical",
@@ -8728,10 +8752,10 @@ const DATA = {
       },
       {
         "level": "warning",
-        "title": "HDMI分配/切換 較上月同期衰退 US$1,836",
-        "detail": "上月前6天(估算) US$1,836 → 本月至今 US$0",
+        "title": "HDMI分配/切換 較上月同期衰退 US$1,851",
+        "detail": "上月前6天(估算) US$1,851 → 本月至今 US$0",
         "action": "了解是否為季節性、競品或缺貨因素",
-        "impactUSD": 1836.14
+        "impactUSD": 1851.12
       },
       {
         "level": "warning",
@@ -9156,7 +9180,8 @@ const DATA = {
       "官網": 0.11,
       "Amazon": 0.89
     },
-    "fxRateAEDperUSD": 3.6725
+    "fxRateAEDperUSD": 3.6725,
+    "fxRateCADperUSD": 1.4254
   }
 };
 </script>
@@ -10002,8 +10027,8 @@ const DATA = {
 
   document.getElementById("subnote").innerHTML = `
     官網＋Amazon 銷售量彙整，供業務查詢每週逐日(僅官網)、每期(週報)與每月銷售狀況。
-    <b>Amazon 金額已換算為USD：美國站(USD，匯率1:1)＋阿聯酋站(AED，固定匯率 1USD=${DATA.meta.fxRateAEDperUSD} AED)</b>，
-    加拿大/沙特等其他站點目前沒有可靠匯率來源，只列數量、金額未併入；月報總額則採財務結算後的
+    <b>Amazon 金額已換算為USD：美國站(USD，匯率1:1)＋阿聯酋站(AED，固定匯率 1USD=${DATA.meta.fxRateAEDperUSD} AED)${DATA.meta.fxRateCADperUSD ? `＋加拿大站(CAD，固定匯率 1USD=${DATA.meta.fxRateCADperUSD} CAD)` : ""}</b>，
+    ${DATA.meta.fxRateCADperUSD ? "" : "加拿大、"}沙特等其他站點目前沒有可靠匯率來源，只列數量、金額未併入；月報總額則採財務結算後的
     <b>表2 官網 / 表3 Amazon 彙總</b>數字為準。
   `;
 
