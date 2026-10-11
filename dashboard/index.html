@@ -282,6 +282,45 @@
   .soc-look { margin-top: 12px; font-size: 12px; color: var(--text-muted); line-height: 1.6; }
   .soc-look b { color: var(--text-secondary); display: block; font-size: 11.5px; margin-bottom: 2px; }
 
+
+  /* ---- ④ 客服與 FAQ：兩張卡(2026-10-07 新增，版型參考 PX 電商儀表板「客服問題與 FAQ 缺口」「FAQ 查答案」) ---- */
+  .cs-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px; align-items: start; }
+  @media (max-width: 980px) { .cs-grid { grid-template-columns: 1fr; } }
+  .cs-grid > .card { margin-top: 0; min-width: 0; }
+  .cs-row { display: grid; grid-template-columns: 120px 1fr 52px; gap: 10px; align-items: center; padding: 8px 0; font-size: 13px; }
+  .cs-row .k { color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cs-row .v { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .cs-row .v.empty { color: var(--axis); font-weight: 600; }
+  .cs-bar { height: 8px; border-radius: 999px; background: var(--grid); overflow: hidden; }
+  .cs-bar > span { display: block; height: 100%; border-radius: 999px; background: var(--brand-yellow); }
+  .cs-kv { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 9px 0; border-top: 1px solid var(--grid); font-size: 13px; }
+  .cs-kv .k { color: var(--text-secondary); }
+  .cs-kv .v { font-weight: 700; font-variant-numeric: tabular-nums; display: flex; align-items: center; gap: 8px; }
+  .cs-kv .v.empty { color: var(--axis); font-weight: 600; }
+  .cs-title { font-size: 12.5px; color: var(--text-muted); font-weight: 600; margin: 4px 0 0; }
+  .cs-faq-big { font-size: 24px; font-weight: 800; margin: 6px 0 4px; letter-spacing: -0.3px; }
+  .enter-link { display: block; text-align: right; margin-top: 12px; font-size: 13.5px; font-weight: 700; color: var(--link); text-decoration: none; }
+  .enter-link:hover { text-decoration: underline; }
+  .link-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--brand-black); color: #fff; border-radius: 10px; padding: 9px 16px; font-weight: 700; font-size: 13px; text-decoration: none; margin-top: 14px; }
+  .link-btn:hover { background: #333; }
+
+
+  /* ---- ③ 廣告成效卡(2026-10-07 新增，版型參考 PX 電商儀表板「廣告費用率」) ---- */
+  .ads-card { display: grid; grid-template-columns: minmax(230px, 1fr) 2fr; gap: 12px 32px; align-items: start; }
+  @media (max-width: 820px) { .ads-card { grid-template-columns: 1fr; } }
+  .ads-head { grid-column: 1 / -1; }
+  .ads-big { font-size: 40px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -0.5px; line-height: 1.1; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .ads-big.empty { color: var(--axis); }
+  .ads-sub { font-size: 12.5px; color: var(--text-muted); margin-top: 6px; line-height: 1.6; }
+  .ads-ch { padding: 8px 0 10px; border-bottom: 1px solid var(--grid); }
+  .ads-ch:last-child { border-bottom: none; }
+  .ads-ch .detail { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .ads-kv { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+  .ads-kv > div { border: 1px solid var(--border); border-radius: 10px; padding: 9px 12px; }
+  .ads-kv .l { font-size: 11.5px; color: var(--text-muted); font-weight: 600; }
+  .ads-kv .v { font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .ads-kv .v.empty { color: var(--axis); }
+
   /* ---- 2026-10-06 校正：格線內卡片對齊、小螢幕防溢出、庫存表欄位對齊 ---- */
   .channels-grid > .card { margin-top: 0; min-width: 0; }
   .kpi, .stat-tile, .inv-sum { min-width: 0; }
@@ -338,18 +377,22 @@
     <div class="card" id="inventoryCard" style="--card-accent: var(--warning)"></div>
   </section>
 
-  <div class="sec-head"><span class="sec-no">3</span><h2>社群數據</h2><span class="sec-sub">Facebook、Instagram、YouTube，資料陸續接入中</span></div>
+  <div class="sec-head"><span class="sec-no">3</span><h2>廣告成效與社群數據</h2><span class="sec-sub">廣告花費與費用率、Facebook、Instagram、YouTube，資料陸續接入中</span></div>
+  <div id="adsBox" style="margin-bottom:16px"></div>
   <div class="social-grid" id="socialGrid"></div>
 
   <div class="sec-head"><span class="sec-no">4</span><h2>經營提醒</h2><span class="sec-sub">中性陳述事實，最多 5 條</span></div>
   <div id="remindersCard"></div>
+
+  <div class="sec-head"><span class="sec-no">5</span><h2>客服與 FAQ</h2><span class="sec-sub">客戶最常問什麼、FAQ 還缺哪些答案</span></div>
+  <div class="cs-grid" id="csGrid"></div>
 </div>
 
 <div class="tooltip" id="tooltip"></div>
 
 <script>
 const DATA = {
-  "generatedAt": "2026-10-11T13:00:04.864Z",
+  "generatedAt": "2026-10-11T23:00:05.065Z",
   "periods": [
     {
       "channel": "官網",
@@ -1056,8 +1099,8 @@ const DATA = {
       "year": 2026,
       "month": 10,
       "startDate": "2026-10-11",
-      "endDate": "2026-10-11",
-      "label": "10/11-10/11",
+      "endDate": "2026-10-12",
+      "label": "10/11-10/12",
       "totalRevenueUSD": 79.97,
       "totalUnits": 1,
       "byProduct": {
@@ -1078,8 +1121,8 @@ const DATA = {
       "excludedZeroTotal": 0,
       "currency": "USD",
       "source": "Shopify Admin API(暫估，本旬尚未結束)",
-      "targetUSD": 270.35,
-      "achievementRate": 29.6
+      "targetUSD": 540.71,
+      "achievementRate": 14.8
     },
     {
       "channel": "Amazon",
@@ -7765,7 +7808,7 @@ const DATA = {
       "source": "暫估(加總2份期報,尚未經財務結算)",
       "periodsIncluded": [
         "10/1-10/10",
-        "10/11-10/11"
+        "10/11-10/12"
       ],
       "targetUSD": 8380.95,
       "achievementRate": 8.3
@@ -8551,15 +8594,6 @@ const DATA = {
   ],
   "dailyOfficial": [
     {
-      "date": "2026-09-12",
-      "totalRevenueUSD": 0,
-      "totalUnits": 0,
-      "ordersCount": 0,
-      "byProduct": {},
-      "byCategory": {},
-      "provisional": false
-    },
-    {
       "date": "2026-09-13",
       "totalRevenueUSD": 0,
       "totalUnits": 0,
@@ -8886,6 +8920,15 @@ const DATA = {
           "revenue": 79.97
         }
       },
+      "provisional": false
+    },
+    {
+      "date": "2026-10-12",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "ordersCount": 0,
+      "byProduct": {},
+      "byCategory": {},
       "provisional": true
     }
   ],
@@ -8976,8 +9019,8 @@ const DATA = {
     },
     {
       "startDate": "2026-10-08",
-      "endDate": "2026-10-11",
-      "label": "10/8-10/11",
+      "endDate": "2026-10-12",
+      "label": "10/8-10/12",
       "officialUSD": 323.94,
       "officialUnits": 2,
       "officialOrders": 2,
@@ -9016,7 +9059,7 @@ const DATA = {
     "freshness": [
       {
         "channel": "官網",
-        "latestEndDate": "2026-10-11",
+        "latestEndDate": "2026-10-12",
         "daysBehind": 0,
         "level": "ok",
         "staleThresholdDays": 14
@@ -9024,7 +9067,7 @@ const DATA = {
       {
         "channel": "Amazon",
         "latestEndDate": "2026-09-30",
-        "daysBehind": 11,
+        "daysBehind": 12,
         "level": "warning",
         "staleThresholdDays": 10
       }
@@ -9033,13 +9076,13 @@ const DATA = {
     "actualUSD": 695.88,
     "achievementRate": 0.9,
     "gapUSD": 75494.6,
-    "daysElapsed": 11,
-    "daysRemaining": 20,
+    "daysElapsed": 12,
+    "daysRemaining": 19,
     "daysInMonth": 31,
-    "forecastUSD": 23325.89,
-    "forecastGapUSD": 52864.59,
+    "forecastUSD": 22411.46,
+    "forecastGapUSD": 53779.02,
     "forecastVerdict": "behind",
-    "headline": "照目前速度，預估月底落後目標 US$52,865（約69.4%），主要缺口在官網",
+    "headline": "照目前速度，預估月底落後目標 US$53,779（約70.6%），主要缺口在官網",
     "channelBreakdown": [
       {
         "channel": "官網",
@@ -9047,9 +9090,9 @@ const DATA = {
         "actualUSD": 695.88,
         "achievementRate": 8.3,
         "gapUSD": 7685.07,
-        "avgDailyRevenue": 87.99,
-        "forecastUSD": 2455.62,
-        "forecastGapUSD": 5925.33,
+        "avgDailyRevenue": 99.41,
+        "forecastUSD": 2584.7,
+        "forecastGapUSD": 5796.25,
         "forecastBasis": "近7天日均"
       },
       {
@@ -9059,7 +9102,7 @@ const DATA = {
         "achievementRate": null,
         "gapUSD": null,
         "avgDailyRevenue": 1043.51,
-        "forecastUSD": 20870.27,
+        "forecastUSD": 19826.76,
         "forecastGapUSD": null,
         "forecastBasis": "近2期期報日均(無日粒度資料，準確度較低)"
       }
@@ -9069,29 +9112,29 @@ const DATA = {
       {
         "category": "電視天線",
         "currentUSD": 0,
-        "previousUSD": 2860.04,
-        "diffUSD": -2860.04
+        "previousUSD": 3120.05,
+        "diffUSD": -3120.05
       },
       {
         "category": "HDMI分配/切換",
         "currentUSD": 79.97,
-        "previousUSD": 4623.96,
-        "diffUSD": -4543.99
+        "previousUSD": 5044.32,
+        "diffUSD": -4964.35
       },
       {
         "category": "無線傳輸(WTR/WHD)",
         "currentUSD": 527.91,
-        "previousUSD": 5446.16,
-        "diffUSD": -4918.25
+        "previousUSD": 5941.27,
+        "diffUSD": -5413.36
       }
     ],
     "anomalies": [
       {
         "level": "critical",
-        "title": "本月預估落後目標 US$52,865",
+        "title": "本月預估落後目標 US$53,779",
         "detail": "主要缺口通路：官網(缺口US$7,685)",
         "action": "檢視該通路的庫存與行銷資源是否足夠，優先補強",
-        "impactUSD": 52864.59
+        "impactUSD": 53779.02
       },
       {
         "level": "critical",
@@ -9109,17 +9152,17 @@ const DATA = {
       },
       {
         "level": "warning",
-        "title": "無線傳輸(WTR/WHD) 較上月同期衰退 US$4,918",
-        "detail": "上月前11天(估算) US$5,446 → 本月至今 US$528",
+        "title": "無線傳輸(WTR/WHD) 較上月同期衰退 US$5,413",
+        "detail": "上月前12天(估算) US$5,941 → 本月至今 US$528",
         "action": "了解是否為季節性、競品或缺貨因素",
-        "impactUSD": 4918.25
+        "impactUSD": 5413.36
       },
       {
         "level": "warning",
-        "title": "HDMI分配/切換 較上月同期衰退 US$4,544",
-        "detail": "上月前11天(估算) US$4,624 → 本月至今 US$80",
+        "title": "HDMI分配/切換 較上月同期衰退 US$4,964",
+        "detail": "上月前12天(估算) US$5,044 → 本月至今 US$80",
         "action": "了解是否為季節性、競品或缺貨因素",
-        "impactUSD": 4543.99
+        "impactUSD": 4964.35
       }
     ],
     "opportunities": [],
@@ -10454,10 +10497,12 @@ const DATA = {
         { key: "videos", label: "影片數" }, { key: "subsNet", label: "訂閱淨增" } ] },
   ];
 
-  function socDeltaChip(pct) {
+  // lowerIsBetter=true：數字越低越好(例如廣告費用率)，降用綠色、升用紅色
+  function socDeltaChip(pct, lowerIsBetter) {
     if (pct == null || isNaN(pct)) return "";
     const up = pct > 0.05, down = pct < -0.05;
-    return chip(`${up ? "▲" : down ? "▼" : "•"} ${Math.abs(pct).toFixed(1)}%`, up ? "good" : down ? "critical" : "");
+    const good = lowerIsBetter ? down : up, bad = lowerIsBetter ? up : down;
+    return chip(`${up ? "▲" : down ? "▼" : "•"} ${Math.abs(pct).toFixed(1)}%`, good ? "good" : bad ? "critical" : "");
   }
 
   function buildSocial() {
@@ -10495,11 +10540,154 @@ const DATA = {
     });
   }
 
+  // ---------- ④ 客服與 FAQ：「客服問題與 FAQ 缺口」+「FAQ 查答案」 ----------
+  // 客服問題的資料還沒接入時顯示「建置中」；之後 sales_data.json 多一個 cs 欄位卡片就自動填上數字。
+  // 欄位格式(都由後端算好，前端純渲染，不在瀏覽器裡重算)：
+  //   DATA.cs = { asOf: "2026-10-05", total30d: 120, prev30d: 100, deltaPct: 20.0,
+  //               topCategories: [{ name: "天線收訊", count: 40 }, ...],   // 取前 3 名
+  //               faqGapCount: 8 }                                         // FAQ 母庫還沒有答案的問題數(選填)
+  // FAQ 查答案：連到既有的客服查詢站(FAQ 母庫)，那個站已經在線上。
+  const CS_FAQ_URL = "https://px-meta.github.io/px-sherriva-cs-wonq/";
+
+  // 客服問題件數的變化標籤(仿電商儀表板)：問題變多是警訊，所以增加用紅/橘、減少用綠
+  function csTrendChip(C) {
+    if (!C || C.total30d == null) return chip("建置中", "gold");
+    const d = C.deltaPct;
+    if (d == null) return chip("已連線", "good");
+    if (d >= 20) return chip("▲ 明顯增加", "critical");
+    if (d >= 5) return chip("▲ 增加", "warning");
+    if (d <= -5) return chip("▼ 減少", "good");
+    return chip("持平", "");
+  }
+
+  function buildCS() {
+    const box = document.getElementById("csGrid");
+    if (!box) return;
+    const C = DATA.cs;
+    const connected = !!(C && C.total30d != null);
+
+    // --- 卡片 1：客服問題與 FAQ 缺口 ---
+    const top = connected ? (C.topCategories || []).slice(0, 3) : [];
+    const max = Math.max(1, ...top.map((t) => t.count));
+    const rows = [0, 1, 2].map((i) => {
+      const t = top[i];
+      return t
+        ? `<div class="cs-row"><span class="k" title="${t.name}">${t.name}</span><div class="cs-bar"><span style="width:${((t.count / max) * 100).toFixed(0)}%"></span></div><span class="v">${fmtNum(t.count)}</span></div>`
+        : `<div class="cs-row"><span class="k" style="color:var(--text-muted)">第 ${i + 1} 名問題類別</span><div class="cs-bar"></div><span class="v empty">—</span></div>`;
+    }).join("");
+    const kv = (k, v, extra) => `<div class="cs-kv"><span class="k">${k}</span><span class="v ${v == null ? "empty" : ""}">${v == null ? "—" : v}${extra || ""}</span></div>`;
+
+    const c1 = document.createElement("div");
+    c1.className = "card";
+    c1.style.setProperty("--card-accent", "var(--brand-yellow)");
+    c1.innerHTML = `
+      <div class="card-head">
+        <div class="channel-name"><span class="channel-icon">🎧</span>客服問題與 FAQ 缺口</div>
+        ${csTrendChip(C)}
+      </div>
+      <div class="cs-title">近 30 天客服問題</div>
+      <div class="soc-big ${connected ? "" : "empty"}">${connected ? fmtNum(C.total30d) + '<span style="font-size:14px;font-weight:700;color:var(--text-muted)">件</span>' : "—"}</div>
+      <div style="margin-top:12px;border-top:1px solid var(--grid);padding-top:6px">
+        <div class="cs-title" style="margin-bottom:2px">最多的三類</div>
+        ${rows}
+      </div>
+      ${kv("前 30 天", connected && C.prev30d != null ? fmtNum(C.prev30d) + " 件" : null)}
+      ${kv("比前 30 天", connected && C.deltaPct != null ? "" : null, connected && C.deltaPct != null ? socDeltaChip(C.deltaPct, true) : "")}
+      ${kv("FAQ 還沒有答案的問題", connected && C.faqGapCount != null ? fmtNum(C.faqGapCount) + " 個" : null)}
+      <div class="soc-look"><b>看什麼</b>每一類問題的件數與變化，以及哪些問題在 FAQ 裡還沒有答案、該補哪幾題。</div>
+      <a class="enter-link" href="${CS_FAQ_URL}" target="_blank" rel="noopener">進入 →</a>
+      <div class="card-foot">資料來源：客服問題整理檔＋FAQ 母庫　${connected && C.asOf ? "資料到 " + C.asOf : "尚未接入"}</div>
+    `;
+    box.appendChild(c1);
+
+    // --- 卡片 2：FAQ 查答案(連到客服查詢站) ---
+    const c2 = document.createElement("div");
+    c2.className = "card";
+    c2.style.setProperty("--card-accent", "var(--brand-black)");
+    c2.innerHTML = `
+      <div class="card-head">
+        <div class="channel-name"><span class="channel-icon">💬</span>FAQ 查答案</div>
+        ${chip("可使用", "good")}
+      </div>
+      <div class="cs-title">客人來問的當下查現成答案</div>
+      <div class="cs-faq-big">查 FAQ 母庫</div>
+      <div class="soc-look" style="margin-top:6px"><b>看什麼</b>依產品與問題搜尋現成回覆，直接複製回覆客戶。</div>
+      <a class="enter-link" href="${CS_FAQ_URL}" target="_blank" rel="noopener">進入 →</a>
+      <div class="card-foot">資料來源：Sherriva 客服查詢站（FAQ 母庫）　依需求更新</div>
+    `;
+    box.appendChild(c2);
+  }
+
+  // ---------- ③ 廣告成效 ----------
+  // 資料還沒接入時顯示「建置中」；之後 sales_data.json 多一個 ads 欄位卡片就自動填上數字。
+  // 欄位格式(後端算好，前端純渲染)：
+  //   DATA.ads = { asOf: "2026-10-05", periodLabel: "近 7 天", spendUSD: 1200, adRevenueUSD: 6000,
+  //                roas: 5.0, costRatePct: 8.5, costRateDeltaPct: -1.2, costRateCapPct: 15,
+  //                byChannel: { amazon: {spendUSD, adRevenueUSD, roas, costRatePct}, official: {...} } }
+  // 廣告費用率＝廣告花費 ÷ 營業額；ROAS＝廣告帶來營收 ÷ 廣告花費(倍)。兩個數字都由後端算好放進來。
+  const ADS_CHANNELS = [
+    { key: "amazon", name: "Amazon 廣告" },
+    { key: "official", name: "官網廣告" },
+  ];
+  function buildAds() {
+    const box = document.getElementById("adsBox");
+    if (!box) return;
+    const A = DATA.ads;
+    const connected = !!(A && A.costRatePct != null);
+    const fmtPct = (v) => (v == null ? "—" : v.toFixed(1) + "%");
+    const kv = (label, v) => `<div><div class="l">${label}</div><div class="v ${v == null ? "empty" : ""}">${v == null ? "—" : v}</div></div>`;
+    const cap = connected && A.costRateCapPct != null ? A.costRateCapPct : null;
+    const maxPct = Math.max(1, cap || 0, ...ADS_CHANNELS.map((c) => (connected && A.byChannel && A.byChannel[c.key] ? A.byChannel[c.key].costRatePct || 0 : 0)));
+
+    const rows = ADS_CHANNELS.map((c) => {
+      const d = connected && A.byChannel ? A.byChannel[c.key] : null;
+      const has = d && d.costRatePct != null;
+      const detail = has
+        ? `廣告費 ${d.spendUSD != null ? fmtUSD(d.spendUSD) : "—"}　·　廣告營收 ${d.adRevenueUSD != null ? fmtUSD(d.adRevenueUSD) : "—"}　·　ROAS ${d.roas != null ? d.roas.toFixed(1) + " 倍" : "—"}`
+        : "廣告費 —　·　廣告營收 —　·　ROAS —";
+      return `<div class="ads-ch">
+        <div class="cs-row" style="grid-template-columns:100px 1fr 56px;padding:4px 0">
+          <span class="k">${c.name}</span>
+          <div class="cs-bar"><span style="width:${has ? Math.min(100, (d.costRatePct / maxPct) * 100).toFixed(0) : 0}%"></span></div>
+          <span class="v ${has ? "" : "empty"}">${has ? fmtPct(d.costRatePct) : "—"}</span>
+        </div>
+        <div class="detail">${detail}</div>
+      </div>`;
+    }).join("");
+
+    const card = document.createElement("div");
+    card.className = "card";
+    card.style.setProperty("--card-accent", "var(--brand-yellow)");
+    card.innerHTML = `
+      <div class="ads-card">
+        <div class="ads-head card-head" style="margin-bottom:0">
+          <div class="channel-name"><span class="channel-icon">📣</span>廣告成效${connected ? chip("已連線", "good") : chip("建置中", "gold")}${connected && A.periodLabel ? `<span class="sec-sub" style="font-weight:400">${A.periodLabel}</span>` : ""}</div>
+        </div>
+        <div>
+          <div class="cs-title">廣告費用率</div>
+          <div class="ads-big ${connected ? "" : "empty"}">${connected ? fmtPct(A.costRatePct) : "—"}${connected && A.costRateDeltaPct != null ? socDeltaChip(A.costRateDeltaPct, true) : ""}</div>
+          <div class="ads-sub">廣告花費 ÷ 營業額${cap != null ? `　·　上限 ${cap}%` : ""}</div>
+          <div class="ads-kv">
+            ${kv("廣告花費", connected && A.spendUSD != null ? fmtUSD(A.spendUSD) : null)}
+            ${kv("廣告營收", connected && A.adRevenueUSD != null ? fmtUSD(A.adRevenueUSD) : null)}
+            ${kv("ROAS", connected && A.roas != null ? A.roas.toFixed(1) + " 倍" : null)}
+          </div>
+        </div>
+        <div>${rows}</div>
+      </div>
+      <div class="soc-look"><b>看什麼</b>廣告花的錢佔營業額多少、每花 1 元帶回多少營收，以及哪個通路的廣告比較吃重。</div>
+      <div class="card-foot">資料來源：廣告後台（待接入）　${connected && A.asOf ? "資料到 " + A.asOf : "尚未接入"}</div>
+    `;
+    box.appendChild(card);
+  }
+
   // ---------- 組裝頁面 ----------
   buildHero();
   buildReminders();
   buildInventoryTab();
+  buildAds();
   buildSocial();
+  buildCS();
   const dailyGrid = document.getElementById("dailyGrid");
   dailyGrid.appendChild(buildDailyCard());
 
