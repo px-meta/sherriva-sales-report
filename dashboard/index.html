@@ -392,7 +392,7 @@
 
 <script>
 const DATA = {
-  "generatedAt": "2026-10-20T13:00:06.406Z",
+  "generatedAt": "2026-10-21T01:00:46.761Z",
   "periods": [
     {
       "channel": "官網",
@@ -1123,6 +1123,26 @@ const DATA = {
       "source": "Shopify Admin API",
       "targetUSD": 2703.53,
       "achievementRate": 3
+    },
+    {
+      "channel": "官網",
+      "year": 2026,
+      "month": 10,
+      "startDate": "2026-10-21",
+      "endDate": "2026-10-21",
+      "label": "10/21-10/21",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "byProduct": {},
+      "byCategory": {},
+      "ordersCount": 0,
+      "excludedCancelled": 0,
+      "excludedRefunded": 0,
+      "excludedZeroTotal": 0,
+      "currency": "USD",
+      "source": "Shopify Admin API(暫估，本旬尚未結束)",
+      "targetUSD": 270.35,
+      "achievementRate": 0
     },
     {
       "channel": "Amazon",
@@ -8167,10 +8187,11 @@ const DATA = {
           "revenue": 79.97
         }
       },
-      "source": "暫估(加總2份期報,尚未經財務結算)",
+      "source": "暫估(加總3份期報,尚未經財務結算)",
       "periodsIncluded": [
         "10/1-10/10",
-        "10/11-10/20"
+        "10/11-10/20",
+        "10/21-10/21"
       ],
       "targetUSD": 8380.95,
       "achievementRate": 8.3
@@ -9087,15 +9108,6 @@ const DATA = {
   ],
   "dailyOfficial": [
     {
-      "date": "2026-09-21",
-      "totalRevenueUSD": 0,
-      "totalUnits": 0,
-      "ordersCount": 0,
-      "byProduct": {},
-      "byCategory": {},
-      "provisional": false
-    },
-    {
       "date": "2026-09-22",
       "totalRevenueUSD": 0,
       "totalUnits": 0,
@@ -9402,42 +9414,19 @@ const DATA = {
       "ordersCount": 0,
       "byProduct": {},
       "byCategory": {},
+      "provisional": false
+    },
+    {
+      "date": "2026-10-21",
+      "totalRevenueUSD": 0,
+      "totalUnits": 0,
+      "ordersCount": 0,
+      "byProduct": {},
+      "byCategory": {},
       "provisional": true
     }
   ],
   "officialByAmazonPeriod": [
-    {
-      "startDate": "2026-09-21",
-      "endDate": "2026-09-30",
-      "label": "9/21-9/30",
-      "officialUSD": 240.88,
-      "officialUnits": 2,
-      "officialOrders": 2,
-      "officialByProduct": {
-        "UHD-3180": {
-          "qty": 1,
-          "revenue": 37.97
-        },
-        "WHD-5100": {
-          "qty": 1,
-          "revenue": 178.61
-        }
-      },
-      "officialByCategory": {
-        "未分類": {
-          "qty": 1,
-          "revenue": 37.97
-        },
-        "無線傳輸(WTR/WHD)": {
-          "qty": 1,
-          "revenue": 178.61
-        }
-      },
-      "amazonUSD": 10918.38,
-      "amazonUnits": 166,
-      "provisional": false,
-      "source": "官網依每日Shopify API加總對齊Amazon期別；Amazon為期報實際數字"
-    },
     {
       "startDate": "2026-10-01",
       "endDate": "2026-10-11",
@@ -9486,8 +9475,8 @@ const DATA = {
     },
     {
       "startDate": "2026-10-19",
-      "endDate": "2026-10-20",
-      "label": "10/19-10/20",
+      "endDate": "2026-10-21",
+      "label": "10/19-10/21",
       "officialUSD": 0,
       "officialUnits": 0,
       "officialOrders": 0,
@@ -9508,7 +9497,7 @@ const DATA = {
     "freshness": [
       {
         "channel": "官網",
-        "latestEndDate": "2026-10-20",
+        "latestEndDate": "2026-10-21",
         "daysBehind": 0,
         "level": "ok",
         "staleThresholdDays": 14
@@ -9516,7 +9505,7 @@ const DATA = {
       {
         "channel": "Amazon",
         "latestEndDate": "2026-10-18",
-        "daysBehind": 2,
+        "daysBehind": 3,
         "level": "ok",
         "staleThresholdDays": 10
       }
@@ -9525,13 +9514,13 @@ const DATA = {
     "actualUSD": 22750.44,
     "achievementRate": 29.9,
     "gapUSD": 53440.04,
-    "daysElapsed": 20,
-    "daysRemaining": 11,
+    "daysElapsed": 21,
+    "daysRemaining": 10,
     "daysInMonth": 31,
-    "forecastUSD": 36228.23,
-    "forecastGapUSD": 39962.25,
+    "forecastUSD": 35002.97,
+    "forecastGapUSD": 41187.51,
     "forecastVerdict": "behind",
-    "headline": "照目前速度，預估月底落後目標 US$39,962（約52.5%），主要缺口在Amazon",
+    "headline": "照目前速度，預估月底落後目標 US$41,188（約54.1%），主要缺口在Amazon",
     "channelBreakdown": [
       {
         "channel": "官網",
@@ -9551,8 +9540,8 @@ const DATA = {
         "achievementRate": 32.5,
         "gapUSD": 45754.97,
         "avgDailyRevenue": 1225.25,
-        "forecastUSD": 35532.35,
-        "forecastGapUSD": 32277.18,
+        "forecastUSD": 34307.09,
+        "forecastGapUSD": 33502.44,
         "forecastBasis": "近2期期報日均(無日粒度資料，準確度較低)"
       }
     ],
@@ -9561,41 +9550,41 @@ const DATA = {
       {
         "category": "HDMI分配/切換",
         "currentUSD": 9289.86,
-        "previousUSD": 8407.2,
-        "diffUSD": 882.66
+        "previousUSD": 8827.57,
+        "diffUSD": 462.3
       },
       {
         "category": "HDMI線材",
         "currentUSD": 0,
-        "previousUSD": 21.94,
-        "diffUSD": -21.94
+        "previousUSD": 23.04,
+        "diffUSD": -23.04
       },
       {
         "category": "未分類",
         "currentUSD": 0,
-        "previousUSD": 25.31,
-        "diffUSD": -25.31
+        "previousUSD": 26.58,
+        "diffUSD": -26.58
       },
       {
         "category": "無線傳輸(WTR/WHD)",
         "currentUSD": 9388.85,
-        "previousUSD": 9902.11,
-        "diffUSD": -513.27
+        "previousUSD": 10397.22,
+        "diffUSD": -1008.37
       },
       {
         "category": "電視天線",
         "currentUSD": 3983.73,
-        "previousUSD": 5200.08,
-        "diffUSD": -1216.35
+        "previousUSD": 5460.08,
+        "diffUSD": -1476.35
       }
     ],
     "anomalies": [
       {
         "level": "critical",
-        "title": "本月預估落後目標 US$39,962",
+        "title": "本月預估落後目標 US$41,188",
         "detail": "主要缺口通路：Amazon(缺口US$45,755)",
         "action": "檢視該通路的庫存與行銷資源是否足夠，優先補強",
-        "impactUSD": 39962.25
+        "impactUSD": 41187.51
       },
       {
         "level": "warning",
@@ -9613,17 +9602,17 @@ const DATA = {
       },
       {
         "level": "warning",
-        "title": "電視天線 較上月同期衰退 US$1,216",
-        "detail": "上月前20天(估算) US$5,200 → 本月至今 US$3,984",
+        "title": "電視天線 較上月同期衰退 US$1,476",
+        "detail": "上月前21天(估算) US$5,460 → 本月至今 US$3,984",
         "action": "了解是否為季節性、競品或缺貨因素",
-        "impactUSD": 1216.35
+        "impactUSD": 1476.35
       },
       {
         "level": "warning",
-        "title": "無線傳輸(WTR/WHD) 較上月同期衰退 US$513",
-        "detail": "上月前20天(估算) US$9,902 → 本月至今 US$9,389",
+        "title": "無線傳輸(WTR/WHD) 較上月同期衰退 US$1,008",
+        "detail": "上月前21天(估算) US$10,397 → 本月至今 US$9,389",
         "action": "了解是否為季節性、競品或缺貨因素",
-        "impactUSD": 513.27
+        "impactUSD": 1008.37
       }
     ],
     "opportunities": [],
@@ -9997,7 +9986,7 @@ const DATA = {
       "replacementSku": null
     }
   ],
-  "inventorySnapshotAt": "2026-10-19T22:51:16.000Z",
+  "inventorySnapshotAt": "2026-10-20T22:51:16.000Z",
   "meta": {
     "officialCategories": [
       "UHD-10KB-3.3FT",
